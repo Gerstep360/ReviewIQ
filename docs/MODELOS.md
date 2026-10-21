@@ -52,7 +52,7 @@ El entrenamiento mide pared, CPU y pico RSS muestreado cada 50 ms del proceso co
 - reports/errors.md: análisis observado, sin textos del corpus.
 - docs/FASE-D-MODELADO.md: comandos, resultados y alcance de esta ejecución.
 
-El checkpoint binario queda fuera de Git; se entrega el código que lo regenera. El empaquetado y manifiesto de despliegue están implementados en la fase E; véase [ARTEFACTOS.md](ARTEFACTOS.md). No hay API ni frontend conectados todavía.
+El checkpoint binario queda fuera de Git; se entrega el código que lo regenera. El empaquetado y manifiesto de despliegue están implementados en la fase E; véase [ARTEFACTOS.md](ARTEFACTOS.md). La API se implementó en F ([API.md](API.md)); el frontend conectado sigue pendiente.
 
 Fuentes de implementación: [LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) y [Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) de scikit-learn. Las versiones están fijadas en requirements.txt.
 ## Resultados de esta ejecución

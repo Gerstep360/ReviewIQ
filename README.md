@@ -4,7 +4,7 @@
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP), D (modelado ML) y E (reproducción y artefactos)** están implementadas. Hay procesamiento NLP compartido, selección congelada antes de test y paquetes de inferencia verificables. Se mantienen el esqueleto de Django y la plantilla de Vite; todavía no hay endpoints de predicción ni interfaz conectada.
+La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP), D (modelado ML), E (reproducción y artefactos) y F (backend REST)** están implementadas. Django/DRF sirve predicciones, métricas, estado y trazas mediante el paquete verificado. El frontend todavía conserva la plantilla de Vite y no está conectado.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -16,7 +16,7 @@ py -3.11 -m venv venv
 .\venv\Scripts\python.exe manage.py check
 ```
 
-Esta comprobación valida la configuración sin conectarse a PostgreSQL. Ejecutar migraciones y levantar la aplicación requerirá una base de datos local y las variables de conexión correspondientes.
+Esta comprobación valida la configuración sin conectarse a PostgreSQL. La API de inferencia puede levantarse con runapi sin base de datos; el admin, runserver habitual y las migraciones requieren PostgreSQL y sus variables de conexión.
 
 ## Datos y análisis exploratorio
 
@@ -92,11 +92,37 @@ print(predictor.predict(["Excelente producto, llegó a tiempo."]))
 
 La carga comprueba hashes, versiones, código NLP e identidad del estado; se reutiliza por proceso. Consulte [comandos y contrato del paquete](docs/ARTEFACTOS.md), [evidencia de la Fase E](docs/FASE-E-REPRODUCIBILIDAD.md) y [medidas de rendimiento](docs/RENDIMIENTO.md). Los binarios permanecen fuera de Git y se regeneran con el comando anterior.
 
-La próxima fase es **F: backend Django/DRF**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
+## Backend REST
+
+Con el paquete full generado:
+
+```powershell
+.\venv\Scripts\python.exe manage.py runapi 127.0.0.1:8000 --noreload --nothreading
+```
+
+El servidor carga y calienta el pipeline al iniciar, sin guardar reseñas ni consultar PostgreSQL. Si no existe un paquete válido, health devuelve 503. Configure REVIEWIQ_MODEL_DIR para usar otro paquete y reinicie al cambiarlo. Documentación interactiva en [localhost:8000/docs/](http://127.0.0.1:8000/docs/), con recursos locales de Swagger.
+
+| Método y ruta | Función |
+|---|---|
+| GET /api/v1/health/ | Estado e identidad del modelo |
+| POST /api/v1/predict/ | JSON con text → estrellas 1–5 y cinco probabilidades |
+| GET /api/v1/metrics/ | Métricas precalculadas del modelo activo y comparación de validation |
+| POST /api/v1/nlp/trace/ | Etapas reales y limitadas del NLP guardado |
+
+Se aceptan también las rutas sin barra final. La entrada admite hasta 3.000 caracteres; errores JSON en español, cuerpo limitado a 64 KiB y CORS restringido a los orígenes configurados. Ver [contrato y ejemplos](docs/API.md), [esquema OpenAPI](docs/openapi.json) y [evidencia de la Fase F](docs/FASE-F-BACKEND.md).
+
+```powershell
+.\venv\Scripts\python.exe -m unittest discover -s tests -p test_api.py -v
+.\venv\Scripts\python.exe scripts/check_api.py
+```
+
+El segundo comando levanta y cierra su propio servidor para comprobar HTTP real; no necesita otro servidor abierto. Las ocho pruebas y la comprobación HTTP se ejecutaron con el paquete real disponible; no se reentrenó ni se volvió a evaluar test.
+
+La próxima fase es **G: frontend React conectado**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  
-**Estado:** avance implementado hasta la Fase E; las guías siguientes conservan los requisitos originales y las fases pendientes.  
+**Estado:** avance implementado hasta la Fase F; las guías siguientes conservan los requisitos originales y las fases pendientes.  
 **Objeto:** producto académico que predice la **valoración en estrellas (1–5)** a partir de texto de reseñas comerciales en español, utilizando **TF-IDF + regresión logística multinomial / Multinomial Naive Bayes**.  
 **Fuente principal de requisitos:** `Proyecto_Integrador(1).pdf`, 7 páginas, proporcionado por el docente.  
 **Fecha de exposición:** 3 de noviembre de 2026; **último commit evaluado:** 2 de noviembre de 2026, 23:59; crear tag `entrega-final`.
@@ -155,4 +181,4 @@ La próxima fase es **F: backend Django/DRF**. Las métricas de test corresponde
 
 ## Alcance actual
 
-El sistema todavía requiere API, frontend conectado y verificación integrada. Las rutas originales `src/` y FastAPI de las guías se adaptan a `ml/` y Django/DRF según ARQUITECTURA.md. Los informes agregados registran resultados reales; los datos de Amazon y los binarios generados se excluyen de Git.
+El sistema todavía requiere frontend conectado y verificación integrada. Las rutas originales `src/` y FastAPI de las guías se adaptan a `ml/` y Django/DRF según ARQUITECTURA.md. Los informes agregados registran resultados reales; los datos de Amazon y los binarios generados se excluyen de Git.

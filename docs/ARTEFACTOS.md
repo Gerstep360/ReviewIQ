@@ -75,4 +75,4 @@ Se conserva en una carpeta ignorada de ml/artifacts para inspección y registra 
 
 ## Alcance siguiente
 
-La Fase F integrará Predictor con Django/DRF. La medición actual llama inferencia local; la latencia HTTP, workers y RAM del servidor se medirán cuando exista la API. No se realizaron cambios de modelo para mejorar los resultados de test.
+La Fase F ya integra Predictor con Django/DRF; véase API.md. Las medidas originales de E son de inferencia local; la medición HTTP posterior y su alcance están en RENDIMIENTO.md y reports/api_smoke.json. No se realizaron cambios de modelo para mejorar los resultados de test.

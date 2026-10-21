@@ -1,0 +1,789 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "ReviewIQ API",
+        "version": "1.0.0",
+        "description": "Inferencia académica de estrellas y trazas del pipeline guardado. No persiste reseñas."
+    },
+    "paths": {
+        "/api/v1/health/": {
+            "get": {
+                "operationId": "api_v1_health_retrieve",
+                "summary": "Comprobar modelo listo para inferencia",
+                "tags": [
+                    "Estado"
+                ],
+                "security": [
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Health"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/UnavailableHealth"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/v1/metrics/": {
+            "get": {
+                "operationId": "api_v1_metrics_retrieve",
+                "summary": "Consultar métricas guardadas del modelo activo",
+                "tags": [
+                    "Métricas"
+                ],
+                "security": [
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Metrics"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/v1/nlp/trace/": {
+            "post": {
+                "operationId": "api_v1_nlp_trace_create",
+                "description": "Cada lista se limita a 200 elementos y cada cadena a 12000 caracteres. Se informan truncamiento y longitudes originales.",
+                "summary": "Inspeccionar los pasos reales del preprocesador guardado",
+                "tags": [
+                    "NLP"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReviewRequest"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Trace"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "413": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "415": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        },
+        "/api/v1/predict/": {
+            "post": {
+                "operationId": "api_v1_predict_create",
+                "summary": "Predecir estrellas para una reseña",
+                "tags": [
+                    "Predicción"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/ReviewRequest"
+                            },
+                            "examples": {
+                                "ReseñaSintética": {
+                                    "value": {
+                                        "text": "El producto funciona, pero la entrega fue lenta."
+                                    },
+                                    "summary": "Reseña sintética"
+                                }
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "security": [
+                    {}
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Prediction"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "400": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "413": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "415": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "500": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    },
+                    "503": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Error"
+                                }
+                            }
+                        },
+                        "description": ""
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Comparison": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "split": {
+                        "$ref": "#/components/schemas/ComparisonSplitEnum"
+                    },
+                    "generated_at_utc": {
+                        "type": "string"
+                    },
+                    "models": {
+                        "type": "array",
+                        "items": {}
+                    }
+                },
+                "required": [
+                    "generated_at_utc",
+                    "model_id",
+                    "models",
+                    "split"
+                ]
+            },
+            "ComparisonSplitEnum": {
+                "enum": [
+                    "validation"
+                ],
+                "type": "string",
+                "description": "* `validation` - validation"
+            },
+            "Error": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/ErrorDetail"
+                    }
+                },
+                "required": [
+                    "error"
+                ]
+            },
+            "ErrorDetail": {
+                "type": "object",
+                "properties": {
+                    "code": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "fields": {
+                        "type": "object",
+                        "additionalProperties": {}
+                    }
+                },
+                "required": [
+                    "code",
+                    "message"
+                ]
+            },
+            "Health": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "$ref": "#/components/schemas/HealthStatusEnum"
+                    },
+                    "model_loaded": {
+                        "type": "boolean"
+                    },
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/ModeEnum"
+                    }
+                },
+                "required": [
+                    "mode",
+                    "model_id",
+                    "model_loaded",
+                    "status"
+                ]
+            },
+            "HealthStatusEnum": {
+                "enum": [
+                    "ok"
+                ],
+                "type": "string",
+                "description": "* `ok` - ok"
+            },
+            "MethodEnum": {
+                "enum": [
+                    "stemming",
+                    "lemmatization"
+                ],
+                "type": "string",
+                "description": "* `stemming` - stemming\n* `lemmatization` - lemmatization"
+            },
+            "MetricValues": {
+                "type": "object",
+                "properties": {
+                    "rows": {
+                        "type": "integer",
+                        "minimum": 1
+                    },
+                    "macro_f1": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "accuracy": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "mae_stars": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 4,
+                        "minimum": 0
+                    },
+                    "per_class": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/PerClass"
+                        }
+                    },
+                    "confusion_matrix": {
+                        "type": "array",
+                        "items": {
+                            "type": "array",
+                            "items": {
+                                "type": "integer",
+                                "minimum": 0
+                            },
+                            "maxItems": 5,
+                            "minItems": 5
+                        },
+                        "maxItems": 5,
+                        "minItems": 5
+                    },
+                    "ordinal_error_counts": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "integer",
+                            "minimum": 0
+                        }
+                    },
+                    "probabilities_sum_to_one": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "accuracy",
+                    "confusion_matrix",
+                    "macro_f1",
+                    "mae_stars",
+                    "per_class",
+                    "rows"
+                ]
+            },
+            "Metrics": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "mode": {
+                        "$ref": "#/components/schemas/ModeEnum"
+                    },
+                    "split": {
+                        "$ref": "#/components/schemas/MetricsSplitEnum"
+                    },
+                    "experimental": {
+                        "type": "boolean"
+                    },
+                    "evaluated_at_utc": {
+                        "type": "string",
+                        "nullable": true
+                    },
+                    "packaged_at_utc": {
+                        "type": "string"
+                    },
+                    "dataset": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "string"
+                        }
+                    },
+                    "configuration": {},
+                    "metrics": {
+                        "$ref": "#/components/schemas/MetricValues"
+                    },
+                    "comparison": {
+                        "allOf": [
+                            {
+                                "$ref": "#/components/schemas/Comparison"
+                            }
+                        ],
+                        "nullable": true
+                    },
+                    "probability_notice": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "comparison",
+                    "configuration",
+                    "dataset",
+                    "evaluated_at_utc",
+                    "experimental",
+                    "metrics",
+                    "mode",
+                    "model_id",
+                    "packaged_at_utc",
+                    "probability_notice",
+                    "split"
+                ]
+            },
+            "MetricsSplitEnum": {
+                "enum": [
+                    "test",
+                    "validation"
+                ],
+                "type": "string",
+                "description": "* `test` - test\n* `validation` - validation"
+            },
+            "ModeEnum": {
+                "enum": [
+                    "quick",
+                    "full"
+                ],
+                "type": "string",
+                "description": "* `quick` - quick\n* `full` - full"
+            },
+            "PerClass": {
+                "type": "object",
+                "properties": {
+                    "label": {
+                        "type": "integer",
+                        "maximum": 4,
+                        "minimum": 0
+                    },
+                    "stars": {
+                        "type": "integer",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "precision": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "recall": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "f1": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "support": {
+                        "type": "integer",
+                        "minimum": 0
+                    }
+                },
+                "required": [
+                    "f1",
+                    "label",
+                    "precision",
+                    "recall",
+                    "stars",
+                    "support"
+                ]
+            },
+            "Prediction": {
+                "type": "object",
+                "properties": {
+                    "stars": {
+                        "type": "integer",
+                        "maximum": 5,
+                        "minimum": 1
+                    },
+                    "label": {
+                        "type": "integer",
+                        "maximum": 4,
+                        "minimum": 0
+                    },
+                    "probabilities": {
+                        "$ref": "#/components/schemas/Probabilities"
+                    },
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "inference_ms": {
+                        "type": "number",
+                        "format": "double",
+                        "minimum": 0
+                    },
+                    "experimental": {
+                        "type": "boolean"
+                    }
+                },
+                "required": [
+                    "experimental",
+                    "inference_ms",
+                    "label",
+                    "model_id",
+                    "probabilities",
+                    "stars"
+                ]
+            },
+            "Probabilities": {
+                "type": "object",
+                "properties": {
+                    "1": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "2": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "3": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "4": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    },
+                    "5": {
+                        "type": "number",
+                        "format": "double",
+                        "maximum": 1,
+                        "minimum": 0
+                    }
+                },
+                "required": [
+                    "1",
+                    "2",
+                    "3",
+                    "4",
+                    "5"
+                ]
+            },
+            "ReviewRequest": {
+                "type": "object",
+                "properties": {
+                    "text": {
+                        "type": "string",
+                        "maxLength": 3000
+                    }
+                },
+                "required": [
+                    "text"
+                ]
+            },
+            "Trace": {
+                "type": "object",
+                "properties": {
+                    "model_id": {
+                        "type": "string"
+                    },
+                    "original": {
+                        "type": "string"
+                    },
+                    "normalized": {
+                        "type": "string"
+                    },
+                    "tokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "removed_stopwords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "tokens_after_stopwords": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "processed_tokens": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "processed_text": {
+                        "type": "string"
+                    },
+                    "method": {
+                        "$ref": "#/components/schemas/MethodEnum"
+                    },
+                    "policy_version": {
+                        "type": "string"
+                    },
+                    "stopwords_version": {
+                        "type": "string"
+                    },
+                    "stopwords_sha256": {
+                        "type": "string"
+                    },
+                    "ngram_range": {
+                        "type": "array",
+                        "items": {
+                            "type": "integer"
+                        },
+                        "maxItems": 2,
+                        "minItems": 2
+                    },
+                    "ngrams": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "known_ngrams": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "unknown_ngrams": {
+                        "type": "array",
+                        "items": {
+                            "type": "string"
+                        }
+                    },
+                    "truncated": {
+                        "type": "boolean"
+                    },
+                    "limits": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "integer"
+                        }
+                    },
+                    "original_counts": {
+                        "type": "object",
+                        "additionalProperties": {
+                            "type": "integer"
+                        }
+                    }
+                },
+                "required": [
+                    "known_ngrams",
+                    "limits",
+                    "method",
+                    "model_id",
+                    "ngram_range",
+                    "ngrams",
+                    "normalized",
+                    "original",
+                    "original_counts",
+                    "policy_version",
+                    "processed_text",
+                    "processed_tokens",
+                    "removed_stopwords",
+                    "stopwords_sha256",
+                    "stopwords_version",
+                    "tokens",
+                    "tokens_after_stopwords",
+                    "truncated",
+                    "unknown_ngrams"
+                ]
+            },
+            "UnavailableHealth": {
+                "type": "object",
+                "properties": {
+                    "error": {
+                        "$ref": "#/components/schemas/ErrorDetail"
+                    },
+                    "status": {
+                        "$ref": "#/components/schemas/UnavailableHealthStatusEnum"
+                    },
+                    "model_loaded": {
+                        "type": "boolean"
+                    },
+                    "model_id": {
+                        "type": "string",
+                        "nullable": true
+                    }
+                },
+                "required": [
+                    "error",
+                    "model_id",
+                    "model_loaded",
+                    "status"
+                ]
+            },
+            "UnavailableHealthStatusEnum": {
+                "enum": [
+                    "unavailable"
+                ],
+                "type": "string",
+                "description": "* `unavailable` - unavailable"
+            }
+        }
+    }
+}

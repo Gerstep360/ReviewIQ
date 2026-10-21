@@ -1,5 +1,7 @@
 # 06 — Responsabilidad: backend REST con FastAPI
 
+> Guía original conservada. La Fase F se implementó con Django/DRF según la arquitectura vigente. Contrato, comandos y límites reales: [API.md](../API.md). Evidencia: [FASE-F-BACKEND.md](../FASE-F-BACKEND.md). FastAPI/Pydantic/TestClient se adaptaron a APIView/serializers/APIClient; las rutas también aceptan barra final.
+
 ## Arquitectura interna
 
 `api/main.py` registra FastAPI, `api/schemas.py` valida entradas/salidas, `api/services/predictor.py` carga el **pipeline completo** y `api/routes/` define endpoints. En lifespan startup cargar artefactos confiables y validar `manifest`/versiones, sin volver a entrenar ni reimplementar la limpieza de texto.

@@ -46,3 +46,19 @@ $env:MKL_NUM_THREADS='1'
 ```
 
 El comando guarda nuevas observaciones en el paquete ignorado; no reemplaza automáticamente los informes versionados ni consulta el corpus.
+
+## HTTP observado en la Fase F
+
+Se midió la API real con scripts/check_api.py en el mismo equipo y entorno ML, usando Django runapi en loopback, un proceso, sin hilos de solicitudes ni autoreload. Las dependencias REST nuevas no cambiaron las versiones congeladas de ML. Se cargó el paquete full reviewiq-8f0ef24251ae5522, sin entrenar ni volver a evaluar test.
+
+| Medida | Resultado observado |
+|---|---:|
+| Arranque hasta health listo, con imports y calentamiento | 4,21 s |
+| HTTP completo p50 / p95 | 22,65 / 31,84 ms |
+| Predictor.predict informado por la API p50 / p95 | 7,30 / 10,16 ms |
+| RSS del servidor listo | 264,38 MiB |
+| Mayor RSS muestreado después de solicitudes | 264,62 MiB |
+
+Hubo tres solicitudes de calentamiento y treinta mediciones de textos sintéticos. El tiempo HTTP incluye cliente loopback, servidor, validación y serialización. Se comprobó también health, métricas, traza, esquema, documentación, cuatro recursos locales de Swagger y una entrada rechazada con 400. El script cerró su servidor al terminar; no se usó PostgreSQL ni frontend.
+
+La RAM corresponde al mayor proceso del servidor, excluyendo el launcher de Windows, muestreada en fronteras de solicitudes. No es un pico continuo comparable al monitor cada 50 ms de E. Las medidas del servidor de desarrollo no representan carga concurrente ni despliegue productivo. Datos completos: reports/api_smoke.json; contrato: API.md; ejecución: FASE-F-BACKEND.md.

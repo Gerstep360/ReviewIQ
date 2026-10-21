@@ -51,10 +51,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
+    'drf_spectacular',
+    'drf_spectacular_sidecar',
+    'corsheaders',
+    'backend.apps.predictions',
+    'backend.apps.analytics',
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'backend.api.middleware.APIMetadataLoggingMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -121,7 +129,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = 'UTC'
 
@@ -139,3 +147,48 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Inferencia local: sin sesiones, autenticación ni persistencia de reseñas.
+REVIEWIQ_MODEL_DIR = Path(os.environ.get('REVIEWIQ_MODEL_DIR', BASE_DIR / 'ml/artifacts/full'))
+if not REVIEWIQ_MODEL_DIR.is_absolute():
+    REVIEWIQ_MODEL_DIR = BASE_DIR / REVIEWIQ_MODEL_DIR
+REVIEWIQ_MAX_TEXT_LENGTH = 3000
+REVIEWIQ_TRACE_MAX_ITEMS = 200
+REVIEWIQ_TRACE_MAX_CHARACTERS = 12000
+REVIEWIQ_QUEUE_TIMEOUT_SECONDS = 2.0
+DATA_UPLOAD_MAX_MEMORY_SIZE = 64 * 1024
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [],
+    'DEFAULT_PERMISSION_CLASSES': ['rest_framework.permissions.AllowAny'],
+    'UNAUTHENTICATED_USER': None,
+    'DEFAULT_RENDERER_CLASSES': ['rest_framework.renderers.JSONRenderer'],
+    'DEFAULT_PARSER_CLASSES': ['backend.api.parsers.BoundedJSONParser'],
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    'EXCEPTION_HANDLER': 'backend.api.exceptions.api_exception_handler',
+}
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'ReviewIQ API',
+    'DESCRIPTION': 'Inferencia académica de estrellas y trazas del pipeline guardado. No persiste reseñas.',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+    'SWAGGER_UI_DIST': 'SIDECAR',
+    'SWAGGER_UI_FAVICON_HREF': 'SIDECAR',
+}
+CORS_ALLOWED_ORIGINS = [
+    origin.strip() for origin in os.environ.get(
+        'DJANGO_CORS_ALLOWED_ORIGINS', 'http://localhost:5173,http://127.0.0.1:5173'
+    ).split(',') if origin.strip()
+]
+CORS_ALLOW_CREDENTIALS = False
+CORS_URLS_REGEX = r'^/api/v1/'
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {'console': {'class': 'logging.StreamHandler'}},
+    'loggers': {
+        'reviewiq.api': {'handlers': ['console'], 'level': 'INFO', 'propagate': False},
+        'django.server': {'handlers': ['console'], 'level': 'WARNING', 'propagate': False},
+    },
+}

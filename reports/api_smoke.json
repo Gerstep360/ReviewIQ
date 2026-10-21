@@ -1,0 +1,58 @@
+{
+  "checked_at_utc": "2026-10-21T18:07:57.581871+00:00",
+  "scope": "Actual loopback HTTP, Django runapi development server, one process and no request threading; no frontend or production load test.",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "mode": "full",
+  "health_status": "ok",
+  "endpoints_checked": [
+    "health",
+    "predict",
+    "metrics",
+    "nlp/trace",
+    "schema",
+    "docs"
+  ],
+  "invalid_input_status": 400,
+  "swagger_local_assets_checked": 4,
+  "metric_split": "test",
+  "metric_model_matches_predictor": true,
+  "synthetic_example": {
+    "text": "Excelente, funciona muy bien y llegó rápido 😍",
+    "response": {
+      "stars": 5,
+      "label": 4,
+      "probabilities": {
+        "1": 0.00015921330486889929,
+        "2": 0.002638984937220812,
+        "3": 0.005281990859657526,
+        "4": 0.22714577615261078,
+        "5": 0.7647740840911865
+      },
+      "model_id": "reviewiq-8f0ef24251ae5522",
+      "inference_ms": 13.005400018300861,
+      "experimental": false
+    }
+  },
+  "test_evaluation_repeated": false,
+  "startup_until_ready_sec": 4.205027300049551,
+  "warmup_calls": 3,
+  "measured_calls": 30,
+  "http_roundtrip": {
+    "p50_ms": 22.652899962849915,
+    "p95_ms": 31.84468498511706
+  },
+  "reported_inference": {
+    "p50_ms": 7.301100005861372,
+    "p95_ms": 10.163040002225898
+  },
+  "idle_ready_rss_mib": 264.375,
+  "max_server_rss_mib_sampled_after_requests": 264.6171875,
+  "machine": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "cpu": "AMD64 Family 25 Model 120 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12,
+    "ram_total_gib": 13.719921112060547
+  },
+  "limitations": "Thirty synthetic single-review calls. RSS sampled at request boundaries, largest server process excluding launcher; not a continuous peak measurement. Startup includes imports and model warm-up. No database or migrations used."
+}

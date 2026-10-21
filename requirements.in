@@ -1,5 +1,8 @@
 # Dependencias de las fases implementadas (Python 3.11, CPU).
 Django==5.2.18
+djangorestframework==3.18.3
+drf-spectacular[sidecar]==0.30.0
+django-cors-headers==4.9.0
 psycopg[binary]==3.3.6
 matplotlib>=3.8,<4
 scikit-learn>=1.5,<2
