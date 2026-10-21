@@ -1,0 +1,40 @@
+{
+  "checked_at_utc": "2026-10-21T19:03:34.785Z",
+  "browser": "156.0.8078.4",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "scope": "Vite dev plus built frontend via preview proxy and actual Django API. One browser smoke flow, not production load testing.",
+  "viewports": [
+    {
+      "width": 1366,
+      "height": 768
+    },
+    {
+      "width": 390,
+      "height": 844
+    }
+  ],
+  "views": [
+    "prediction",
+    "nlp",
+    "models",
+    "methodology"
+  ],
+  "prediction_stars": 3,
+  "probabilities_sum_to_one": true,
+  "trace_matches_api": true,
+  "matrices_match_api": true,
+  "validation_and_test_distinguished": true,
+  "mobile_page_overflow": false,
+  "retry_after_simulated_503": "real API prediction succeeded",
+  "browser_page_errors": [],
+  "screenshots": [
+    "reports/figures/web-empty-desktop.png",
+    "reports/figures/web-prediction-desktop.png",
+    "reports/figures/web-nlp-desktop.png",
+    "reports/figures/web-models-desktop.png",
+    "reports/figures/web-prediction-mobile.png",
+    "reports/figures/web-models-mobile.png",
+    "reports/figures/web-error-mobile.png"
+  ],
+  "test_evaluation_repeated": false
+}

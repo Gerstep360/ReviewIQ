@@ -4,7 +4,7 @@
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP), D (modelado ML), E (reproducción y artefactos) y F (backend REST)** están implementadas. Django/DRF sirve predicciones, métricas, estado y trazas mediante el paquete verificado. El frontend todavía conserva la plantilla de Vite y no está conectado.
+La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP), D (modelado ML), E (reproducción y artefactos), F (backend REST) y G (frontend conectado)** están implementadas. React consume la API Django/DRF para predicciones, trazas NLP y métricas reales; la aplicación incluye metodología y limitaciones. La verificación final de entrega corresponde a H.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -118,11 +118,33 @@ Se aceptan también las rutas sin barra final. La entrada admite hasta 3.000 car
 
 El segundo comando levanta y cierra su propio servidor para comprobar HTTP real; no necesita otro servidor abierto. Las ocho pruebas y la comprobación HTTP se ejecutaron con el paquete real disponible; no se reentrenó ni se volvió a evaluar test.
 
-La próxima fase es **G: frontend React conectado**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
+## Aplicación web funcional
+
+Con la API anterior activa en una terminal, abre otra desde la raíz (Node >=22.12; verificado con 24.15.0):
+
+```powershell
+cd frontend
+npm ci
+npm run dev
+```
+
+Abre **http://127.0.0.1:5173/**. Vite dirige /api al backend local en 8000. Las cuatro vistas son Predicción, Laboratorio NLP, Modelos y métricas y Metodología. Los ejemplos rellenan la reseña y solo se envían al pulsar Analizar; no hay predicciones prefabricadas ni tokenización NLP en JavaScript. Las trazas y las métricas proceden del modelo activo y distinguen validation de test final.
+
+Para comprobar el frontend, dentro de frontend:
+
+```powershell
+npm test
+npm run lint
+npm run build
+```
+
+El build se puede revisar con npm run preview en http://127.0.0.1:4173/, también con la API activa. Hay seis pruebas de comportamiento y un recorrido de navegador real, verificado en 1366×768 y 390×844. Comandos, proxy, errores/reintentos y capturas: [frontend/README.md](frontend/README.md), [FRONTEND.md](docs/FRONTEND.md) y [Fase G](docs/FASE-G-FRONTEND.md).
+
+La próxima fase es **H: verificación final, informe y defensa**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  
-**Estado:** avance implementado hasta la Fase F; las guías siguientes conservan los requisitos originales y las fases pendientes.  
+**Estado:** avance implementado hasta la Fase G; las guías siguientes conservan los requisitos originales y las fases pendientes.  
 **Objeto:** producto académico que predice la **valoración en estrellas (1–5)** a partir de texto de reseñas comerciales en español, utilizando **TF-IDF + regresión logística multinomial / Multinomial Naive Bayes**.  
 **Fuente principal de requisitos:** `Proyecto_Integrador(1).pdf`, 7 páginas, proporcionado por el docente.  
 **Fecha de exposición:** 3 de noviembre de 2026; **último commit evaluado:** 2 de noviembre de 2026, 23:59; crear tag `entrega-final`.
@@ -181,4 +203,4 @@ La próxima fase es **G: frontend React conectado**. Las métricas de test corre
 
 ## Alcance actual
 
-El sistema todavía requiere frontend conectado y verificación integrada. Las rutas originales `src/` y FastAPI de las guías se adaptan a `ml/` y Django/DRF según ARQUITECTURA.md. Los informes agregados registran resultados reales; los datos de Amazon y los binarios generados se excluyen de Git.
+El sistema tiene frontend conectado y un flujo de navegador comprobado; todavía requiere verificación final desde instalación limpia y preparación de entrega. Las rutas originales `src/` y FastAPI de las guías se adaptan a `ml/` y Django/DRF según ARQUITECTURA.md. Los informes agregados registran resultados reales; los datos de Amazon y los binarios generados se excluyen de Git.

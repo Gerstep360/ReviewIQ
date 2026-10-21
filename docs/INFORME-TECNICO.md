@@ -1,6 +1,6 @@
 # Informe técnico — avance
 
-Documento parcial. La arquitectura y las fases B (datos/EDA), C (pipeline NLP), D (modelado ML), E (reproducción/artefactos) y F (backend REST) están implementadas. Se completará con el frontend y la integración del sistema.
+Documento parcial. La arquitectura y las fases B (datos/EDA), C (pipeline NLP), D (modelado ML), E (reproducción/artefactos), F (backend REST) y G (frontend conectado) están implementadas. Falta el cierre de integración, informe y defensa de H.
 
 Fuente, licencia y preparación: `DATASET.md`. Comandos y resultados: `FASE-B-DATOS-EDA.md`, `FASE-C-PIPELINE-NLP.md` y `FASE-D-MODELADO.md`. Las estadísticas proceden de ejecuciones reales. `reports/nlp_comparison.json` conserva el experimento exploratorio de NLP; `reports/model_comparison.json` documenta selección y `reports/test_metrics.json` la única evaluación del campeón congelado.
 
@@ -29,3 +29,11 @@ La Fase F adapta la guía original de FastAPI/Pydantic a Django/DRF y serializer
 Se validan entrada, codificación, tamaño y salida; se limitan trazas y espera de turno. La API no persiste reseñas ni consulta PostgreSQL. Swagger y el esquema OpenAPI se sirven desde el proyecto con recursos locales. El comando de desarrollo runapi omite exclusivamente el chequeo de migraciones para estas funciones sin persistencia; el backend conserva PostgreSQL para operaciones que lo requieran.
 
 Ocho pruebas enfocadas pasaron, incluida igualdad API/pipeline real sobre tres ejemplos de validation con fit/red bloqueados. Se comprobó además HTTP en loopback y se midieron treinta solicitudes individuales: p50 22,65 ms, p95 31,84 ms y RSS observado tras solicitudes de hasta 264,62 MiB en el servidor de desarrollo. No son resultados de frontend ni de producción. Evidencia, comandos, alcance y asistencia de IA: API.md, FASE-F-BACKEND.md y reports/api_smoke.json.
+
+## Interfaz conectada
+
+La Fase G implementa predicción de estrellas/probabilidades, laboratorio NLP real, comparación de modelos con matriz/detalle por clase y metodología. React no aplica otra tokenización ni contiene métricas de demostración. El cliente maneja validación, estados de red, timeout, cancelación y reintentos; conserva texto solo en memoria y descarta resultados al editar. El comparador identifica validation, test y quick experimental.
+
+Se mantuvo React/TypeScript/Vite, con dependencias fijadas en package-lock.json, proxy local y diseño claro responsive. Build y lint pasaron; seis pruebas de comportamiento y un recorrido Chromium con API real pasaron. El recorrido verificó dev/build, las cuatro vistas, igualdad de trazas/matrices con API, navegación con texto conservado y ausencia de desbordamiento en 1366×768 y 390×844. Solo se simuló un 503 para comprobar el estado de error y su reintento real posterior.
+
+Se inspeccionaron capturas y se ajustó contraste y legibilidad. No se afirma una auditoría completa de accesibilidad, compatibilidad con todos los navegadores ni despliegue de producción. No se modificó el modelo ni se repitió test. La asistencia de Codex incluyó implementación, diseño, pruebas y documentación. Evidencia: FRONTEND.md, FASE-G-FRONTEND.md, reports/frontend_smoke.json y capturas en reports/figures/web-*.png.

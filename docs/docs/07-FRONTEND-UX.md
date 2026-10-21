@@ -1,5 +1,7 @@
 # 07 — Responsabilidad: frontend profesional y verificable
 
+> Fase G implementada con React/TypeScript/Vite y la API Django/DRF de la arquitectura vigente. Las menciones originales de FastAPI se adaptan a ese backend. Uso y decisiones: [FRONTEND.md](../FRONTEND.md). Evidencia ejecutada y capturas: [FASE-G-FRONTEND.md](../FASE-G-FRONTEND.md).
+
 ## Objetivo visual
 
 Construir una aplicación de análisis comercial utilizable y sobria, no una página tipo chatbot. Mostrar **predicción y evidencia**. React + TypeScript + Vite; UI responsiva de escritorio/móvil; colores neutros y un acento para estrellas/estado.
