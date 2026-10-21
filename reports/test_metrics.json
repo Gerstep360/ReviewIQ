@@ -1,0 +1,238 @@
+{
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "selection_sha256": "4c627524726779f9236e59b210074dae5bb48c70b3bdbafcab717deb4e4c148f",
+  "artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+  "split": "test",
+  "evaluated_at_utc": "2026-10-21T17:24:03.591860+00:00",
+  "dataset_revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "test_file_sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a",
+  "metrics": {
+    "rows": 5000,
+    "macro_f1": 0.5131349211771471,
+    "accuracy": 0.5154,
+    "mae_stars": 0.6128,
+    "per_class": [
+      {
+        "label": 0,
+        "stars": 1,
+        "precision": 0.6497120921305183,
+        "recall": 0.677,
+        "f1": 0.66307541625857,
+        "support": 1000
+      },
+      {
+        "label": 1,
+        "stars": 2,
+        "precision": 0.4288461538461538,
+        "recall": 0.446,
+        "f1": 0.4372549019607843,
+        "support": 1000
+      },
+      {
+        "label": 2,
+        "stars": 3,
+        "precision": 0.4041666666666667,
+        "recall": 0.388,
+        "f1": 0.39591836734693875,
+        "support": 1000
+      },
+      {
+        "label": 3,
+        "stars": 4,
+        "precision": 0.45353982300884954,
+        "recall": 0.41,
+        "f1": 0.43067226890756305,
+        "support": 1000
+      },
+      {
+        "label": 4,
+        "stars": 5,
+        "precision": 0.6223908918406073,
+        "recall": 0.656,
+        "f1": 0.6387536514118792,
+        "support": 1000
+      }
+    ],
+    "confusion_matrix": [
+      [
+        677,
+        246,
+        61,
+        6,
+        10
+      ],
+      [
+        247,
+        446,
+        231,
+        46,
+        30
+      ],
+      [
+        85,
+        248,
+        388,
+        217,
+        62
+      ],
+      [
+        19,
+        64,
+        211,
+        410,
+        296
+      ],
+      [
+        14,
+        36,
+        69,
+        225,
+        656
+      ]
+    ],
+    "ordinal_error_counts": {
+      "0": 2577,
+      "1": 1921,
+      "2": 387,
+      "3": 91,
+      "4": 24
+    },
+    "probabilities_sum_to_one": true,
+    "error_analysis": {
+      "errors": 2423,
+      "groups_non_exclusive": {
+        "contains_negation": 1273,
+        "contains_contrast_connector": 854,
+        "short_text_at_most_8_words": 354,
+        "intermediate_rating": 1756
+      },
+      "largest_confusions": [
+        {
+          "actual_stars": 4,
+          "predicted_stars": 5,
+          "count": 296
+        },
+        {
+          "actual_stars": 3,
+          "predicted_stars": 2,
+          "count": 248
+        },
+        {
+          "actual_stars": 2,
+          "predicted_stars": 1,
+          "count": 247
+        },
+        {
+          "actual_stars": 1,
+          "predicted_stars": 2,
+          "count": 246
+        },
+        {
+          "actual_stars": 2,
+          "predicted_stars": 3,
+          "count": 231
+        },
+        {
+          "actual_stars": 5,
+          "predicted_stars": 4,
+          "count": 225
+        },
+        {
+          "actual_stars": 3,
+          "predicted_stars": 4,
+          "count": 217
+        },
+        {
+          "actual_stars": 4,
+          "predicted_stars": 3,
+          "count": 211
+        }
+      ],
+      "cases_for_local_review": [
+        {
+          "row_position_1based": 64,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 10,
+          "tags": [
+            "contains_negation"
+          ]
+        },
+        {
+          "row_position_1based": 113,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 38,
+          "tags": [
+            "contains_contrast_connector"
+          ]
+        },
+        {
+          "row_position_1based": 138,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 23,
+          "tags": []
+        },
+        {
+          "row_position_1based": 174,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 22,
+          "tags": [
+            "contains_contrast_connector"
+          ]
+        },
+        {
+          "row_position_1based": 283,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 17,
+          "tags": [
+            "contains_contrast_connector"
+          ]
+        },
+        {
+          "row_position_1based": 293,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 32,
+          "tags": [
+            "contains_negation",
+            "contains_contrast_connector"
+          ]
+        },
+        {
+          "row_position_1based": 479,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 42,
+          "tags": [
+            "contains_negation"
+          ]
+        },
+        {
+          "row_position_1based": 537,
+          "actual_stars": 1,
+          "predicted_stars": 5,
+          "distance": 4,
+          "word_count": 26,
+          "tags": [
+            "contains_negation",
+            "contains_contrast_connector"
+          ]
+        }
+      ],
+      "interpretation": "Observed text features, not causal diagnoses. Sarcasm/mixed sentiment require human review. Positions allow local inspection without publishing text or review IDs."
+    }
+  },
+  "selection_frozen_before_test": true,
+  "purpose": "Final estimate only. Do not use these scores to redesign or select the model."
+}

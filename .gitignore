@@ -37,6 +37,7 @@ staticfiles/
 *.joblib
 *.pkl
 *.pickle
+/reports/quick/
 
 # Archivos del sistema y editor
 .DS_Store

@@ -4,7 +4,7 @@
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-La arquitectura inicial y las **fases B (datos y EDA) y C (pipeline NLP)** están implementadas. Hay descarga reproducible, preparación, informes, notebook de EDA, procesamiento NLP compartido y comparación experimental de variantes. Se mantienen el esqueleto de Django y la plantilla de Vite. Todavía no hay endpoints de predicción ni un modelo final: Naive Bayes se usa únicamente como baseline de los experimentos NLP.
+La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP) y D (modelado ML)** están implementadas. Hay procesamiento NLP compartido, comparación de dos clasificadores, CV sobre train y selección congelada antes de la evaluación final. Se mantienen el esqueleto de Django y la plantilla de Vite; todavía no hay endpoints de predicción ni interfaz conectada.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -58,7 +58,24 @@ Los archivos de dependencias se generaron con pip-tools en Windows y Python 3.11
 
 La comparación usa una muestra estratificada fija de 20.000 filas de train preparado y las 5.000 de validation, con semilla 42 y MultinomialNB fijo. Compara stemming/lematización y unigramas/uni+bigramas; no abre test. Produce `reports/nlp_comparison.csv` y `.json`, con Macro-F1, vocabulario, dispersión y coste de CPU/RAM medidos. La recomendación experimental es **stemming + (1,2)**, Macro-F1 de validación **0,4783**; no son métricas finales.
 
-Ver [políticas y resultados NLP](docs/NLP.md), [evidencia de la Fase C](docs/FASE-C-PIPELINE-NLP.md) y [trazas de un ejemplo sintético](reports/nlp_trace_examples.json). La próxima fase es **D: modelado ML**, incluyendo comparación de los dos clasificadores y validación cruzada solo en train. Test sigue reservado para la evaluación final.
+Ver [políticas y resultados NLP](docs/NLP.md), [evidencia de la Fase C](docs/FASE-C-PIPELINE-NLP.md) y [trazas de un ejemplo sintético](reports/nlp_trace_examples.json).
+
+## Modelado ML
+
+La Fase D compara MultinomialNB y LogisticRegression con variantes NLP, ajusta alpha/C mediante tres folds estratificados dentro de train y reajusta ambos finalistas con las 197.572 filas de train preparado. Las 5.000 filas de validation eligen el campeón por mayor Macro-F1, menor MAE y desempate estable. NLP y TF-IDF se ajustan dentro de cada fold; test no participa en selección.
+
+```powershell
+.\venv\Scripts\python.exe -m unittest discover -s tests -p test_models.py -v
+.\venv\Scripts\python.exe -m ml.training.train --mode quick --seed 42
+```
+
+Quick es experimental, no abre test y guarda informes en `reports/quick/`, excluidos de Git. El proceso full y la única evaluación final se describen en [MODELOS.md](docs/MODELOS.md). Los registros persistidos bloquean sobrescribir la selección full o repetir test en este checkout ya evaluado. La reproducción del artefacto congelado sin volver a consultar test se completará en la fase E.
+
+Los informes de selección y evaluación están en `reports/model_comparison.*`, `reports/model_selection.json`, `reports/test_metrics.json` y `reports/final_test_ledger.json`; el análisis de errores está en `reports/errors.md`. El checkpoint binario queda local en `ml/artifacts/`, fuera de Git. Ver [evidencia de la Fase D](docs/FASE-D-MODELADO.md).
+
+El campeón es **regresión logística con lematización y bigramas, C=1**. Su única evaluación de test obtuvo **Macro-F1 0,5131**, **accuracy 51,54 %** y **MAE 0,6128 estrellas**. El ajuste full completo tomó 19,57 minutos y registró 1.311,70 MiB de pico RSS en este equipo; las estrellas intermedias siguen siendo difíciles de distinguir.
+
+La próxima fase es **E: reproducibilidad y artefactos de despliegue**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  

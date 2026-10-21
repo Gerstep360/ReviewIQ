@@ -60,5 +60,25 @@
       "alpha": 1,
       "status": "experimental_validation_only"
     }
+  },
+  "models": {
+    "screen_train_rows": 20000,
+    "cv_folds": 3,
+    "parameter_grid": {
+      "MultinomialNB": [
+        0.1,
+        1.0,
+        2.0
+      ],
+      "LogisticRegression": [
+        0.5,
+        1.0,
+        2.0
+      ]
+    },
+    "logistic_max_iter": 500,
+    "selection_rule": "maximize validation macro_f1, then minimize mae_stars, then model name; no test selection",
+    "final_fit_split": "train_only",
+    "test_policy": "one evaluation of the frozen full-train champion; quick never accesses test"
   }
 }

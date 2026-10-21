@@ -9,13 +9,14 @@ Modalidad de desarrollo: individual. La autoría real se consulta en Git; no se 
 - Fase B: descarga de JSONL con revisión y SHA-256 fijados, validación de esquema, auditoría de duplicados y preparación de train sin solapamiento con los conjuntos reservados. Evidencia: `ml/data/`, `config.json` y `reports/`.
 - EDA: estadísticas y figuras agregadas de las particiones originales, notebook ejecutado y cinco pruebas de datos sin red. Evidencia: `notebooks/01_EDA.ipynb`, `tests/test_data.py` y `docs/FASE-B-DATOS-EDA.md`.
 - Fase C: pipeline NLP español clonable y serializable, traza compartida, stop words y negaciones, stemming/lematización y TF-IDF. Comparación experimental de cuatro variantes sobre train/validation con tiempos y RAM medidos. Evidencia: `ml/nlp/`, `tests/test_nlp.py`, `reports/nlp_comparison.*` y `docs/FASE-C-PIPELINE-NLP.md`.
+- Fase D: comparación de los dos clasificadores, cribado de ocho combinaciones, CV estratificada sin filtraciones, ajuste full con train preparado, selección por validación y evaluación final protegida. Evidencia: `ml/training/`, `ml/evaluation/`, `tests/test_models.py` y los informes de modelos.
 - Las especificaciones restantes son planificación, no evidencia de funcionalidades terminadas.
 
 El commit inicial permite consultar estos cambios con `git log --reverse` y `git show <hash>`.
 
 ## Asistencia de IA
 
-Codex ayudó a revisar la documentación y preparar la configuración, el commit inicial y el código, las pruebas y los informes de las fases B y C. Las estadísticas y métricas experimentales provienen de ejecutar el código sobre los datos registrados. El informe técnico registra esta asistencia; no se atribuye una revisión humana que no esté documentada.
+Codex ayudó a revisar la documentación y preparar la configuración, el commit inicial y el código, las pruebas y los informes de las fases B, C y D. Las estadísticas y métricas provienen de ejecutar el código sobre los datos registrados. El informe técnico registra esta asistencia; no se atribuye una revisión humana que no esté documentada.
 
 ## Evidencia
 

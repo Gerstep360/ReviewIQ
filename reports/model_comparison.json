@@ -1,0 +1,632 @@
+{
+  "generated_at_utc": "2026-10-21T17:22:57.239331+00:00",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "mode": "full",
+  "split": "validation",
+  "models": [
+    {
+      "model": "MultinomialNB",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "best_params": {
+        "classifier__alpha": 2.0
+      },
+      "train_rows": 197572,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.5087952589239126,
+        "accuracy": 0.5138,
+        "mae_stars": 0.635,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.6171003717472119,
+            "recall": 0.664,
+            "f1": 0.6396917148362236,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.4154676258992806,
+            "recall": 0.462,
+            "f1": 0.4375,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.43028322440087147,
+            "recall": 0.395,
+            "f1": 0.4118873826903024,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.48348745046235136,
+            "recall": 0.366,
+            "f1": 0.4166192373363688,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5998240985048373,
+            "recall": 0.682,
+            "f1": 0.6382779597566682,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            664,
+            274,
+            52,
+            3,
+            7
+          ],
+          [
+            240,
+            462,
+            236,
+            42,
+            20
+          ],
+          [
+            103,
+            254,
+            395,
+            161,
+            87
+          ],
+          [
+            42,
+            75,
+            176,
+            366,
+            341
+          ],
+          [
+            27,
+            47,
+            59,
+            185,
+            682
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2569,
+          "1": 1867,
+          "2": 418,
+          "3": 112,
+          "4": 34
+        },
+        "probabilities_sum_to_one": true,
+        "error_analysis": {
+          "errors": 2431,
+          "groups_non_exclusive": {
+            "contains_negation": 1356,
+            "contains_contrast_connector": 892,
+            "short_text_at_most_8_words": 328,
+            "intermediate_rating": 1777
+          },
+          "largest_confusions": [
+            {
+              "actual_stars": 4,
+              "predicted_stars": 5,
+              "count": 341
+            },
+            {
+              "actual_stars": 1,
+              "predicted_stars": 2,
+              "count": 274
+            },
+            {
+              "actual_stars": 3,
+              "predicted_stars": 2,
+              "count": 254
+            },
+            {
+              "actual_stars": 2,
+              "predicted_stars": 1,
+              "count": 240
+            },
+            {
+              "actual_stars": 2,
+              "predicted_stars": 3,
+              "count": 236
+            },
+            {
+              "actual_stars": 5,
+              "predicted_stars": 4,
+              "count": 185
+            },
+            {
+              "actual_stars": 4,
+              "predicted_stars": 3,
+              "count": 176
+            },
+            {
+              "actual_stars": 3,
+              "predicted_stars": 4,
+              "count": 161
+            }
+          ],
+          "cases_for_local_review": [
+            {
+              "row_position_1based": 192,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 8,
+              "tags": [
+                "short_text_at_most_8_words",
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 198,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 14,
+              "tags": [
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 218,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 5,
+              "tags": [
+                "short_text_at_most_8_words",
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 400,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 31,
+              "tags": []
+            },
+            {
+              "row_position_1based": 568,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 43,
+              "tags": [
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 730,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 26,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 927,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 10,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 4050,
+              "actual_stars": 5,
+              "predicted_stars": 1,
+              "distance": 4,
+              "word_count": 35,
+              "tags": [
+                "contains_negation"
+              ]
+            }
+          ],
+          "interpretation": "Observed text features, not causal diagnoses. Sarcasm/mixed sentiment require human review. Positions allow local inspection without publishing text or review IDs."
+        }
+      },
+      "vocabulary_size": 50000,
+      "fit_and_validation_wall_sec": 110.08302399999229,
+      "solver_iterations": [],
+      "convergence_warnings": 0
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "best_params": {
+        "classifier__C": 1.0
+      },
+      "train_rows": 197572,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.515025320612175,
+        "accuracy": 0.5182,
+        "mae_stars": 0.604,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.6388115134633241,
+            "recall": 0.688,
+            "f1": 0.6624939817043813,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.4245754245754246,
+            "recall": 0.425,
+            "f1": 0.42478760619690153,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.406345957011259,
+            "recall": 0.397,
+            "f1": 0.4016186140617097,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.46651532349602726,
+            "recall": 0.411,
+            "f1": 0.4370015948963317,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.6296992481203008,
+            "recall": 0.67,
+            "f1": 0.6492248062015504,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            688,
+            229,
+            67,
+            11,
+            5
+          ],
+          [
+            261,
+            425,
+            251,
+            44,
+            19
+          ],
+          [
+            94,
+            254,
+            397,
+            183,
+            72
+          ],
+          [
+            17,
+            69,
+            205,
+            411,
+            298
+          ],
+          [
+            17,
+            24,
+            57,
+            232,
+            670
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2591,
+          "1": 1913,
+          "2": 403,
+          "3": 71,
+          "4": 22
+        },
+        "probabilities_sum_to_one": true,
+        "error_analysis": {
+          "errors": 2409,
+          "groups_non_exclusive": {
+            "contains_negation": 1336,
+            "contains_contrast_connector": 897,
+            "short_text_at_most_8_words": 345,
+            "intermediate_rating": 1767
+          },
+          "largest_confusions": [
+            {
+              "actual_stars": 4,
+              "predicted_stars": 5,
+              "count": 298
+            },
+            {
+              "actual_stars": 2,
+              "predicted_stars": 1,
+              "count": 261
+            },
+            {
+              "actual_stars": 3,
+              "predicted_stars": 2,
+              "count": 254
+            },
+            {
+              "actual_stars": 2,
+              "predicted_stars": 3,
+              "count": 251
+            },
+            {
+              "actual_stars": 5,
+              "predicted_stars": 4,
+              "count": 232
+            },
+            {
+              "actual_stars": 1,
+              "predicted_stars": 2,
+              "count": 229
+            },
+            {
+              "actual_stars": 4,
+              "predicted_stars": 3,
+              "count": 205
+            },
+            {
+              "actual_stars": 3,
+              "predicted_stars": 4,
+              "count": 183
+            }
+          ],
+          "cases_for_local_review": [
+            {
+              "row_position_1based": 33,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 24,
+              "tags": [
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 198,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 14,
+              "tags": [
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 730,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 26,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 837,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 6,
+              "tags": [
+                "short_text_at_most_8_words"
+              ]
+            },
+            {
+              "row_position_1based": 974,
+              "actual_stars": 1,
+              "predicted_stars": 5,
+              "distance": 4,
+              "word_count": 33,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 4095,
+              "actual_stars": 5,
+              "predicted_stars": 1,
+              "distance": 4,
+              "word_count": 20,
+              "tags": [
+                "contains_negation"
+              ]
+            },
+            {
+              "row_position_1based": 4186,
+              "actual_stars": 5,
+              "predicted_stars": 1,
+              "distance": 4,
+              "word_count": 13,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            },
+            {
+              "row_position_1based": 4269,
+              "actual_stars": 5,
+              "predicted_stars": 1,
+              "distance": 4,
+              "word_count": 37,
+              "tags": [
+                "contains_negation",
+                "contains_contrast_connector"
+              ]
+            }
+          ],
+          "interpretation": "Observed text features, not causal diagnoses. Sarcasm/mixed sentiment require human review. Positions allow local inspection without publishing text or review IDs."
+        }
+      },
+      "vocabulary_size": 50000,
+      "fit_and_validation_wall_sec": 620.0683656000183,
+      "solver_iterations": [
+        325
+      ],
+      "convergence_warnings": 0
+    }
+  ],
+  "provenance": {
+    "train_rows_available": 197572,
+    "train_rows_sampled": 20000,
+    "validation_rows": 5000,
+    "seed": 42,
+    "sample_label_counts": {
+      "0": 4018,
+      "1": 4028,
+      "2": 4009,
+      "3": 3969,
+      "4": 3976
+    },
+    "sample_ids_sha256": "58a2a9e3368757c73444ce647b94b38dfec1b662a6ca279a3cff9c91399ea8cd",
+    "train_file_sha256": "e5612e36bd3245366c1a493a3986a25c86c678abbd817da93bf143f0e363204e",
+    "validation_file_sha256": "92fb1af073afaa4ac9981567397cc017e5b605eb31343c29782e1abc39b59576",
+    "test_accessed": false
+  },
+  "majority_baseline": {
+    "trained": false,
+    "predicted_label": 1,
+    "metrics": {
+      "rows": 5000,
+      "macro_f1": 0.06666666666666667,
+      "accuracy": 0.2,
+      "mae_stars": 1.4,
+      "per_class": [
+        {
+          "label": 0,
+          "stars": 1,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1000
+        },
+        {
+          "label": 1,
+          "stars": 2,
+          "precision": 0.2,
+          "recall": 1.0,
+          "f1": 0.3333333333333333,
+          "support": 1000
+        },
+        {
+          "label": 2,
+          "stars": 3,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1000
+        },
+        {
+          "label": 3,
+          "stars": 4,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1000
+        },
+        {
+          "label": 4,
+          "stars": 5,
+          "precision": 0.0,
+          "recall": 0.0,
+          "f1": 0.0,
+          "support": 1000
+        }
+      ],
+      "confusion_matrix": [
+        [
+          0,
+          1000,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0,
+          0,
+          0
+        ],
+        [
+          0,
+          1000,
+          0,
+          0,
+          0
+        ]
+      ],
+      "ordinal_error_counts": {
+        "0": 1000,
+        "1": 2000,
+        "2": 1000,
+        "3": 1000,
+        "4": 0
+      }
+    }
+  },
+  "wall_sec": 1174.4985360000283,
+  "cpu_sec": 1166.1875,
+  "sampled_process_peak_rss_mib": 1311.69921875,
+  "machine": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "processor": "AMD64 Family 25 Model 120 Stepping 0, AuthenticAMD"
+  },
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "nltk": "3.10.4",
+    "spacy": "3.8.16",
+    "es-core-news-sm": "3.8.0"
+  },
+  "test_accessed": false,
+  "warning": "Validation scores were used for selection; only the frozen champion may be scored once on test. Quick results are experimental."
+}

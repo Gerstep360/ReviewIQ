@@ -1,0 +1,310 @@
+{
+  "mode": "full",
+  "final_fit_split": "train_only",
+  "train_rows": 197572,
+  "dataset_revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "provenance": {
+    "train_rows_available": 197572,
+    "train_rows_sampled": 20000,
+    "validation_rows": 5000,
+    "seed": 42,
+    "sample_label_counts": {
+      "0": 4018,
+      "1": 4028,
+      "2": 4009,
+      "3": 3969,
+      "4": 3976
+    },
+    "sample_ids_sha256": "58a2a9e3368757c73444ce647b94b38dfec1b662a6ca279a3cff9c91399ea8cd",
+    "train_file_sha256": "e5612e36bd3245366c1a493a3986a25c86c678abbd817da93bf143f0e363204e",
+    "validation_file_sha256": "92fb1af073afaa4ac9981567397cc017e5b605eb31343c29782e1abc39b59576",
+    "test_accessed": false
+  },
+  "champion": {
+    "model": "LogisticRegression",
+    "morphology": "lemmatization",
+    "ngram_range": [
+      1,
+      2
+    ],
+    "best_params": {
+      "classifier__C": 1.0
+    },
+    "train_rows": 197572,
+    "metrics": {
+      "rows": 5000,
+      "macro_f1": 0.515025320612175,
+      "accuracy": 0.5182,
+      "mae_stars": 0.604,
+      "per_class": [
+        {
+          "label": 0,
+          "stars": 1,
+          "precision": 0.6388115134633241,
+          "recall": 0.688,
+          "f1": 0.6624939817043813,
+          "support": 1000
+        },
+        {
+          "label": 1,
+          "stars": 2,
+          "precision": 0.4245754245754246,
+          "recall": 0.425,
+          "f1": 0.42478760619690153,
+          "support": 1000
+        },
+        {
+          "label": 2,
+          "stars": 3,
+          "precision": 0.406345957011259,
+          "recall": 0.397,
+          "f1": 0.4016186140617097,
+          "support": 1000
+        },
+        {
+          "label": 3,
+          "stars": 4,
+          "precision": 0.46651532349602726,
+          "recall": 0.411,
+          "f1": 0.4370015948963317,
+          "support": 1000
+        },
+        {
+          "label": 4,
+          "stars": 5,
+          "precision": 0.6296992481203008,
+          "recall": 0.67,
+          "f1": 0.6492248062015504,
+          "support": 1000
+        }
+      ],
+      "confusion_matrix": [
+        [
+          688,
+          229,
+          67,
+          11,
+          5
+        ],
+        [
+          261,
+          425,
+          251,
+          44,
+          19
+        ],
+        [
+          94,
+          254,
+          397,
+          183,
+          72
+        ],
+        [
+          17,
+          69,
+          205,
+          411,
+          298
+        ],
+        [
+          17,
+          24,
+          57,
+          232,
+          670
+        ]
+      ],
+      "ordinal_error_counts": {
+        "0": 2591,
+        "1": 1913,
+        "2": 403,
+        "3": 71,
+        "4": 22
+      },
+      "probabilities_sum_to_one": true,
+      "error_analysis": {
+        "errors": 2409,
+        "groups_non_exclusive": {
+          "contains_negation": 1336,
+          "contains_contrast_connector": 897,
+          "short_text_at_most_8_words": 345,
+          "intermediate_rating": 1767
+        },
+        "largest_confusions": [
+          {
+            "actual_stars": 4,
+            "predicted_stars": 5,
+            "count": 298
+          },
+          {
+            "actual_stars": 2,
+            "predicted_stars": 1,
+            "count": 261
+          },
+          {
+            "actual_stars": 3,
+            "predicted_stars": 2,
+            "count": 254
+          },
+          {
+            "actual_stars": 2,
+            "predicted_stars": 3,
+            "count": 251
+          },
+          {
+            "actual_stars": 5,
+            "predicted_stars": 4,
+            "count": 232
+          },
+          {
+            "actual_stars": 1,
+            "predicted_stars": 2,
+            "count": 229
+          },
+          {
+            "actual_stars": 4,
+            "predicted_stars": 3,
+            "count": 205
+          },
+          {
+            "actual_stars": 3,
+            "predicted_stars": 4,
+            "count": 183
+          }
+        ],
+        "cases_for_local_review": [
+          {
+            "row_position_1based": 33,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 24,
+            "tags": [
+              "contains_negation"
+            ]
+          },
+          {
+            "row_position_1based": 198,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 14,
+            "tags": [
+              "contains_negation"
+            ]
+          },
+          {
+            "row_position_1based": 730,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 26,
+            "tags": [
+              "contains_negation",
+              "contains_contrast_connector"
+            ]
+          },
+          {
+            "row_position_1based": 837,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 6,
+            "tags": [
+              "short_text_at_most_8_words"
+            ]
+          },
+          {
+            "row_position_1based": 974,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 33,
+            "tags": [
+              "contains_negation",
+              "contains_contrast_connector"
+            ]
+          },
+          {
+            "row_position_1based": 4095,
+            "actual_stars": 5,
+            "predicted_stars": 1,
+            "distance": 4,
+            "word_count": 20,
+            "tags": [
+              "contains_negation"
+            ]
+          },
+          {
+            "row_position_1based": 4186,
+            "actual_stars": 5,
+            "predicted_stars": 1,
+            "distance": 4,
+            "word_count": 13,
+            "tags": [
+              "contains_negation",
+              "contains_contrast_connector"
+            ]
+          },
+          {
+            "row_position_1based": 4269,
+            "actual_stars": 5,
+            "predicted_stars": 1,
+            "distance": 4,
+            "word_count": 37,
+            "tags": [
+              "contains_negation",
+              "contains_contrast_connector"
+            ]
+          }
+        ],
+        "interpretation": "Observed text features, not causal diagnoses. Sarcasm/mixed sentiment require human review. Positions allow local inspection without publishing text or review IDs."
+      }
+    },
+    "vocabulary_size": 50000,
+    "fit_and_validation_wall_sec": 620.0683656000183,
+    "solver_iterations": [
+      325
+    ],
+    "convergence_warnings": 0
+  },
+  "selection_rule": "maximize validation macro_f1, then minimize mae_stars, then model name; no test selection",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "frozen_at_utc": "2026-10-21T17:22:56.380539+00:00",
+  "artifact": "ml/artifacts/reviewiq_pipeline.joblib",
+  "artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+  "artifact_bytes": 1526931,
+  "decision_rule": "argmax over ordered classes 0..4; stars = label + 1; no threshold",
+  "label_index_to_stars": {
+    "0": 1,
+    "1": 2,
+    "2": 3,
+    "3": 4,
+    "4": 5
+  },
+  "config_sha256": "f1432572f863254c99d0e67761065bf887b99d1d4d4ac5b5bcab5c0edaaf888e",
+  "source_sha256": {
+    "ml/config.py": "967195b9062b4b66254b4a7ba992645d42480495d70981e10c9d303be367967a",
+    "ml/nlp/__init__.py": "6eaf8bbf8008370d58cc579abeb83c4be025386d8d4bd2f485cd54d7b1368b75",
+    "ml/nlp/compare.py": "ccfad6d9a589a5e9d63e0c832fa6b5b455670901d765be78bc78640512cd3db8",
+    "ml/nlp/normalize.py": "0ff9f4cba3ffa28ce2e3c62a7475c5f47ff91a54114502dc5b75101682fe08d4",
+    "ml/nlp/pipeline.py": "22f22186a26d42e33110e5c01ebb53aecb6a71072f821801b23d9fe17a3f3bde",
+    "ml/nlp/stem_lemma.py": "30c02b0c25a8fc817707352721a0a58a40d1faf8c8199cb438f7421ff4135679",
+    "ml/nlp/stopwords.py": "29b918c6b838a145a3e3017e9f5a77127558cd46c4a1e32ab251573200f0309c",
+    "ml/nlp/tokenize.py": "ad8d5b259c9f3abb50d60e29b2d4fa3cb4be0a774a9edd8bf7df6cb69a656010",
+    "ml/nlp/trace.py": "cba4377c5811de340bef6bf67c2656559145191aebcf730dcbad9c8a7292d435",
+    "ml/nlp/transformer.py": "05a2dbde5412b9f2eae3449ec1a24a14633f0f8638920a0effe5e94d441da796",
+    "ml/training/__init__.py": "e15a200e5ab106f57330362725cb9118ed7a35969fe55fdd602703d61311259e",
+    "ml/training/export.py": "f77d9394a2fda4a05a8dc987063ab4ec0c7b24dc1637efe718ee78f1c1d7c8f5",
+    "ml/training/pipelines.py": "9fb61c325fac955bfecc5ff32f16806079d480067a2a52c4abe12136f142d727",
+    "ml/training/train.py": "70209e8e56044468af41801c086f1528a3f1d2deb5c1a9018738dea4af06a80f",
+    "ml/training/tune.py": "877e55cc3a432105d53d626aa880f76cb4f499d7ece0a3ed7a587176fb52fac4",
+    "ml/evaluation/__init__.py": "78f348c74f87eda6436cba2047121e504c9071d73a09955db4db32590ce4fe48",
+    "ml/evaluation/errors.py": "59f8914f5ceb908a423e77006c81e04437c1a18115fa67b6ffe932622b1f1ef4",
+    "ml/evaluation/evaluate.py": "3b8749a4368f19be61a50c2b094ef486bc9ced0c7dad24d93f6d6491e6f72852",
+    "ml/evaluation/final_test.py": "bec90ac9879e3068b2a1fe8a97e6a03de9c698d8b1c302942ca0a68b00991091"
+  },
+  "roundtrip_verified": true,
+  "test_accessed_during_selection": false
+}

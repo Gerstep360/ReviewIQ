@@ -1,0 +1,26 @@
+{
+    "model_id":  "reviewiq-8f0ef24251ae5522",
+    "scope":  "AI-assisted qualitative inspection of four real validation errors; paraphrases only; no model changes after test.",
+    "cases":  [
+                  {
+                      "split":  "validation",
+                      "row_position_1based":  33,
+                      "observation":  "Una reseña describe una avería temprana y una reclamación sin resolver; la valoración original es de 1 estrella y el modelo predice 5. La presencia de una negación conservada no garantiza reconocer una secuencia narrativa negativa. No se ha identificado una causa única del error."
+                  },
+                  {
+                      "split":  "validation",
+                      "row_position_1based":  198,
+                      "observation":  "La utilidad protectora del artículo se cuestiona mediante una comparación con una alternativa doméstica. El modelo predice 5 frente a 1 estrella real. La formulación puede leerse como ironía; esa interpretación es cualitativa y no una categoría diagnosticada automáticamente."
+                  },
+                  {
+                      "split":  "validation",
+                      "row_position_1based":  730,
+                      "observation":  "El texto elogia a la tienda antes de explicar que el producto no resulta adecuado. El modelo predice 5 y la valoración original es 1. Hay señales positivas y negativas en entidades distintas y un conector de contraste; unigramas y bigramas no resuelven de forma explícita a qué entidad se refiere cada valoración."
+                  },
+                  {
+                      "split":  "validation",
+                      "row_position_1based":  837,
+                      "observation":  "Una crítica de solo seis palabras comunica deterioro y una alteración del contenido de un recipiente. El modelo predice 5 frente a 1 estrella real. El ejemplo muestra una evaluación negativa breve sin un negador explícito; determinar el papel de términos raros requeriría analizar los pesos del modelo."
+                  }
+              ]
+}

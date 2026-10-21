@@ -1,0 +1,171 @@
+{
+  "scope": "sample train only, all TF-IDF fits inside each fold",
+  "models": [
+    {
+      "model": "MultinomialNB",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "rows": 20000,
+      "scoring": "f1_macro",
+      "best_params": {
+        "classifier__alpha": 2.0
+      },
+      "best_mean_macro_f1": 0.4786211408001491,
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 13333,
+          "validation_rows": 6667,
+          "train_positions_sha256": "3e443d2460b8f264605c744a9b0b4aca8298498142dd2644f01ef4f09f650a48",
+          "heldout_positions_sha256": "0e3f5239c04a5cf49473ce5768a738827a5dc3673d6fc89e30e0f25556f10c2e",
+          "overlap": 0
+        },
+        {
+          "fold": 2,
+          "train_rows": 13333,
+          "validation_rows": 6667,
+          "train_positions_sha256": "85ff6da8f0352eeda21133da089cd486af7363efa475eaba77e62d15c61b7ff6",
+          "heldout_positions_sha256": "a9b08047af21b7f18cd44d04a3f523217d7b4b93331e75d6d82f6fa189719995",
+          "overlap": 0
+        },
+        {
+          "fold": 3,
+          "train_rows": 13334,
+          "validation_rows": 6666,
+          "train_positions_sha256": "e9c9ee103241a959d22dc7f8b33809aa1e4dac9170371caa2d8b46b21d305083",
+          "heldout_positions_sha256": "34e541fdf0eb515902ec51572092298382a6849075deecaaaa50e6d7e618b967",
+          "overlap": 0
+        }
+      ],
+      "trials": [
+        {
+          "params": {
+            "classifier__alpha": 0.1
+          },
+          "mean_macro_f1": 0.45583819318805735,
+          "std_macro_f1": 0.001951285998245273,
+          "fold_macro_f1": [
+            0.4535270987489407,
+            0.45829965290106045,
+            0.45568782791417084
+          ],
+          "mean_fit_sec": 8.136730511983236
+        },
+        {
+          "params": {
+            "classifier__alpha": 1.0
+          },
+          "mean_macro_f1": 0.4744770973809025,
+          "std_macro_f1": 0.0039610004006109785,
+          "fold_macro_f1": [
+            0.47192168292859077,
+            0.48007182661223136,
+            0.4714377826018854
+          ],
+          "mean_fit_sec": 0.2728319962819417
+        },
+        {
+          "params": {
+            "classifier__alpha": 2.0
+          },
+          "mean_macro_f1": 0.4786211408001491,
+          "std_macro_f1": 0.003812460136037279,
+          "fold_macro_f1": [
+            0.47421863951898874,
+            0.48351789979451826,
+            0.4781268830869404
+          ],
+          "mean_fit_sec": 0.22893524169921875
+        }
+      ],
+      "convergence_warnings": 0,
+      "idf_fit_scope": "training rows of each fold only; Pipeline cache keyed by exact X/y and parameters"
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "rows": 20000,
+      "scoring": "f1_macro",
+      "best_params": {
+        "classifier__C": 1.0
+      },
+      "best_mean_macro_f1": 0.47992318407518697,
+      "folds": [
+        {
+          "fold": 1,
+          "train_rows": 13333,
+          "validation_rows": 6667,
+          "train_positions_sha256": "3e443d2460b8f264605c744a9b0b4aca8298498142dd2644f01ef4f09f650a48",
+          "heldout_positions_sha256": "0e3f5239c04a5cf49473ce5768a738827a5dc3673d6fc89e30e0f25556f10c2e",
+          "overlap": 0
+        },
+        {
+          "fold": 2,
+          "train_rows": 13333,
+          "validation_rows": 6667,
+          "train_positions_sha256": "85ff6da8f0352eeda21133da089cd486af7363efa475eaba77e62d15c61b7ff6",
+          "heldout_positions_sha256": "a9b08047af21b7f18cd44d04a3f523217d7b4b93331e75d6d82f6fa189719995",
+          "overlap": 0
+        },
+        {
+          "fold": 3,
+          "train_rows": 13334,
+          "validation_rows": 6666,
+          "train_positions_sha256": "e9c9ee103241a959d22dc7f8b33809aa1e4dac9170371caa2d8b46b21d305083",
+          "heldout_positions_sha256": "34e541fdf0eb515902ec51572092298382a6849075deecaaaa50e6d7e618b967",
+          "overlap": 0
+        }
+      ],
+      "trials": [
+        {
+          "params": {
+            "classifier__C": 0.5
+          },
+          "mean_macro_f1": 0.47855171126012114,
+          "std_macro_f1": 0.002967227472549088,
+          "fold_macro_f1": [
+            0.4798574048466754,
+            0.47444516623099614,
+            0.4813525627026918
+          ],
+          "mean_fit_sec": 42.56330895423889
+        },
+        {
+          "params": {
+            "classifier__C": 1.0
+          },
+          "mean_macro_f1": 0.47992318407518697,
+          "std_macro_f1": 0.00595347658233242,
+          "fold_macro_f1": [
+            0.4819522088652678,
+            0.47183208218198436,
+            0.48598526117830865
+          ],
+          "mean_fit_sec": 1.194896936416626
+        },
+        {
+          "params": {
+            "classifier__C": 2.0
+          },
+          "mean_macro_f1": 0.4780565136083288,
+          "std_macro_f1": 0.004694341524934063,
+          "fold_macro_f1": [
+            0.4824272717096548,
+            0.47154359267527457,
+            0.480198676440057
+          ],
+          "mean_fit_sec": 1.5535766283671062
+        }
+      ],
+      "convergence_warnings": 0,
+      "idf_fit_scope": "training rows of each fold only; Pipeline cache keyed by exact X/y and parameters"
+    }
+  ]
+}

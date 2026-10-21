@@ -1,0 +1,9 @@
+{
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "selection_sha256": "4c627524726779f9236e59b210074dae5bb48c70b3bdbafcab717deb4e4c148f",
+  "artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+  "status": "complete",
+  "started_at_utc": "2026-10-21T17:23:49.914192+00:00",
+  "evaluated_at_utc": "2026-10-21T17:24:03.591860+00:00",
+  "test_metrics_sha256": "9f089bb7f77df4249677b72ede7af547dc1a8cec544eaf0976a9cbde596af8c9"
+}

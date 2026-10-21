@@ -1,0 +1,44 @@
+{
+  "created_at_utc": "2026-10-21T17:03:24.346419+00:00",
+  "mode": "full",
+  "seed": 42,
+  "config": {
+    "screen_train_rows": 20000,
+    "cv_folds": 3,
+    "parameter_grid": {
+      "MultinomialNB": [
+        0.1,
+        1.0,
+        2.0
+      ],
+      "LogisticRegression": [
+        0.5,
+        1.0,
+        2.0
+      ]
+    },
+    "logistic_max_iter": 500,
+    "selection_rule": "maximize validation macro_f1, then minimize mae_stars, then model name; no test selection",
+    "final_fit_split": "train_only",
+    "test_policy": "one evaluation of the frozen full-train champion; quick never accesses test"
+  },
+  "provenance": {
+    "train_rows_available": 197572,
+    "train_rows_sampled": 20000,
+    "validation_rows": 5000,
+    "seed": 42,
+    "sample_label_counts": {
+      "0": 4018,
+      "1": 4028,
+      "2": 4009,
+      "3": 3969,
+      "4": 3976
+    },
+    "sample_ids_sha256": "58a2a9e3368757c73444ce647b94b38dfec1b662a6ca279a3cff9c91399ea8cd",
+    "train_file_sha256": "e5612e36bd3245366c1a493a3986a25c86c678abbd817da93bf143f0e363204e",
+    "validation_file_sha256": "92fb1af073afaa4ac9981567397cc017e5b605eb31343c29782e1abc39b59576",
+    "test_accessed": false
+  },
+  "test_accessed": false,
+  "decision": "Compare eight fixed NLP/model combinations on sample, pick NLP per model using validation, tune alpha/C with 3-fold train-only CV, refit two finalists on train only, select by validation macro-F1 then MAE then stable model/config name."
+}

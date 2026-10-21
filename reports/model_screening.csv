@@ -1,0 +1,9 @@
+model,morphology,ngram_range,parameter,train_rows,macro_f1,accuracy,mae_stars,vocabulary_size
+MultinomialNB,stemming,"[1, 1]",{},20000,0.44671254383551817,0.449,0.7702,5710
+LogisticRegression,stemming,"[1, 1]",{},20000,0.45405578505741034,0.457,0.729,5710
+MultinomialNB,stemming,"[1, 2]",{},20000,0.4782833223643447,0.4812,0.6946,36851
+LogisticRegression,stemming,"[1, 2]",{},20000,0.4776321756588053,0.4802,0.6832,36851
+MultinomialNB,lemmatization,"[1, 1]",{},20000,0.4373071027583456,0.439,0.7884,8291
+LogisticRegression,lemmatization,"[1, 1]",{},20000,0.46010555493858185,0.4622,0.7346,8291
+MultinomialNB,lemmatization,"[1, 2]",{},20000,0.4688610789152106,0.4718,0.7134,36737
+LogisticRegression,lemmatization,"[1, 2]",{},20000,0.4784686872178642,0.481,0.6872,36737

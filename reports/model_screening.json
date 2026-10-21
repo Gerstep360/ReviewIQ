@@ -1,0 +1,837 @@
+{
+  "scope": "sample train/validation only",
+  "candidates": [
+    {
+      "model": "MultinomialNB",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.44671254383551817,
+        "accuracy": 0.449,
+        "mae_stars": 0.7702,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.5785582255083179,
+            "recall": 0.626,
+            "f1": 0.6013448607108549,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3637226970560304,
+            "recall": 0.383,
+            "f1": 0.37311251826595226,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.34659685863874345,
+            "recall": 0.331,
+            "f1": 0.33861892583120207,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.3719646799116998,
+            "recall": 0.337,
+            "f1": 0.35362014690451204,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5657370517928287,
+            "recall": 0.568,
+            "f1": 0.5668662674650699,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            626,
+            241,
+            99,
+            19,
+            15
+          ],
+          [
+            246,
+            383,
+            237,
+            97,
+            37
+          ],
+          [
+            120,
+            257,
+            331,
+            208,
+            84
+          ],
+          [
+            57,
+            114,
+            192,
+            337,
+            300
+          ],
+          [
+            33,
+            58,
+            96,
+            245,
+            568
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2245,
+          "1": 1926,
+          "2": 610,
+          "3": 171,
+          "4": 48
+        }
+      },
+      "vocabulary_size": 5710,
+      "classifier_fit_predict_sec": 0.019749300030525774,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.45405578505741034,
+        "accuracy": 0.457,
+        "mae_stars": 0.729,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.5976058931860037,
+            "recall": 0.649,
+            "f1": 0.6222435282837967,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3704433497536946,
+            "recall": 0.376,
+            "f1": 0.3732009925558313,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.3312302839116719,
+            "recall": 0.315,
+            "f1": 0.3229113275243465,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.391304347826087,
+            "recall": 0.36,
+            "f1": 0.375,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5690661478599222,
+            "recall": 0.585,
+            "f1": 0.5769230769230769,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            649,
+            236,
+            87,
+            16,
+            12
+          ],
+          [
+            255,
+            376,
+            261,
+            75,
+            33
+          ],
+          [
+            117,
+            265,
+            315,
+            210,
+            93
+          ],
+          [
+            46,
+            84,
+            205,
+            360,
+            305
+          ],
+          [
+            19,
+            54,
+            83,
+            259,
+            585
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2285,
+          "1": 1996,
+          "2": 539,
+          "3": 149,
+          "4": 31
+        }
+      },
+      "vocabulary_size": 5710,
+      "classifier_fit_predict_sec": 0.7789649000042118,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "MultinomialNB",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.4782833223643447,
+        "accuracy": 0.4812,
+        "mae_stars": 0.6946,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.6007428040854225,
+            "recall": 0.647,
+            "f1": 0.6230139624458353,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.378682842287695,
+            "recall": 0.437,
+            "f1": 0.40575673166202414,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.3775280898876405,
+            "recall": 0.336,
+            "f1": 0.35555555555555557,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.43243243243243246,
+            "recall": 0.368,
+            "f1": 0.39762290653700705,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.6011673151750972,
+            "recall": 0.618,
+            "f1": 0.6094674556213018,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            647,
+            261,
+            78,
+            7,
+            7
+          ],
+          [
+            247,
+            437,
+            231,
+            62,
+            23
+          ],
+          [
+            108,
+            290,
+            336,
+            196,
+            70
+          ],
+          [
+            47,
+            102,
+            173,
+            368,
+            310
+          ],
+          [
+            28,
+            64,
+            72,
+            218,
+            618
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2406,
+          "1": 1926,
+          "2": 492,
+          "3": 141,
+          "4": 35
+        }
+      },
+      "vocabulary_size": 36851,
+      "classifier_fit_predict_sec": 0.01975160004803911,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "stemming",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.4776321756588053,
+        "accuracy": 0.4802,
+        "mae_stars": 0.6832,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.6136154553817847,
+            "recall": 0.667,
+            "f1": 0.639195016770484,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3883495145631068,
+            "recall": 0.4,
+            "f1": 0.39408866995073893,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.3742138364779874,
+            "recall": 0.357,
+            "f1": 0.3654042988741044,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.412472647702407,
+            "recall": 0.377,
+            "f1": 0.3939393939393939,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5911330049261084,
+            "recall": 0.6,
+            "f1": 0.5955334987593052,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            667,
+            236,
+            75,
+            12,
+            10
+          ],
+          [
+            255,
+            400,
+            250,
+            67,
+            28
+          ],
+          [
+            112,
+            260,
+            357,
+            199,
+            72
+          ],
+          [
+            35,
+            85,
+            198,
+            377,
+            305
+          ],
+          [
+            18,
+            49,
+            74,
+            259,
+            600
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2401,
+          "1": 1962,
+          "2": 485,
+          "3": 124,
+          "4": 28
+        }
+      },
+      "vocabulary_size": 36851,
+      "classifier_fit_predict_sec": 2.4262049999670126,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "MultinomialNB",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.4373071027583456,
+        "accuracy": 0.439,
+        "mae_stars": 0.7884,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.5659494855004678,
+            "recall": 0.605,
+            "f1": 0.5848235862735621,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.329981718464351,
+            "recall": 0.361,
+            "f1": 0.3447946513849093,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.3470031545741325,
+            "recall": 0.33,
+            "f1": 0.33828805740645823,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.3795454545454545,
+            "recall": 0.334,
+            "f1": 0.3553191489361702,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5616302186878728,
+            "recall": 0.565,
+            "f1": 0.5633100697906281,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            605,
+            265,
+            86,
+            29,
+            15
+          ],
+          [
+            257,
+            361,
+            245,
+            101,
+            36
+          ],
+          [
+            119,
+            279,
+            330,
+            183,
+            89
+          ],
+          [
+            53,
+            118,
+            194,
+            334,
+            301
+          ],
+          [
+            35,
+            71,
+            96,
+            233,
+            565
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2195,
+          "1": 1957,
+          "2": 609,
+          "3": 189,
+          "4": 50
+        }
+      },
+      "vocabulary_size": 8291,
+      "classifier_fit_predict_sec": 0.014266499958466738,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        1
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.46010555493858185,
+        "accuracy": 0.4622,
+        "mae_stars": 0.7346,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.5799256505576208,
+            "recall": 0.624,
+            "f1": 0.6011560693641619,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3700787401574803,
+            "recall": 0.376,
+            "f1": 0.373015873015873,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.35353535353535354,
+            "recall": 0.35,
+            "f1": 0.35175879396984927,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.4175084175084175,
+            "recall": 0.372,
+            "f1": 0.39344262295081966,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.5735150925024343,
+            "recall": 0.589,
+            "f1": 0.5811544153922052,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            624,
+            248,
+            96,
+            19,
+            13
+          ],
+          [
+            266,
+            376,
+            249,
+            78,
+            31
+          ],
+          [
+            115,
+            251,
+            350,
+            190,
+            94
+          ],
+          [
+            43,
+            89,
+            196,
+            372,
+            300
+          ],
+          [
+            28,
+            52,
+            99,
+            232,
+            589
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2311,
+          "1": 1932,
+          "2": 571,
+          "3": 145,
+          "4": 41
+        }
+      },
+      "vocabulary_size": 8291,
+      "classifier_fit_predict_sec": 0.7984077000292018,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "MultinomialNB",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.4688610789152106,
+        "accuracy": 0.4718,
+        "mae_stars": 0.7134,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.5868152274837511,
+            "recall": 0.632,
+            "f1": 0.6085700529610014,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3588850174216028,
+            "recall": 0.412,
+            "f1": 0.38361266294227186,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.375,
+            "recall": 0.339,
+            "f1": 0.3560924369747899,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.42117930204572807,
+            "recall": 0.35,
+            "f1": 0.3823047515019115,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.6019230769230769,
+            "recall": 0.626,
+            "f1": 0.6137254901960785,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            632,
+            269,
+            78,
+            13,
+            8
+          ],
+          [
+            257,
+            412,
+            232,
+            70,
+            29
+          ],
+          [
+            109,
+            296,
+            339,
+            187,
+            69
+          ],
+          [
+            51,
+            104,
+            187,
+            350,
+            308
+          ],
+          [
+            28,
+            67,
+            68,
+            211,
+            626
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2359,
+          "1": 1947,
+          "2": 498,
+          "3": 160,
+          "4": 36
+        }
+      },
+      "vocabulary_size": 36737,
+      "classifier_fit_predict_sec": 0.022023700003046542,
+      "convergence_warnings": 0
+    },
+    {
+      "model": "LogisticRegression",
+      "morphology": "lemmatization",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "train_rows": 20000,
+      "metrics": {
+        "rows": 5000,
+        "macro_f1": 0.4784686872178642,
+        "accuracy": 0.481,
+        "mae_stars": 0.6872,
+        "per_class": [
+          {
+            "label": 0,
+            "stars": 1,
+            "precision": 0.6106442577030813,
+            "recall": 0.654,
+            "f1": 0.631578947368421,
+            "support": 1000
+          },
+          {
+            "label": 1,
+            "stars": 2,
+            "precision": 0.3871576959395656,
+            "recall": 0.41,
+            "f1": 0.39825157843613407,
+            "support": 1000
+          },
+          {
+            "label": 2,
+            "stars": 3,
+            "precision": 0.38219895287958117,
+            "recall": 0.365,
+            "f1": 0.3734015345268542,
+            "support": 1000
+          },
+          {
+            "label": 3,
+            "stars": 4,
+            "precision": 0.42093287827076226,
+            "recall": 0.37,
+            "f1": 0.3938265034592869,
+            "support": 1000
+          },
+          {
+            "label": 4,
+            "stars": 5,
+            "precision": 0.584942084942085,
+            "recall": 0.606,
+            "f1": 0.5952848722986247,
+            "support": 1000
+          }
+        ],
+        "confusion_matrix": [
+          [
+            654,
+            244,
+            76,
+            14,
+            12
+          ],
+          [
+            262,
+            410,
+            232,
+            66,
+            30
+          ],
+          [
+            99,
+            271,
+            365,
+            183,
+            82
+          ],
+          [
+            34,
+            88,
+            202,
+            370,
+            306
+          ],
+          [
+            22,
+            46,
+            80,
+            246,
+            606
+          ]
+        ],
+        "ordinal_error_counts": {
+          "0": 2405,
+          "1": 1946,
+          "2": 491,
+          "3": 124,
+          "4": 34
+        }
+      },
+      "vocabulary_size": 36737,
+      "classifier_fit_predict_sec": 2.1491458999807946,
+      "convergence_warnings": 0
+    }
+  ]
+}
