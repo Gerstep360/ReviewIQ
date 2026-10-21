@@ -1,0 +1,44 @@
+# Python y entornos locales
+venv/
+.venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Secretos y bases de datos locales
+.env
+.env.*
+!.env.example
+*.sqlite3
+*.sqlite3-journal
+*.log
+
+# Frontend y archivos generados
+node_modules/
+dist/
+dist-ssr/
+coverage/
+*.tsbuildinfo
+staticfiles/
+
+# Corpus restringido y modelos generados
+/data/raw/
+/data/processed/
+/ml/data/raw/
+/ml/data/processed/
+/ml/artifacts/*
+!/ml/artifacts/.gitkeep
+*.joblib
+*.pkl
+*.pickle
+
+# Archivos del sistema y editor
+.DS_Store
+Thumbs.db
+.idea/
