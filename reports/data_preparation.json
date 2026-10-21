@@ -1,0 +1,146 @@
+{
+  "policy": "Remove train overlaps with either holdout, all train text groups with conflicting labels, then keep first train ID/text. Preserve holdout rows, order, text and labels; drop only unused columns.",
+  "columns": [
+    "id",
+    "text",
+    "label"
+  ],
+  "splits": {
+    "train": {
+      "source_rows": 200000,
+      "prepared_rows": 197572,
+      "removed_rows_by_reason": {
+        "conflicting_labels_for_same_text": 1313,
+        "overlap_with_validation_or_test": 671,
+        "duplicate_within_train": 444
+      },
+      "label_counts": {
+        "0": 39689,
+        "1": 39788,
+        "2": 39607,
+        "3": 39209,
+        "4": 39279
+      }
+    },
+    "validation": {
+      "source_rows": 5000,
+      "prepared_rows": 5000,
+      "removed_rows_by_reason": {},
+      "label_counts": {
+        "0": 1000,
+        "1": 1000,
+        "2": 1000,
+        "3": 1000,
+        "4": 1000
+      }
+    },
+    "test": {
+      "source_rows": 5000,
+      "prepared_rows": 5000,
+      "removed_rows_by_reason": {},
+      "label_counts": {
+        "0": 1000,
+        "1": 1000,
+        "2": 1000,
+        "3": 1000,
+        "4": 1000
+      }
+    }
+  },
+  "selection": "No predictions or holdout scores used; only identity checks across splits.",
+  "audit_after_preparation": {
+    "splits": {
+      "train": {
+        "rows": 197572,
+        "label_counts": {
+          "0": 39689,
+          "1": 39788,
+          "2": 39607,
+          "3": 39209,
+          "4": 39279
+        },
+        "class_proportions": {
+          "0": 0.20088372846354746,
+          "1": 0.2013848116129816,
+          "2": 0.2004686898953293,
+          "3": 0.19845423440568502,
+          "4": 0.19880853562245662
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 0,
+        "duplicate_normalized_text_rows": 0,
+        "normalized_text_groups_with_conflicting_labels": 0
+      },
+      "validation": {
+        "rows": 5000,
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        },
+        "class_proportions": {
+          "0": 0.2,
+          "1": 0.2,
+          "2": 0.2,
+          "3": 0.2,
+          "4": 0.2
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 5,
+        "duplicate_normalized_text_rows": 7,
+        "normalized_text_groups_with_conflicting_labels": 1
+      },
+      "test": {
+        "rows": 5000,
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        },
+        "class_proportions": {
+          "0": 0.2,
+          "1": 0.2,
+          "2": 0.2,
+          "3": 0.2,
+          "4": 0.2
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 6,
+        "duplicate_normalized_text_rows": 6,
+        "normalized_text_groups_with_conflicting_labels": 1
+      }
+    },
+    "overlaps": {
+      "train__validation": {
+        "shared_ids": 0,
+        "shared_exact_texts": 0,
+        "shared_normalized_texts": 0,
+        "train_rows_with_shared_text": 0,
+        "validation_rows_with_shared_text": 0
+      },
+      "train__test": {
+        "shared_ids": 0,
+        "shared_exact_texts": 0,
+        "shared_normalized_texts": 0,
+        "train_rows_with_shared_text": 0,
+        "test_rows_with_shared_text": 0
+      },
+      "validation__test": {
+        "shared_ids": 0,
+        "shared_exact_texts": 9,
+        "shared_normalized_texts": 9,
+        "validation_rows_with_shared_text": 15,
+        "test_rows_with_shared_text": 12
+      }
+    },
+    "text_identity": "casefold + collapse whitespace + SHA-256; accents and punctuation preserved",
+    "validation": "fail-fast on invalid records; zero invalid rows means every row passed"
+  }
+}

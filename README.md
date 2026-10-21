@@ -1,10 +1,10 @@
 # ReviewIQ
 
-## Estado inicial del repositorio
+## Estado del repositorio
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-Este primer commit registra las especificaciones, el proyecto base de Django, la plantilla de Vite y las carpetas reservadas de ML, notebooks y pruebas. Todavía no hay endpoints de predicción, modelos entrenados ni métricas. `requirements.txt` fija las dependencias del esqueleto Django; las dependencias de DRF, ML y la instalación completa quedan para el siguiente paso.
+La arquitectura inicial y la **Fase B (datos y EDA)** están implementadas. Hay descarga reproducible, validación, preparación de datos, informes y un notebook ejecutado. Se mantienen el esqueleto de Django y la plantilla de Vite. Todavía no hay endpoints de predicción ni modelos entrenados; las dependencias de DRF y modelado se agregarán en sus fases.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -17,6 +17,35 @@ py -3.11 -m venv venv
 ```
 
 Esta comprobación valida la configuración sin conectarse a PostgreSQL. Ejecutar migraciones y levantar la aplicación requerirá una base de datos local y las variables de conexión correspondientes.
+
+## Datos y análisis exploratorio
+
+Desde la raíz del repositorio, con las dependencias de `requirements.txt` instaladas:
+
+```powershell
+.\venv\Scripts\python.exe -m ml.data.eda
+.\venv\Scripts\python.exe -m unittest discover -s tests -p test_data.py -v
+```
+
+El primer comando descarga y verifica la revisión fijada en `config.json`, audita las particiones originales, prepara los datos locales y genera `reports/eda_summary.json`, `reports/dataset_manifest.json`, `reports/data_preparation.json` y tres figuras. No necesita Django ni una base de datos. También se puede ejecutar solo la descarga con `python -m ml.data.download` o la preparación con `python -m ml.data.prepare`.
+
+Se observaron 200.000 / 5.000 / 5.000 filas originales. La limpieza deja **197.572 filas de train** y conserva las filas de validación y prueba; se verificó que train preparado no comparte IDs ni textos normalizados con los conjuntos reservados. El corpus crudo y preparado permanece en carpetas ignoradas por Git. Ver [origen, licencia y decisiones](docs/DATASET.md) y [evidencia de la Fase B](docs/FASE-B-DATOS-EDA.md).
+
+Para regenerar el notebook con el mismo intérprete del entorno:
+
+```powershell
+.\venv\Scripts\python.exe -m pip install -r requirements-dev.txt
+.\venv\Scripts\python.exe scripts/run_eda_notebook.py
+```
+
+Los archivos de dependencias se generaron con pip-tools en Windows y Python 3.11. Para actualizarlos de forma explícita:
+
+```powershell
+.\venv\Scripts\python.exe -m piptools compile --no-header --no-emit-index-url --no-strip-extras --output-file requirements.txt requirements.in
+.\venv\Scripts\python.exe -m piptools compile --no-header --no-emit-index-url --no-strip-extras --constraint requirements.txt --output-file requirements-dev.txt requirements-dev.in
+```
+
+La próxima fase es **C: pipeline NLP**, usando `ml/nlp/` y los datos preparados. No se ha ejecutado validación cruzada ni evaluación de modelos con test.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  

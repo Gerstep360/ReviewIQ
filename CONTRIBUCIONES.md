@@ -6,13 +6,15 @@ Modalidad de desarrollo: individual. La autoría real se consulta en Git; no se 
 
 - Arquitectura inicial: documentación de las capas Django/DRF, React, PostgreSQL y ML; registro del esqueleto existente y de las carpetas reservadas.
 - Configuración inicial: exclusión de entornos, secretos, corpus y artefactos generados; variables de entorno para Django y PostgreSQL.
+- Fase B: descarga de JSONL con revisión y SHA-256 fijados, validación de esquema, auditoría de duplicados y preparación de train sin solapamiento con los conjuntos reservados. Evidencia: `ml/data/`, `config.json` y `reports/`.
+- EDA: estadísticas y figuras agregadas de las particiones originales, notebook ejecutado y cinco pruebas de datos sin red. Evidencia: `notebooks/01_EDA.ipynb`, `tests/test_data.py` y `docs/FASE-B-DATOS-EDA.md`.
 - Las especificaciones restantes son planificación, no evidencia de funcionalidades terminadas.
 
 El commit inicial permite consultar estos cambios con `git log --reverse` y `git show <hash>`.
 
 ## Asistencia de IA
 
-Codex ayudó a revisar la documentación y preparar la configuración y el commit inicial. Esta asistencia también debe declararse en el informe técnico al elaborarlo.
+Codex ayudó a revisar la documentación y preparar la configuración, el commit inicial y el código, las pruebas y el notebook de la Fase B. Las estadísticas provienen de ejecutar el código sobre el corpus descargado. El informe técnico registra esta asistencia; no se atribuye una revisión humana que no esté documentada.
 
 ## Evidencia
 

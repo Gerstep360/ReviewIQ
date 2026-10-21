@@ -1,0 +1,28 @@
+{
+  "seed": 42,
+  "runtime": {"n_jobs": 1},
+  "dataset": {
+    "repository": "SetFit/amazon_reviews_multi_es",
+    "revision": "16015418b488c9186fce74b058877ea939ca934d",
+    "files": {
+      "train": {
+        "name": "train.jsonl",
+        "rows": 200000,
+        "bytes": 43777905,
+        "sha256": "f5ea8ef25c01e8eb51cc60d732cc9341e976c7910aab52c471fecab36465a8a1"
+      },
+      "validation": {
+        "name": "validation.jsonl",
+        "rows": 5000,
+        "bytes": 1088600,
+        "sha256": "62fe25433b7a63a8952b63246b3c4db20e2902cca4c6e2d20310dda736b71dce"
+      },
+      "test": {
+        "name": "test.jsonl",
+        "rows": 5000,
+        "bytes": 1097228,
+        "sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a"
+      }
+    }
+  }
+}

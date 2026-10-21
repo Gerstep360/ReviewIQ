@@ -1,0 +1,31 @@
+{
+  "repository": "SetFit/amazon_reviews_multi_es",
+  "revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "verified_at_utc": "2026-10-21T16:41:47.182257+00:00",
+  "license_url": "https://github.com/awslabs/open-data-docs/blob/main/docs/amazon-reviews-ml/README.md#license",
+  "usage": "academic research only; do not redistribute corpus or reidentify authors",
+  "reader": "Python standard library JSONL; no remote dataset scripts executed",
+  "files": {
+    "train": {
+      "file": "train.jsonl",
+      "url": "https://huggingface.co/datasets/SetFit/amazon_reviews_multi_es/resolve/16015418b488c9186fce74b058877ea939ca934d/train.jsonl",
+      "bytes": 43777905,
+      "sha256": "f5ea8ef25c01e8eb51cc60d732cc9341e976c7910aab52c471fecab36465a8a1",
+      "local_file_mtime_utc": "2026-10-21T16:36:48.877850+00:00"
+    },
+    "validation": {
+      "file": "validation.jsonl",
+      "url": "https://huggingface.co/datasets/SetFit/amazon_reviews_multi_es/resolve/16015418b488c9186fce74b058877ea939ca934d/validation.jsonl",
+      "bytes": 1088600,
+      "sha256": "62fe25433b7a63a8952b63246b3c4db20e2902cca4c6e2d20310dda736b71dce",
+      "local_file_mtime_utc": "2026-10-21T16:36:49.533100+00:00"
+    },
+    "test": {
+      "file": "test.jsonl",
+      "url": "https://huggingface.co/datasets/SetFit/amazon_reviews_multi_es/resolve/16015418b488c9186fce74b058877ea939ca934d/test.jsonl",
+      "bytes": 1097228,
+      "sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a",
+      "local_file_mtime_utc": "2026-10-21T16:36:50.102771+00:00"
+    }
+  }
+}

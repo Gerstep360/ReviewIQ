@@ -1,0 +1,944 @@
+{
+  "schema_version": "1.0",
+  "generated_at_utc": "2026-10-21T16:41:58.731801+00:00",
+  "repository": "SetFit/amazon_reviews_multi_es",
+  "revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "seed": 42,
+  "n_jobs": 1,
+  "config_sha256": "28ced320eb7793883176b65e3c5135bd0a54190679939cf2adc90dd7edd8422a",
+  "source_files": {
+    "train": {
+      "bytes": 43777905,
+      "sha256": "f5ea8ef25c01e8eb51cc60d732cc9341e976c7910aab52c471fecab36465a8a1"
+    },
+    "validation": {
+      "bytes": 1088600,
+      "sha256": "62fe25433b7a63a8952b63246b3c4db20e2902cca4c6e2d20310dda736b71dce"
+    },
+    "test": {
+      "bytes": 1097228,
+      "sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a"
+    }
+  },
+  "audit": {
+    "splits": {
+      "train": {
+        "rows": 200000,
+        "label_counts": {
+          "0": 40000,
+          "1": 40000,
+          "2": 40000,
+          "3": 40000,
+          "4": 40000
+        },
+        "class_proportions": {
+          "0": 0.2,
+          "1": 0.2,
+          "2": 0.2,
+          "3": 0.2,
+          "4": 0.2
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 1736,
+        "duplicate_normalized_text_rows": 1922,
+        "normalized_text_groups_with_conflicting_labels": 427
+      },
+      "validation": {
+        "rows": 5000,
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        },
+        "class_proportions": {
+          "0": 0.2,
+          "1": 0.2,
+          "2": 0.2,
+          "3": 0.2,
+          "4": 0.2
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 5,
+        "duplicate_normalized_text_rows": 7,
+        "normalized_text_groups_with_conflicting_labels": 1
+      },
+      "test": {
+        "rows": 5000,
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        },
+        "class_proportions": {
+          "0": 0.2,
+          "1": 0.2,
+          "2": 0.2,
+          "3": 0.2,
+          "4": 0.2
+        },
+        "null_empty_or_invalid_records": 0,
+        "duplicate_id_rows": 0,
+        "duplicate_exact_text_rows": 6,
+        "duplicate_normalized_text_rows": 6,
+        "normalized_text_groups_with_conflicting_labels": 1
+      }
+    },
+    "overlaps": {
+      "train__validation": {
+        "shared_ids": 0,
+        "shared_exact_texts": 66,
+        "shared_normalized_texts": 75,
+        "train_rows_with_shared_text": 427,
+        "validation_rows_with_shared_text": 82
+      },
+      "train__test": {
+        "shared_ids": 0,
+        "shared_exact_texts": 57,
+        "shared_normalized_texts": 61,
+        "train_rows_with_shared_text": 483,
+        "test_rows_with_shared_text": 67
+      },
+      "validation__test": {
+        "shared_ids": 0,
+        "shared_exact_texts": 9,
+        "shared_normalized_texts": 9,
+        "validation_rows_with_shared_text": 15,
+        "test_rows_with_shared_text": 12
+      }
+    },
+    "text_identity": "casefold + collapse whitespace + SHA-256; accents and punctuation preserved",
+    "validation": "fail-fast on invalid records; zero invalid rows means every row passed"
+  },
+  "statistics": {
+    "train": {
+      "characters": {
+        "min": 16,
+        "max": 3086,
+        "mean": 151.3029,
+        "p50": 120.0,
+        "p90": 295.0,
+        "p95": 391.0
+      },
+      "word_tokens": {
+        "min": 2,
+        "max": 551,
+        "mean": 27.6202,
+        "p50": 22.0,
+        "p90": 54.0,
+        "p95": 71.0
+      },
+      "text_features": {
+        "numbers": {
+          "rows": 32641,
+          "proportion": 0.163205
+        },
+        "urls": {
+          "rows": 1,
+          "proportion": 5e-06
+        },
+        "accented_spanish_characters": {
+          "rows": 143377,
+          "proportion": 0.716885
+        },
+        "emoji_heuristic": {
+          "rows": 752,
+          "proportion": 0.00376
+        }
+      },
+      "character_histogram": {
+        "edges": [
+          0,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1600,
+          3200,
+          10000
+        ],
+        "counts": [
+          32370,
+          44118,
+          79400,
+          34706,
+          8382,
+          972,
+          52,
+          0
+        ]
+      },
+      "frequent_words": [
+        {
+          "word": "de",
+          "count": 203906
+        },
+        {
+          "word": "que",
+          "count": 190965
+        },
+        {
+          "word": "y",
+          "count": 183111
+        },
+        {
+          "word": "la",
+          "count": 174804
+        },
+        {
+          "word": "el",
+          "count": 163281
+        },
+        {
+          "word": "no",
+          "count": 155383
+        },
+        {
+          "word": "es",
+          "count": 115361
+        },
+        {
+          "word": "en",
+          "count": 95706
+        },
+        {
+          "word": "lo",
+          "count": 91785
+        },
+        {
+          "word": "se",
+          "count": 89478
+        },
+        {
+          "word": "muy",
+          "count": 81242
+        },
+        {
+          "word": "para",
+          "count": 80501
+        },
+        {
+          "word": "a",
+          "count": 76139
+        },
+        {
+          "word": "un",
+          "count": 73746
+        },
+        {
+          "word": "me",
+          "count": 70037
+        },
+        {
+          "word": "pero",
+          "count": 64912
+        },
+        {
+          "word": "con",
+          "count": 64480
+        },
+        {
+          "word": "bien",
+          "count": 51562
+        },
+        {
+          "word": "por",
+          "count": 50029
+        },
+        {
+          "word": "los",
+          "count": 48721
+        }
+      ],
+      "frequent_words_by_label": {
+        "0": [
+          {
+            "word": "no",
+            "count": 47970
+          },
+          {
+            "word": "de",
+            "count": 42401
+          },
+          {
+            "word": "que",
+            "count": 38723
+          },
+          {
+            "word": "el",
+            "count": 36634
+          },
+          {
+            "word": "y",
+            "count": 36491
+          },
+          {
+            "word": "la",
+            "count": 35182
+          },
+          {
+            "word": "me",
+            "count": 20274
+          },
+          {
+            "word": "se",
+            "count": 20074
+          },
+          {
+            "word": "lo",
+            "count": 19990
+          },
+          {
+            "word": "en",
+            "count": 19218
+          },
+          {
+            "word": "a",
+            "count": 17616
+          },
+          {
+            "word": "es",
+            "count": 17213
+          },
+          {
+            "word": "un",
+            "count": 13587
+          },
+          {
+            "word": "para",
+            "count": 11995
+          },
+          {
+            "word": "con",
+            "count": 11970
+          },
+          {
+            "word": "una",
+            "count": 10470
+          },
+          {
+            "word": "por",
+            "count": 9985
+          },
+          {
+            "word": "los",
+            "count": 9665
+          },
+          {
+            "word": "muy",
+            "count": 9468
+          },
+          {
+            "word": "ha",
+            "count": 9390
+          }
+        ],
+        "1": [
+          {
+            "word": "de",
+            "count": 46164
+          },
+          {
+            "word": "que",
+            "count": 44927
+          },
+          {
+            "word": "no",
+            "count": 43464
+          },
+          {
+            "word": "la",
+            "count": 42458
+          },
+          {
+            "word": "el",
+            "count": 37866
+          },
+          {
+            "word": "y",
+            "count": 36819
+          },
+          {
+            "word": "es",
+            "count": 25548
+          },
+          {
+            "word": "se",
+            "count": 23161
+          },
+          {
+            "word": "en",
+            "count": 21877
+          },
+          {
+            "word": "lo",
+            "count": 19960
+          },
+          {
+            "word": "a",
+            "count": 17340
+          },
+          {
+            "word": "pero",
+            "count": 17218
+          },
+          {
+            "word": "me",
+            "count": 16024
+          },
+          {
+            "word": "para",
+            "count": 15736
+          },
+          {
+            "word": "un",
+            "count": 14958
+          },
+          {
+            "word": "con",
+            "count": 13604
+          },
+          {
+            "word": "muy",
+            "count": 13553
+          },
+          {
+            "word": "por",
+            "count": 12254
+          },
+          {
+            "word": "los",
+            "count": 11806
+          },
+          {
+            "word": "las",
+            "count": 10731
+          }
+        ],
+        "2": [
+          {
+            "word": "que",
+            "count": 42681
+          },
+          {
+            "word": "de",
+            "count": 40679
+          },
+          {
+            "word": "la",
+            "count": 36379
+          },
+          {
+            "word": "el",
+            "count": 35094
+          },
+          {
+            "word": "y",
+            "count": 33053
+          },
+          {
+            "word": "no",
+            "count": 32837
+          },
+          {
+            "word": "es",
+            "count": 27535
+          },
+          {
+            "word": "pero",
+            "count": 20211
+          },
+          {
+            "word": "en",
+            "count": 19966
+          },
+          {
+            "word": "se",
+            "count": 19411
+          },
+          {
+            "word": "lo",
+            "count": 18919
+          },
+          {
+            "word": "para",
+            "count": 17216
+          },
+          {
+            "word": "un",
+            "count": 16111
+          },
+          {
+            "word": "muy",
+            "count": 14385
+          },
+          {
+            "word": "a",
+            "count": 14277
+          },
+          {
+            "word": "bien",
+            "count": 13948
+          },
+          {
+            "word": "me",
+            "count": 13296
+          },
+          {
+            "word": "con",
+            "count": 12132
+          },
+          {
+            "word": "por",
+            "count": 11673
+          },
+          {
+            "word": "los",
+            "count": 10393
+          }
+        ],
+        "3": [
+          {
+            "word": "de",
+            "count": 37354
+          },
+          {
+            "word": "que",
+            "count": 35775
+          },
+          {
+            "word": "y",
+            "count": 34608
+          },
+          {
+            "word": "la",
+            "count": 31584
+          },
+          {
+            "word": "el",
+            "count": 28898
+          },
+          {
+            "word": "es",
+            "count": 24688
+          },
+          {
+            "word": "no",
+            "count": 19260
+          },
+          {
+            "word": "muy",
+            "count": 19033
+          },
+          {
+            "word": "para",
+            "count": 17718
+          },
+          {
+            "word": "en",
+            "count": 17627
+          },
+          {
+            "word": "lo",
+            "count": 17587
+          },
+          {
+            "word": "un",
+            "count": 15941
+          },
+          {
+            "word": "se",
+            "count": 14508
+          },
+          {
+            "word": "bien",
+            "count": 14206
+          },
+          {
+            "word": "a",
+            "count": 13112
+          },
+          {
+            "word": "pero",
+            "count": 13055
+          },
+          {
+            "word": "con",
+            "count": 12860
+          },
+          {
+            "word": "me",
+            "count": 10047
+          },
+          {
+            "word": "por",
+            "count": 9421
+          },
+          {
+            "word": "los",
+            "count": 8474
+          }
+        ],
+        "4": [
+          {
+            "word": "y",
+            "count": 42140
+          },
+          {
+            "word": "de",
+            "count": 37308
+          },
+          {
+            "word": "la",
+            "count": 29201
+          },
+          {
+            "word": "que",
+            "count": 28859
+          },
+          {
+            "word": "muy",
+            "count": 24803
+          },
+          {
+            "word": "el",
+            "count": 24789
+          },
+          {
+            "word": "es",
+            "count": 20377
+          },
+          {
+            "word": "para",
+            "count": 17836
+          },
+          {
+            "word": "en",
+            "count": 17018
+          },
+          {
+            "word": "lo",
+            "count": 15329
+          },
+          {
+            "word": "con",
+            "count": 13914
+          },
+          {
+            "word": "a",
+            "count": 13794
+          },
+          {
+            "word": "un",
+            "count": 13149
+          },
+          {
+            "word": "se",
+            "count": 12324
+          },
+          {
+            "word": "no",
+            "count": 11852
+          },
+          {
+            "word": "me",
+            "count": 10396
+          },
+          {
+            "word": "bien",
+            "count": 9333
+          },
+          {
+            "word": "los",
+            "count": 8383
+          },
+          {
+            "word": "calidad",
+            "count": 8263
+          },
+          {
+            "word": "una",
+            "count": 7698
+          }
+        ]
+      }
+    },
+    "validation": {
+      "characters": {
+        "min": 19,
+        "max": 1576,
+        "mean": 150.2334,
+        "p50": 121.0,
+        "p90": 290.0,
+        "p95": 371.0
+      },
+      "word_tokens": {
+        "min": 2,
+        "max": 257,
+        "mean": 27.3952,
+        "p50": 22.0,
+        "p90": 52.0,
+        "p95": 68.0
+      },
+      "text_features": {
+        "numbers": {
+          "rows": 824,
+          "proportion": 0.1648
+        },
+        "urls": {
+          "rows": 0,
+          "proportion": 0.0
+        },
+        "accented_spanish_characters": {
+          "rows": 3558,
+          "proportion": 0.7116
+        },
+        "emoji_heuristic": {
+          "rows": 18,
+          "proportion": 0.0036
+        }
+      },
+      "character_histogram": {
+        "edges": [
+          0,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1600,
+          3200,
+          10000
+        ],
+        "counts": [
+          796,
+          1095,
+          2001,
+          908,
+          177,
+          23,
+          0,
+          0
+        ]
+      }
+    },
+    "test": {
+      "characters": {
+        "min": 20,
+        "max": 1789,
+        "mean": 151.9142,
+        "p50": 122.0,
+        "p90": 290.0,
+        "p95": 382.0
+      },
+      "word_tokens": {
+        "min": 2,
+        "max": 368,
+        "mean": 27.6876,
+        "p50": 22.0,
+        "p90": 53.0,
+        "p95": 69.05000000000018
+      },
+      "text_features": {
+        "numbers": {
+          "rows": 820,
+          "proportion": 0.164
+        },
+        "urls": {
+          "rows": 0,
+          "proportion": 0.0
+        },
+        "accented_spanish_characters": {
+          "rows": 3549,
+          "proportion": 0.7098
+        },
+        "emoji_heuristic": {
+          "rows": 13,
+          "proportion": 0.0026
+        }
+      },
+      "character_histogram": {
+        "edges": [
+          0,
+          50,
+          100,
+          200,
+          400,
+          800,
+          1600,
+          3200,
+          10000
+        ],
+        "counts": [
+          803,
+          1067,
+          2025,
+          882,
+          201,
+          20,
+          2,
+          0
+        ]
+      }
+    }
+  },
+  "preparation": {
+    "policy": "Remove train overlaps with either holdout, all train text groups with conflicting labels, then keep first train ID/text. Preserve holdout rows, order, text and labels; drop only unused columns.",
+    "columns": [
+      "id",
+      "text",
+      "label"
+    ],
+    "splits": {
+      "train": {
+        "source_rows": 200000,
+        "prepared_rows": 197572,
+        "removed_rows_by_reason": {
+          "conflicting_labels_for_same_text": 1313,
+          "overlap_with_validation_or_test": 671,
+          "duplicate_within_train": 444
+        },
+        "label_counts": {
+          "0": 39689,
+          "1": 39788,
+          "2": 39607,
+          "3": 39209,
+          "4": 39279
+        }
+      },
+      "validation": {
+        "source_rows": 5000,
+        "prepared_rows": 5000,
+        "removed_rows_by_reason": {},
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        }
+      },
+      "test": {
+        "source_rows": 5000,
+        "prepared_rows": 5000,
+        "removed_rows_by_reason": {},
+        "label_counts": {
+          "0": 1000,
+          "1": 1000,
+          "2": 1000,
+          "3": 1000,
+          "4": 1000
+        }
+      }
+    },
+    "selection": "No predictions or holdout scores used; only identity checks across splits.",
+    "audit_after_preparation": {
+      "splits": {
+        "train": {
+          "rows": 197572,
+          "label_counts": {
+            "0": 39689,
+            "1": 39788,
+            "2": 39607,
+            "3": 39209,
+            "4": 39279
+          },
+          "class_proportions": {
+            "0": 0.20088372846354746,
+            "1": 0.2013848116129816,
+            "2": 0.2004686898953293,
+            "3": 0.19845423440568502,
+            "4": 0.19880853562245662
+          },
+          "null_empty_or_invalid_records": 0,
+          "duplicate_id_rows": 0,
+          "duplicate_exact_text_rows": 0,
+          "duplicate_normalized_text_rows": 0,
+          "normalized_text_groups_with_conflicting_labels": 0
+        },
+        "validation": {
+          "rows": 5000,
+          "label_counts": {
+            "0": 1000,
+            "1": 1000,
+            "2": 1000,
+            "3": 1000,
+            "4": 1000
+          },
+          "class_proportions": {
+            "0": 0.2,
+            "1": 0.2,
+            "2": 0.2,
+            "3": 0.2,
+            "4": 0.2
+          },
+          "null_empty_or_invalid_records": 0,
+          "duplicate_id_rows": 0,
+          "duplicate_exact_text_rows": 5,
+          "duplicate_normalized_text_rows": 7,
+          "normalized_text_groups_with_conflicting_labels": 1
+        },
+        "test": {
+          "rows": 5000,
+          "label_counts": {
+            "0": 1000,
+            "1": 1000,
+            "2": 1000,
+            "3": 1000,
+            "4": 1000
+          },
+          "class_proportions": {
+            "0": 0.2,
+            "1": 0.2,
+            "2": 0.2,
+            "3": 0.2,
+            "4": 0.2
+          },
+          "null_empty_or_invalid_records": 0,
+          "duplicate_id_rows": 0,
+          "duplicate_exact_text_rows": 6,
+          "duplicate_normalized_text_rows": 6,
+          "normalized_text_groups_with_conflicting_labels": 1
+        }
+      },
+      "overlaps": {
+        "train__validation": {
+          "shared_ids": 0,
+          "shared_exact_texts": 0,
+          "shared_normalized_texts": 0,
+          "train_rows_with_shared_text": 0,
+          "validation_rows_with_shared_text": 0
+        },
+        "train__test": {
+          "shared_ids": 0,
+          "shared_exact_texts": 0,
+          "shared_normalized_texts": 0,
+          "train_rows_with_shared_text": 0,
+          "test_rows_with_shared_text": 0
+        },
+        "validation__test": {
+          "shared_ids": 0,
+          "shared_exact_texts": 9,
+          "shared_normalized_texts": 9,
+          "validation_rows_with_shared_text": 15,
+          "test_rows_with_shared_text": 12
+        }
+      },
+      "text_identity": "casefold + collapse whitespace + SHA-256; accents and punctuation preserved",
+      "validation": "fail-fast on invalid records; zero invalid rows means every row passed"
+    }
+  },
+  "methodology": {
+    "word_tokens": "Unicode alphabetic sequences, casefold, without stop-word removal; descriptive EDA only",
+    "lexical_scope": "train only; no vocabulary or preprocessing selected from validation/test",
+    "holdouts": "Only schema, balance, identity and descriptive length/feature audits. No model fitting or scoring.",
+    "emojis": "Approximate Unicode range detection, not grapheme segmentation",
+    "future_cv": "Stratified folds, shuffle=True, random_state=42, cleaned train only; not executed in this phase"
+  }
+}
