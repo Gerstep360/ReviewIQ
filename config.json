@@ -1,6 +1,8 @@
 {
   "seed": 42,
-  "runtime": {"n_jobs": 1},
+  "runtime": {
+    "n_jobs": 1
+  },
   "dataset": {
     "repository": "SetFit/amazon_reviews_multi_es",
     "revision": "16015418b488c9186fce74b058877ea939ca934d",
@@ -23,6 +25,40 @@
         "bytes": 1097228,
         "sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a"
       }
+    }
+  },
+  "nlp": {
+    "preprocessing": {
+      "preserve_accents": true,
+      "number_policy": "marker",
+      "emoji_policy": "marker",
+      "protect_negations": true,
+      "batch_size": 128
+    },
+    "morphology_candidates": [
+      "stemming",
+      "lemmatization"
+    ],
+    "ngram_candidates": [
+      [
+        1,
+        1
+      ],
+      [
+        1,
+        2
+      ]
+    ],
+    "tfidf": {
+      "max_features": 50000,
+      "min_df": 2,
+      "max_df": 0.98
+    },
+    "comparison": {
+      "train_rows": 20000,
+      "classifier": "MultinomialNB",
+      "alpha": 1,
+      "status": "experimental_validation_only"
     }
   }
 }

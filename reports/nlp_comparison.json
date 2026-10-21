@@ -1,0 +1,153 @@
+{
+  "generated_at_utc": "2026-10-21T16:53:51.469955+00:00",
+  "scope": "exploratory NLP selection with a fixed MultinomialNB baseline; validation only, not final model metrics",
+  "provenance": {
+    "train_rows_available": 197572,
+    "train_rows_sampled": 20000,
+    "validation_rows": 5000,
+    "seed": 42,
+    "sample_label_counts": {
+      "0": 4018,
+      "1": 4028,
+      "2": 4009,
+      "3": 3969,
+      "4": 3976
+    },
+    "sample_ids_sha256": "58a2a9e3368757c73444ce647b94b38dfec1b662a6ca279a3cff9c91399ea8cd",
+    "train_file_sha256": "e5612e36bd3245366c1a493a3986a25c86c678abbd817da93bf143f0e363204e",
+    "validation_file_sha256": "92fb1af073afaa4ac9981567397cc017e5b605eb31343c29782e1abc39b59576",
+    "test_accessed": false
+  },
+  "dataset_revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "config_sha256": "af3f9a21e3eb85434f7ef8cefb82eccff7466a622fabd86846d6808c70836123",
+  "versions": {
+    "scikit-learn": "1.9.1",
+    "nltk": "3.10.4",
+    "spacy": "3.8.16",
+    "es-core-news-sm": "3.8.0",
+    "emoji": "2.16.0",
+    "numpy": "2.4.6"
+  },
+  "preprocessing": {
+    "preserve_accents": true,
+    "number_policy": "marker",
+    "emoji_policy": "marker",
+    "protect_negations": true,
+    "batch_size": 128
+  },
+  "tfidf": {
+    "max_features": 50000,
+    "min_df": 2,
+    "max_df": 0.98
+  },
+  "policy": {
+    "version": "reviewiq-nlp-1",
+    "stopwords_version": "reviewiq-es-1",
+    "stopwords_sha256": "9ba019f3bf20c990f6343a4342809d87e8f966c09eb644dfe0229c1ac96d3e74"
+  },
+  "nlp_source_sha256": {
+    "__init__.py": "6eaf8bbf8008370d58cc579abeb83c4be025386d8d4bd2f485cd54d7b1368b75",
+    "compare.py": "ccfad6d9a589a5e9d63e0c832fa6b5b455670901d765be78bc78640512cd3db8",
+    "normalize.py": "0ff9f4cba3ffa28ce2e3c62a7475c5f47ff91a54114502dc5b75101682fe08d4",
+    "pipeline.py": "22f22186a26d42e33110e5c01ebb53aecb6a71072f821801b23d9fe17a3f3bde",
+    "stem_lemma.py": "30c02b0c25a8fc817707352721a0a58a40d1faf8c8199cb438f7421ff4135679",
+    "stopwords.py": "29b918c6b838a145a3e3017e9f5a77127558cd46c4a1e32ab251573200f0309c",
+    "tokenize.py": "ad8d5b259c9f3abb50d60e29b2d4fa3cb4be0a774a9edd8bf7df6cb69a656010",
+    "trace.py": "cba4377c5811de340bef6bf67c2656559145191aebcf730dcbad9c8a7292d435",
+    "transformer.py": "05a2dbde5412b9f2eae3449ec1a24a14633f0f8638920a0effe5e94d441da796"
+  },
+  "results": [
+    {
+      "morphology": "stemming",
+      "ngram_min": 1,
+      "ngram_max": 1,
+      "classifier": "MultinomialNB",
+      "alpha": 1,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "macro_f1_validation": 0.44671254383551817,
+      "accuracy_validation": 0.449,
+      "vocabulary_size": 5710,
+      "train_nnz": 276075,
+      "train_sparsity": 0.997582530647986,
+      "train_csr_mib": 2.1825828552246094,
+      "dtype": "float32",
+      "preprocessing_wall_sec": 13.380890500033274,
+      "preprocessing_cpu_sec": 13.1875,
+      "vectorization_fit_predict_wall_sec": 0.2526732999831438,
+      "vectorization_fit_predict_cpu_sec": 0.25,
+      "method_process_peak_rss_mib": 272.9765625
+    },
+    {
+      "morphology": "stemming",
+      "ngram_min": 1,
+      "ngram_max": 2,
+      "classifier": "MultinomialNB",
+      "alpha": 1,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "macro_f1_validation": 0.4782833223643447,
+      "accuracy_validation": 0.4812,
+      "vocabulary_size": 36851,
+      "train_nnz": 442474,
+      "train_sparsity": 0.9993996445143958,
+      "train_csr_mib": 3.452106475830078,
+      "dtype": "float32",
+      "preprocessing_wall_sec": 13.380890500033274,
+      "preprocessing_cpu_sec": 13.1875,
+      "vectorization_fit_predict_wall_sec": 1.0114619000232778,
+      "vectorization_fit_predict_cpu_sec": 0.96875,
+      "method_process_peak_rss_mib": 272.9765625
+    },
+    {
+      "morphology": "lemmatization",
+      "ngram_min": 1,
+      "ngram_max": 1,
+      "classifier": "MultinomialNB",
+      "alpha": 1,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "macro_f1_validation": 0.4373071027583456,
+      "accuracy_validation": 0.439,
+      "vocabulary_size": 8291,
+      "train_nnz": 273217,
+      "train_sparsity": 0.9983523278253528,
+      "train_csr_mib": 2.160778045654297,
+      "dtype": "float32",
+      "preprocessing_wall_sec": 81.63007460004883,
+      "preprocessing_cpu_sec": 79.484375,
+      "vectorization_fit_predict_wall_sec": 0.2479213000042364,
+      "vectorization_fit_predict_cpu_sec": 0.25,
+      "method_process_peak_rss_mib": 409.609375
+    },
+    {
+      "morphology": "lemmatization",
+      "ngram_min": 1,
+      "ngram_max": 2,
+      "classifier": "MultinomialNB",
+      "alpha": 1,
+      "train_rows": 20000,
+      "validation_rows": 5000,
+      "macro_f1_validation": 0.4688610789152106,
+      "accuracy_validation": 0.4718,
+      "vocabulary_size": 36737,
+      "train_nnz": 426613,
+      "train_sparsity": 0.9994193687562948,
+      "train_csr_mib": 3.331096649169922,
+      "dtype": "float32",
+      "preprocessing_wall_sec": 81.63007460004883,
+      "preprocessing_cpu_sec": 79.484375,
+      "vectorization_fit_predict_wall_sec": 1.040524700016249,
+      "vectorization_fit_predict_cpu_sec": 1.03125,
+      "method_process_peak_rss_mib": 409.609375
+    }
+  ],
+  "experimental_recommendation": {
+    "morphology": "stemming",
+    "ngram_min": 1,
+    "ngram_max": 2,
+    "macro_f1_validation": 0.4782833223643447
+  },
+  "measurement": "One CPU process per morphology; preprocessing shared by its two n-gram variants. RSS is the 50ms sampled peak for the entire method process, not per candidate. Wall/CPU excludes interpreter startup; CSR bytes measure the training matrix only.",
+  "limitations": "No CV, LogisticRegression comparison, final test evaluation, or deployable artifact. Preprocessing policies were fixed for this experiment, not compared exhaustively. Recommendations may change with the classifier and full train in Phase D."
+}

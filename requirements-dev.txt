@@ -1,3 +1,15 @@
+annotated-doc==0.0.5
+    # via
+    #   -c requirements.txt
+    #   typer
+annotated-types==0.8.0
+    # via
+    #   -c requirements.txt
+    #   pydantic
+anyio==4.15.1
+    # via
+    #   -c requirements.txt
+    #   httpx
 asgiref==3.12.1
     # via
     #   -c requirements.txt
@@ -8,16 +20,58 @@ attrs==26.1.0
     # via
     #   jsonschema
     #   referencing
+blis==1.3.3
+    # via
+    #   -c requirements.txt
+    #   thinc
 build==1.6.1
     # via pip-tools
+catalogue==2.0.10
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   srsly
+    #   thinc
+certifi==2026.10.19
+    # via
+    #   -c requirements.txt
+    #   httpcore
+    #   httpx
+    #   requests
+charset-normalizer==3.5.2
+    # via
+    #   -c requirements.txt
+    #   requests
 click==8.5.0
-    # via pip-tools
+    # via
+    #   -c requirements.txt
+    #   nltk
+    #   pip-tools
+    #   spacy
+cloudpathlib==0.26.0
+    # via
+    #   -c requirements.txt
+    #   weasel
+cloudpickle==3.1.2
+    # via
+    #   -c requirements.txt
+    #   joblib
 colorama==0.4.6
     # via
+    #   -c requirements.txt
     #   build
     #   ipython
+    #   tqdm
+    #   typer
+    #   wasabi
 comm==0.2.3
     # via ipykernel
+confection==1.3.3
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   thinc
+    #   weasel
 contourpy==1.3.3
     # via
     #   -c requirements.txt
@@ -26,9 +80,27 @@ cycler==0.12.1
     # via
     #   -c requirements.txt
     #   matplotlib
+cymem==2.0.13
+    # via
+    #   -c requirements.txt
+    #   preshed
+    #   spacy
+    #   thinc
 debugpy==1.8.22
     # via ipykernel
+defusedxml==0.7.1
+    # via
+    #   -c requirements.txt
+    #   nltk
 django==5.2.18
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+emoji==2.16.0
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+es-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.8.0/es_core_news_sm-3.8.0-py3-none-any.whl#sha256=e451a83d6df79b87e9eed0cb553f03e99e36a3bab18a7b79f0dcfd1fdf875e12
     # via
     #   -c requirements.txt
     #   -r requirements.in
@@ -40,6 +112,24 @@ fonttools==4.67.0
     # via
     #   -c requirements.txt
     #   matplotlib
+h11==0.16.0
+    # via
+    #   -c requirements.txt
+    #   httpcore
+httpcore==1.0.9
+    # via
+    #   -c requirements.txt
+    #   httpx
+httpx==0.28.1
+    # via
+    #   -c requirements.txt
+    #   weasel
+idna==3.20
+    # via
+    #   -c requirements.txt
+    #   anyio
+    #   httpx
+    #   requests
 ipykernel==7.4.0
     # via -r requirements-dev.in
 ipython==9.17.1
@@ -48,6 +138,16 @@ ipython-pygments-lexers==1.1.1
     # via ipython
 jedi==0.20.1
     # via ipython
+jinja2==3.1.6
+    # via
+    #   -c requirements.txt
+    #   spacy
+joblib==1.6.0
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+    #   nltk
+    #   scikit-learn
 jsonschema==4.26.0
     # via nbformat
 jsonschema-specifications==2025.9.1
@@ -66,6 +166,14 @@ kiwisolver==1.5.1
     # via
     #   -c requirements.txt
     #   matplotlib
+markdown-it-py==4.2.0
+    # via
+    #   -c requirements.txt
+    #   rich
+markupsafe==3.0.4
+    # via
+    #   -c requirements.txt
+    #   jinja2
 matplotlib==3.11.2
     # via
     #   -c requirements.txt
@@ -74,6 +182,20 @@ matplotlib-inline==0.2.2
     # via
     #   ipykernel
     #   ipython
+mdurl==0.1.2
+    # via
+    #   -c requirements.txt
+    #   markdown-it-py
+murmurhash==1.0.15
+    # via
+    #   -c requirements.txt
+    #   preshed
+    #   spacy
+    #   thinc
+narwhals==2.27.1
+    # via
+    #   -c requirements.txt
+    #   scikit-learn
 nbclient==0.11.0
     # via -r requirements-dev.in
 nbformat==5.11.1
@@ -82,17 +204,29 @@ nbformat==5.11.1
     #   nbclient
 nest-asyncio2==1.7.4
     # via ipykernel
+nltk==3.10.4
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
 numpy==2.4.6
     # via
     #   -c requirements.txt
+    #   blis
     #   contourpy
     #   matplotlib
+    #   scikit-learn
+    #   scipy
+    #   spacy
+    #   thinc
 packaging==26.3
     # via
     #   -c requirements.txt
     #   build
     #   ipykernel
     #   matplotlib
+    #   spacy
+    #   thinc
+    #   weasel
     #   wheel
 parso==0.8.7
     # via jedi
@@ -104,10 +238,18 @@ pip-tools==7.6.2
     # via -r requirements-dev.in
 platformdirs==4.13.5
     # via jupyter-core
+preshed==3.0.13
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   thinc
 prompt-toolkit==3.0.53
     # via ipython
 psutil==7.2.2
-    # via ipython
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+    #   ipython
 psycopg[binary]==3.3.6
     # via
     #   -c requirements.txt
@@ -118,10 +260,22 @@ psycopg-binary==3.3.6
     #   psycopg
 pure-eval==0.2.4
     # via stack-data
+pydantic==2.14.1
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   thinc
+    #   weasel
+pydantic-core==2.50.1
+    # via
+    #   -c requirements.txt
+    #   pydantic
 pygments==2.21.0
     # via
+    #   -c requirements.txt
     #   ipython
     #   ipython-pygments-lexers
+    #   rich
 pyparsing==3.3.3
     # via
     #   -c requirements.txt
@@ -143,24 +297,84 @@ referencing==0.37.0
     # via
     #   jsonschema
     #   jsonschema-specifications
+regex==2026.9.29
+    # via
+    #   -c requirements.txt
+    #   nltk
+requests==2.34.2
+    # via
+    #   -c requirements.txt
+    #   spacy
+rich==15.0.0
+    # via
+    #   -c requirements.txt
+    #   typer
 rpds-py==2026.9.1
     # via
     #   jsonschema
     #   referencing
+scikit-learn==1.9.1
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+scipy==1.17.1
+    # via
+    #   -c requirements.txt
+    #   scikit-learn
+shellingham==1.5.4
+    # via
+    #   -c requirements.txt
+    #   typer
 six==1.17.0
     # via
     #   -c requirements.txt
     #   python-dateutil
+smart-open==8.0.4
+    # via
+    #   -c requirements.txt
+    #   weasel
+spacy==3.8.16
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+spacy-legacy==3.0.12
+    # via
+    #   -c requirements.txt
+    #   spacy
+spacy-loggers==1.0.5
+    # via
+    #   -c requirements.txt
+    #   spacy
 sqlparse==0.6.0
     # via
     #   -c requirements.txt
     #   django
+srsly==2.5.4
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   thinc
+    #   weasel
 stack-data==0.6.3
     # via ipython
+thinc==8.3.13
+    # via
+    #   -c requirements.txt
+    #   spacy
+threadpoolctl==3.7.0
+    # via
+    #   -c requirements.txt
+    #   -r requirements.in
+    #   scikit-learn
 tornado==6.6
     # via
     #   ipykernel
     #   jupyter-client
+tqdm==4.70.1
+    # via
+    #   -c requirements.txt
+    #   nltk
+    #   spacy
 traitlets==5.16.1
     # via
     #   ipykernel
@@ -170,22 +384,53 @@ traitlets==5.16.1
     #   matplotlib-inline
     #   nbclient
     #   nbformat
+typer==0.27.3
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   weasel
 typing-extensions==4.16.0
     # via
     #   -c requirements.txt
+    #   anyio
     #   ipython
     #   jupyter-client
     #   psycopg
+    #   pydantic
+    #   pydantic-core
     #   referencing
+    #   typing-inspection
+typing-inspection==0.4.4
+    # via
+    #   -c requirements.txt
+    #   pydantic
 tzdata==2026.5
     # via
     #   -c requirements.txt
     #   django
     #   psycopg
+urllib3==2.8.0
+    # via
+    #   -c requirements.txt
+    #   requests
+wasabi==1.1.3
+    # via
+    #   -c requirements.txt
+    #   spacy
+    #   thinc
+    #   weasel
 wcwidth==0.9.3
     # via prompt-toolkit
+weasel==1.0.0
+    # via
+    #   -c requirements.txt
+    #   spacy
 wheel==0.48.0
     # via pip-tools
+wrapt==2.5.1
+    # via
+    #   -c requirements.txt
+    #   smart-open
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip

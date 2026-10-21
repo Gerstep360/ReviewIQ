@@ -1,4 +1,12 @@
-# Dependencias de ejecución implementadas; agregar NLP/ML cuando corresponda.
+# Dependencias de las fases implementadas (Python 3.11, CPU).
 Django==5.2.18
 psycopg[binary]==3.3.6
 matplotlib>=3.8,<4
+scikit-learn>=1.5,<2
+nltk>=3.9,<4
+spacy>=3.8,<3.9
+emoji>=2.14,<3
+psutil>=7,<8
+joblib>=1.4,<2
+threadpoolctl>=3.5,<4
+es-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/es_core_news_sm-3.8.0/es_core_news_sm-3.8.0-py3-none-any.whl#sha256=e451a83d6df79b87e9eed0cb553f03e99e36a3bab18a7b79f0dcfd1fdf875e12

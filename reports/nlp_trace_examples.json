@@ -1,0 +1,163 @@
+{
+  "scope": "Synthetic example written for demonstration; not a corpus excerpt. No fitted TF-IDF vocabulary or classifier.",
+  "traces": [
+    {
+      "original": "No me gustó!!! Llegó roto 😡. Sin garantía tras 2 días: https://ejemplo.invalid",
+      "normalized": "no me gustó llegó roto emojitoken_enraged_face sin garantía tras numerotoken días urltoken",
+      "tokens": [
+        "no",
+        "me",
+        "gustó",
+        "llegó",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "días",
+        "urltoken"
+      ],
+      "removed_stopwords": [
+        "me"
+      ],
+      "tokens_after_stopwords": [
+        "no",
+        "gustó",
+        "llegó",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "días",
+        "urltoken"
+      ],
+      "processed_tokens": [
+        "no",
+        "gust",
+        "lleg",
+        "rot",
+        "emojitoken_enraged_face",
+        "sin",
+        "garant",
+        "tras",
+        "numerotoken",
+        "dias",
+        "urltoken"
+      ],
+      "processed_text": "no gust lleg rot emojitoken_enraged_face sin garant tras numerotoken dias urltoken",
+      "method": "stemming",
+      "policy_version": "reviewiq-nlp-1",
+      "stopwords_version": "reviewiq-es-1",
+      "stopwords_sha256": "9ba019f3bf20c990f6343a4342809d87e8f966c09eb644dfe0229c1ac96d3e74",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "ngrams": [
+        "no",
+        "gust",
+        "lleg",
+        "rot",
+        "emojitoken_enraged_face",
+        "sin",
+        "garant",
+        "tras",
+        "numerotoken",
+        "dias",
+        "urltoken",
+        "no gust",
+        "gust lleg",
+        "lleg rot",
+        "rot emojitoken_enraged_face",
+        "emojitoken_enraged_face sin",
+        "sin garant",
+        "garant tras",
+        "tras numerotoken",
+        "numerotoken dias",
+        "dias urltoken"
+      ]
+    },
+    {
+      "original": "No me gustó!!! Llegó roto 😡. Sin garantía tras 2 días: https://ejemplo.invalid",
+      "normalized": "no me gustó llegó roto emojitoken_enraged_face sin garantía tras numerotoken días urltoken",
+      "tokens": [
+        "no",
+        "me",
+        "gustó",
+        "llegó",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "días",
+        "urltoken"
+      ],
+      "removed_stopwords": [
+        "me"
+      ],
+      "tokens_after_stopwords": [
+        "no",
+        "gustó",
+        "llegó",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "días",
+        "urltoken"
+      ],
+      "processed_tokens": [
+        "no",
+        "gustar",
+        "llegar",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "día",
+        "urltoken"
+      ],
+      "processed_text": "no gustar llegar roto emojitoken_enraged_face sin garantía tras numerotoken día urltoken",
+      "method": "lemmatization",
+      "policy_version": "reviewiq-nlp-1",
+      "stopwords_version": "reviewiq-es-1",
+      "stopwords_sha256": "9ba019f3bf20c990f6343a4342809d87e8f966c09eb644dfe0229c1ac96d3e74",
+      "ngram_range": [
+        1,
+        2
+      ],
+      "ngrams": [
+        "no",
+        "gustar",
+        "llegar",
+        "roto",
+        "emojitoken_enraged_face",
+        "sin",
+        "garantía",
+        "tras",
+        "numerotoken",
+        "día",
+        "urltoken",
+        "no gustar",
+        "gustar llegar",
+        "llegar roto",
+        "roto emojitoken_enraged_face",
+        "emojitoken_enraged_face sin",
+        "sin garantía",
+        "garantía tras",
+        "tras numerotoken",
+        "numerotoken día",
+        "día urltoken"
+      ]
+    }
+  ]
+}

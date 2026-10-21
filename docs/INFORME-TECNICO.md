@@ -1,8 +1,8 @@
 # Informe técnico — avance
 
-Documento parcial. La arquitectura y la Fase B de datos y EDA están implementadas. Se completará después de entrenar, evaluar e integrar el sistema.
+Documento parcial. La arquitectura y las fases B (datos/EDA) y C (pipeline NLP) están implementadas. Se completará después de seleccionar el modelo, evaluar e integrar el sistema.
 
-Fuente, licencia y preparación: `DATASET.md`. Comandos y resultados: `FASE-B-DATOS-EDA.md`. Las estadísticas proceden de `reports/eda_summary.json` y del notebook ejecutado. Todavía no hay accuracy, F1 ni resultados de modelos.
+Fuente, licencia y preparación: `DATASET.md`. Comandos y resultados: `FASE-B-DATOS-EDA.md` y `FASE-C-PIPELINE-NLP.md`. Las estadísticas proceden de `reports/eda_summary.json` y del notebook ejecutado. `reports/nlp_comparison.json` registra métricas experimentales de validación con Naive Bayes para comparar cuatro variantes NLP; no son resultados del modelo final ni de test.
 
 ## Uso de asistentes de IA
 

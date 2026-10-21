@@ -4,7 +4,7 @@
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-La arquitectura inicial y la **Fase B (datos y EDA)** están implementadas. Hay descarga reproducible, validación, preparación de datos, informes y un notebook ejecutado. Se mantienen el esqueleto de Django y la plantilla de Vite. Todavía no hay endpoints de predicción ni modelos entrenados; las dependencias de DRF y modelado se agregarán en sus fases.
+La arquitectura inicial y las **fases B (datos y EDA) y C (pipeline NLP)** están implementadas. Hay descarga reproducible, preparación, informes, notebook de EDA, procesamiento NLP compartido y comparación experimental de variantes. Se mantienen el esqueleto de Django y la plantilla de Vite. Todavía no hay endpoints de predicción ni un modelo final: Naive Bayes se usa únicamente como baseline de los experimentos NLP.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -45,7 +45,20 @@ Los archivos de dependencias se generaron con pip-tools en Windows y Python 3.11
 .\venv\Scripts\python.exe -m piptools compile --no-header --no-emit-index-url --no-strip-extras --constraint requirements.txt --output-file requirements-dev.txt requirements-dev.in
 ```
 
-La próxima fase es **C: pipeline NLP**, usando `ml/nlp/` y los datos preparados. No se ha ejecutado validación cruzada ni evaluación de modelos con test.
+## Pipeline NLP y comparación de variantes
+
+`ml/nlp/` contiene normalización NFKC, tokens, stop words versionadas con negaciones protegidas, Snowball español, lematización spaCy por lotes y TF-IDF disperso `float32`. La traza ejecuta las mismas etapas del transformador que usarán entrenamiento y API. Las dependencias fijadas incluyen `es_core_news_sm==3.8.0`, instalado desde su wheel oficial con SHA-256; no se descarga ningún recurso durante inferencia.
+
+```powershell
+.\venv\Scripts\python.exe -m pip install -r requirements.txt
+.\venv\Scripts\python.exe -m ml.nlp.trace --text "No me gusto, sin garantia tras 2 dias" --morphology stemming
+.\venv\Scripts\python.exe -m unittest discover -s tests -p test_nlp.py -v
+.\venv\Scripts\python.exe -m ml.nlp.compare
+```
+
+La comparación usa una muestra estratificada fija de 20.000 filas de train preparado y las 5.000 de validation, con semilla 42 y MultinomialNB fijo. Compara stemming/lematización y unigramas/uni+bigramas; no abre test. Produce `reports/nlp_comparison.csv` y `.json`, con Macro-F1, vocabulario, dispersión y coste de CPU/RAM medidos. La recomendación experimental es **stemming + (1,2)**, Macro-F1 de validación **0,4783**; no son métricas finales.
+
+Ver [políticas y resultados NLP](docs/NLP.md), [evidencia de la Fase C](docs/FASE-C-PIPELINE-NLP.md) y [trazas de un ejemplo sintético](reports/nlp_trace_examples.json). La próxima fase es **D: modelado ML**, incluyendo comparación de los dos clasificadores y validación cruzada solo en train. Test sigue reservado para la evaluación final.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  
