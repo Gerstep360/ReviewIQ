@@ -1,0 +1,102 @@
+{
+  "schema_version": "1.0",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "mode": "full",
+  "created_at_utc": "2026-10-21T17:53:03.975217+00:00",
+  "artifact_file": "pipeline.joblib",
+  "artifact_sha256": "1d25091470de2bc3c326212e7ed6fbcd36ad48d4eccacf99b12c3f181e3e3a26",
+  "artifact_bytes": 1526934,
+  "model_state_sha256": "acb4bc2199689a83debd60cf54a127dfcffb07bdc5c20f7fe14e471cdcdac18b",
+  "metric_file": "metrics.json",
+  "metric_path": "metrics.json",
+  "metric_sha256": "8e8299146dcd23a1f86e6e0146009e33883d2959113c1ffed1ec8193e9584227",
+  "metric_split": "test",
+  "dataset_repository": "SetFit/amazon_reviews_multi_es",
+  "dataset_revision": "16015418b488c9186fce74b058877ea939ca934d",
+  "seed": 42,
+  "nlp_config": "config.json",
+  "config_canonical_sha256": "b62691fce40d6349a400260c658f5b8ea3afbce1237a4137677f463ed3074029",
+  "preprocessing": {
+    "batch_size": 128,
+    "emoji_policy": "marker",
+    "extra_stopwords": [],
+    "morphology": "lemmatization",
+    "number_policy": "marker",
+    "preserve_accents": true,
+    "protect_negations": true
+  },
+  "tfidf": {
+    "ngram_range": [
+      1,
+      2
+    ],
+    "min_df": 2,
+    "max_df": 0.98,
+    "max_features": 50000,
+    "sublinear_tf": true
+  },
+  "classifier": {
+    "name": "LogisticRegression",
+    "parameters": {
+      "C": 1.0,
+      "class_weight": null,
+      "dual": false,
+      "fit_intercept": true,
+      "intercept_scaling": 1,
+      "l1_ratio": 0.0,
+      "max_iter": 500,
+      "n_jobs": null,
+      "penalty": "deprecated",
+      "random_state": 42,
+      "solver": "lbfgs",
+      "tol": 0.0001,
+      "verbose": 0,
+      "warm_start": false
+    }
+  },
+  "feature_count": 50000,
+  "label_index_to_stars": {
+    "0": 1,
+    "1": 2,
+    "2": 3,
+    "3": 4,
+    "4": 5
+  },
+  "runtime": {
+    "python_major_minor": "3.11",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "joblib": "1.6.0",
+    "nltk": "3.10.4",
+    "spacy": "3.8.16",
+    "es-core-news-sm": "3.8.0",
+    "emoji": "2.16.0"
+  },
+  "python_version": "3.11.0",
+  "sklearn_version": "1.9.1",
+  "nlp_source_sha256": {
+    "normalize.py": "0ff9f4cba3ffa28ce2e3c62a7475c5f47ff91a54114502dc5b75101682fe08d4",
+    "tokenize.py": "ad8d5b259c9f3abb50d60e29b2d4fa3cb4be0a774a9edd8bf7df6cb69a656010",
+    "stopwords.py": "29b918c6b838a145a3e3017e9f5a77127558cd46c4a1e32ab251573200f0309c",
+    "stem_lemma.py": "30c02b0c25a8fc817707352721a0a58a40d1faf8c8199cb438f7421ff4135679",
+    "transformer.py": "05a2dbde5412b9f2eae3449ec1a24a14633f0f8638920a0effe5e94d441da796",
+    "pipeline.py": "22f22186a26d42e33110e5c01ebb53aecb6a71072f821801b23d9fe17a3f3bde"
+  },
+  "roundtrip_verified": true,
+  "provenance": {
+    "path": "retrained_frozen_parameters",
+    "train_rows": 197572,
+    "data_cache_verified": false,
+    "wall_sec": 635.1587072000257,
+    "cpu_sec": 624.421875,
+    "test_evaluation_repeated": false,
+    "seed": 42,
+    "metadata_exported_from_verified_clean_rebuild": true
+  },
+  "historical_test": {
+    "reused": true,
+    "evaluated_artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+    "model_state_matches_evaluated": true
+  }
+}

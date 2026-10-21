@@ -1,0 +1,333 @@
+{
+  "scope": "Experimental quick run, not final test metrics",
+  "manifest.json": {
+    "schema_version": "1.0",
+    "model_id": "reviewiq-quick-3ac8f79ec79a7319",
+    "mode": "quick",
+    "created_at_utc": "2026-10-21T17:40:56.354070+00:00",
+    "artifact_file": "pipeline.joblib",
+    "artifact_sha256": "69bbdf99a2fdaa114f7c26769dd168b094058e197de5dfeea3caf272d47f0ca3",
+    "artifact_bytes": 1095627,
+    "model_state_sha256": "3ac8f79ec79a73193ddbbe615667e07440eb27f771b5362337e8cb4d543c4504",
+    "metric_file": "metrics.json",
+    "metric_path": "metrics.json",
+    "metric_sha256": "25c0862d23b8cf48b666a24855518b79d3aad8374e8ef4660f8115a8aa9646db",
+    "metric_split": "validation",
+    "dataset_repository": "SetFit/amazon_reviews_multi_es",
+    "dataset_revision": "16015418b488c9186fce74b058877ea939ca934d",
+    "seed": 42,
+    "nlp_config": "config.json",
+    "config_canonical_sha256": "b62691fce40d6349a400260c658f5b8ea3afbce1237a4137677f463ed3074029",
+    "feature_count": 36737,
+    "label_index_to_stars": {
+      "0": 1,
+      "1": 2,
+      "2": 3,
+      "3": 4,
+      "4": 5
+    },
+    "runtime": {
+      "python_major_minor": "3.11",
+      "scikit-learn": "1.9.1",
+      "numpy": "2.4.6",
+      "scipy": "1.17.1",
+      "joblib": "1.6.0",
+      "nltk": "3.10.4",
+      "spacy": "3.8.16",
+      "es-core-news-sm": "3.8.0",
+      "emoji": "2.16.0"
+    },
+    "python_version": "3.11.0",
+    "sklearn_version": "1.9.1",
+    "nlp_source_sha256": {
+      "normalize.py": "0ff9f4cba3ffa28ce2e3c62a7475c5f47ff91a54114502dc5b75101682fe08d4",
+      "tokenize.py": "ad8d5b259c9f3abb50d60e29b2d4fa3cb4be0a774a9edd8bf7df6cb69a656010",
+      "stopwords.py": "29b918c6b838a145a3e3017e9f5a77127558cd46c4a1e32ab251573200f0309c",
+      "stem_lemma.py": "30c02b0c25a8fc817707352721a0a58a40d1faf8c8199cb438f7421ff4135679",
+      "transformer.py": "05a2dbde5412b9f2eae3449ec1a24a14633f0f8638920a0effe5e94d441da796",
+      "pipeline.py": "22f22186a26d42e33110e5c01ebb53aecb6a71072f821801b23d9fe17a3f3bde"
+    },
+    "roundtrip_verified": true,
+    "provenance": {
+      "path": "experimental_train_sample",
+      "train_rows": 20000,
+      "data_cache_verified": true,
+      "wall_sec": 61.363450500008184,
+      "cpu_sec": 59.625,
+      "test_evaluation_repeated": false
+    },
+    "historical_test": {
+      "reused": false,
+      "evaluated_artifact_sha256": null,
+      "model_state_matches_evaluated": false
+    }
+  },
+  "build_report.json": {
+    "model_id": "reviewiq-quick-3ac8f79ec79a7319",
+    "mode": "quick",
+    "path": "experimental_train_sample",
+    "train_rows": 20000,
+    "data_cache_verified": true,
+    "wall_sec": 61.363450500008184,
+    "cpu_sec": 59.625,
+    "test_evaluation_repeated": false,
+    "sampled_process_peak_rss_mib": 419.625,
+    "artifact_sha256": "69bbdf99a2fdaa114f7c26769dd168b094058e197de5dfeea3caf272d47f0ca3",
+    "model_state_sha256": "3ac8f79ec79a73193ddbbe615667e07440eb27f771b5362337e8cb4d543c4504"
+  },
+  "performance.json": {
+    "model_id": "reviewiq-quick-3ac8f79ec79a7319",
+    "mode": "quick",
+    "scope": "local Predictor.predict, no HTTP; synthetic phrases; one process and one computation thread",
+    "package_load_sec": 0.21897340001305565,
+    "cold_first_prediction_sec": 1.3594123999937437,
+    "warmup_single_calls": 3,
+    "single": {
+      "calls": 30,
+      "p50_ms": 6.520049995742738,
+      "p95_ms": 7.656360024702734
+    },
+    "batch_100": {
+      "calls": 7,
+      "p50_ms": 70.26090001454577,
+      "p95_ms": 73.13447002088651
+    },
+    "baseline_rss_mib": 134.71484375,
+    "idle_loaded_rss_mib": 232.4453125,
+    "sampled_process_peak_rss_mib": 243.6171875,
+    "artifact_bytes": 1095627,
+    "machine": {
+      "os": "Windows-10-10.0.26200-SP0",
+      "python": "3.11.0",
+      "cpu": "AMD64 Family 25 Model 120 Stepping 0, AuthenticAMD",
+      "logical_cpus": 12,
+      "ram_total_gib": 13.719921112060547
+    },
+    "limitation": "Not an API benchmark. Batch percentile uses seven observations; RSS is sampled every 50ms and includes the interpreter and loaded libraries."
+  },
+  "metrics.json": {
+    "model_id": "reviewiq-quick-3ac8f79ec79a7319",
+    "split": "validation",
+    "experimental": true,
+    "metrics": {
+      "rows": 5000,
+      "macro_f1": 0.4784686872178642,
+      "accuracy": 0.481,
+      "mae_stars": 0.6872,
+      "per_class": [
+        {
+          "label": 0,
+          "stars": 1,
+          "precision": 0.6106442577030813,
+          "recall": 0.654,
+          "f1": 0.631578947368421,
+          "support": 1000
+        },
+        {
+          "label": 1,
+          "stars": 2,
+          "precision": 0.3871576959395656,
+          "recall": 0.41,
+          "f1": 0.39825157843613407,
+          "support": 1000
+        },
+        {
+          "label": 2,
+          "stars": 3,
+          "precision": 0.38219895287958117,
+          "recall": 0.365,
+          "f1": 0.3734015345268542,
+          "support": 1000
+        },
+        {
+          "label": 3,
+          "stars": 4,
+          "precision": 0.42093287827076226,
+          "recall": 0.37,
+          "f1": 0.3938265034592869,
+          "support": 1000
+        },
+        {
+          "label": 4,
+          "stars": 5,
+          "precision": 0.584942084942085,
+          "recall": 0.606,
+          "f1": 0.5952848722986247,
+          "support": 1000
+        }
+      ],
+      "confusion_matrix": [
+        [
+          654,
+          244,
+          76,
+          14,
+          12
+        ],
+        [
+          262,
+          410,
+          232,
+          66,
+          30
+        ],
+        [
+          99,
+          271,
+          365,
+          183,
+          82
+        ],
+        [
+          34,
+          88,
+          202,
+          370,
+          306
+        ],
+        [
+          22,
+          46,
+          80,
+          246,
+          606
+        ]
+      ],
+      "ordinal_error_counts": {
+        "0": 2405,
+        "1": 1946,
+        "2": 491,
+        "3": 124,
+        "4": 34
+      },
+      "probabilities_sum_to_one": true,
+      "error_analysis": {
+        "errors": 2595,
+        "groups_non_exclusive": {
+          "contains_negation": 1448,
+          "contains_contrast_connector": 946,
+          "short_text_at_most_8_words": 349,
+          "intermediate_rating": 1855
+        },
+        "largest_confusions": [
+          {
+            "actual_stars": 4,
+            "predicted_stars": 5,
+            "count": 306
+          },
+          {
+            "actual_stars": 3,
+            "predicted_stars": 2,
+            "count": 271
+          },
+          {
+            "actual_stars": 2,
+            "predicted_stars": 1,
+            "count": 262
+          },
+          {
+            "actual_stars": 5,
+            "predicted_stars": 4,
+            "count": 246
+          },
+          {
+            "actual_stars": 1,
+            "predicted_stars": 2,
+            "count": 244
+          },
+          {
+            "actual_stars": 2,
+            "predicted_stars": 3,
+            "count": 232
+          },
+          {
+            "actual_stars": 4,
+            "predicted_stars": 3,
+            "count": 202
+          },
+          {
+            "actual_stars": 3,
+            "predicted_stars": 4,
+            "count": 183
+          }
+        ],
+        "cases_for_local_review": [
+          {
+            "row_position_1based": 132,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 16,
+            "tags": []
+          },
+          {
+            "row_position_1based": 198,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 14,
+            "tags": [
+              "contains_negation"
+            ]
+          },
+          {
+            "row_position_1based": 234,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 52,
+            "tags": []
+          },
+          {
+            "row_position_1based": 260,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 10,
+            "tags": []
+          },
+          {
+            "row_position_1based": 437,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 16,
+            "tags": [
+              "contains_contrast_connector"
+            ]
+          },
+          {
+            "row_position_1based": 438,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 34,
+            "tags": []
+          },
+          {
+            "row_position_1based": 471,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 46,
+            "tags": [
+              "contains_contrast_connector"
+            ]
+          },
+          {
+            "row_position_1based": 623,
+            "actual_stars": 1,
+            "predicted_stars": 5,
+            "distance": 4,
+            "word_count": 50,
+            "tags": [
+              "contains_negation"
+            ]
+          }
+        ],
+        "interpretation": "Observed text features, not causal diagnoses. Sarcasm/mixed sentiment require human review. Positions allow local inspection without publishing text or review IDs."
+      }
+    },
+    "test_evaluated": false
+  }
+}

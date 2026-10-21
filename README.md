@@ -4,7 +4,7 @@
 
 La referencia vigente es [docs/ARQUITECTURA.md](docs/ARQUITECTURA.md): Django/DRF como único backend, PostgreSQL, React + TypeScript + Vite y módulos de ML en `ml/`. Las guías originales en `docs/docs/` conservan propuestas anteriores de FastAPI y `src/`; se adaptarán a esta arquitectura al implementar cada fase.
 
-La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP) y D (modelado ML)** están implementadas. Hay procesamiento NLP compartido, comparación de dos clasificadores, CV sobre train y selección congelada antes de la evaluación final. Se mantienen el esqueleto de Django y la plantilla de Vite; todavía no hay endpoints de predicción ni interfaz conectada.
+La arquitectura inicial y las **fases B (datos y EDA), C (pipeline NLP), D (modelado ML) y E (reproducción y artefactos)** están implementadas. Hay procesamiento NLP compartido, selección congelada antes de test y paquetes de inferencia verificables. Se mantienen el esqueleto de Django y la plantilla de Vite; todavía no hay endpoints de predicción ni interfaz conectada.
 
 `venv/`, `node_modules/`, los datos restringidos y los artefactos generados se excluyen de Git. `.env.example` enumera las variables de configuración: deben exportarse en la terminal; Django aún no carga archivos `.env` automáticamente. La clave de desarrollo es pública y solo sirve en local; con `DJANGO_DEBUG=False` se exige `DJANGO_SECRET_KEY`.
 
@@ -69,17 +69,34 @@ La Fase D compara MultinomialNB y LogisticRegression con variantes NLP, ajusta a
 .\venv\Scripts\python.exe -m ml.training.train --mode quick --seed 42
 ```
 
-Quick es experimental, no abre test y guarda informes en `reports/quick/`, excluidos de Git. El proceso full y la única evaluación final se describen en [MODELOS.md](docs/MODELOS.md). Los registros persistidos bloquean sobrescribir la selección full o repetir test en este checkout ya evaluado. La reproducción del artefacto congelado sin volver a consultar test se completará en la fase E.
+Quick es experimental: ajusta los parámetros congelados sobre 20.000 filas de train y mide validation; genera su propio paquete en `ml/artifacts/quick/`, excluido de Git. El protocolo histórico de selección y la única evaluación final se describen en [MODELOS.md](docs/MODELOS.md). Los registros persistidos bloquean sobrescribir la selección o repetir test.
 
 Los informes de selección y evaluación están en `reports/model_comparison.*`, `reports/model_selection.json`, `reports/test_metrics.json` y `reports/final_test_ledger.json`; el análisis de errores está en `reports/errors.md`. El checkpoint binario queda local en `ml/artifacts/`, fuera de Git. Ver [evidencia de la Fase D](docs/FASE-D-MODELADO.md).
 
 El campeón es **regresión logística con lematización y bigramas, C=1**. Su única evaluación de test obtuvo **Macro-F1 0,5131**, **accuracy 51,54 %** y **MAE 0,6128 estrellas**. El ajuste full completo tomó 19,57 minutos y registró 1.311,70 MiB de pico RSS en este equipo; las estrellas intermedias siguen siendo difíciles de distinguir.
 
-La próxima fase es **E: reproducibilidad y artefactos de despliegue**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
+## Reproducción y artefactos de inferencia
+
+```powershell
+.\venv\Scripts\python.exe -m ml.training.train --mode full --seed 42
+```
+
+Verifica el paquete local, o lo genera desde el checkpoint evaluado; si no existen, descarga el corpus fijado y reconstruye el campeón con sus parámetros congelados. `--rebuild` fuerza este último camino. Full exige reproducir exactamente el estado aprendido antes de asociar las métricas históricas; no vuelve a predecir test ni a seleccionar hiperparámetros. El paquete incluye pipeline completo, manifiesto, métricas, informe de construcción y benchmark local.
+
+```python
+from ml.inference.predictor import get_predictor
+
+predictor = get_predictor()
+print(predictor.predict(["Excelente producto, llegó a tiempo."]))
+```
+
+La carga comprueba hashes, versiones, código NLP e identidad del estado; se reutiliza por proceso. Consulte [comandos y contrato del paquete](docs/ARTEFACTOS.md), [evidencia de la Fase E](docs/FASE-E-REPRODUCIBILIDAD.md) y [medidas de rendimiento](docs/RENDIMIENTO.md). Los binarios permanecen fuera de Git y se regeneran con el comando anterior.
+
+La próxima fase es **F: backend Django/DRF**. Las métricas de test corresponden al campeón congelado; no se usarán para volver a elegir parámetros.
 
 
 **Proyecto integrador: Tópicos y Programación Avanzada (primer parcial)**  
-**Estado:** planificación y criterios de aceptación; *el código, los entrenamientos y las métricas aún deben implementarse y medirse*.  
+**Estado:** avance implementado hasta la Fase E; las guías siguientes conservan los requisitos originales y las fases pendientes.  
 **Objeto:** producto académico que predice la **valoración en estrellas (1–5)** a partir de texto de reseñas comerciales en español, utilizando **TF-IDF + regresión logística multinomial / Multinomial Naive Bayes**.  
 **Fuente principal de requisitos:** `Proyecto_Integrador(1).pdf`, 7 páginas, proporcionado por el docente.  
 **Fecha de exposición:** 3 de noviembre de 2026; **último commit evaluado:** 2 de noviembre de 2026, 23:59; crear tag `entrega-final`.
@@ -136,6 +153,6 @@ La próxima fase es **E: reproducibilidad y artefactos de despliegue**. Las mét
 2. `06` API → `07` frontend → `08` pruebas extremo a extremo.
 3. `09` trazabilidad **durante** cada fase → `10` informe → `11` entrega.
 
-## Lo que NO contiene este paquete
+## Alcance actual
 
-No es un software ya terminado. Son documentos de implementación y control para construirlo. Los comandos y rutas propuestos deben implementarse y validarse en el repositorio del proyecto. Tampoco incluye métricas de modelos entrenados ni archivos de datos de Amazon.
+El sistema todavía requiere API, frontend conectado y verificación integrada. Las rutas originales `src/` y FastAPI de las guías se adaptan a `ml/` y Django/DRF según ARQUITECTURA.md. Los informes agregados registran resultados reales; los datos de Amazon y los binarios generados se excluyen de Git.

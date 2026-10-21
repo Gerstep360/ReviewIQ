@@ -1,0 +1,54 @@
+{
+  "scope": "Fresh copy of Git-listed files (including current phase changes), fresh venv, pinned install, no prior corpus or artifact. Not an HTTP/frontend check.",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "model_state_sha256": "acb4bc2199689a83debd60cf54a127dfcffb07bdc5c20f7fe14e471cdcdac18b",
+  "historical_test": {
+    "reused": true,
+    "evaluated_artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+    "model_state_matches_evaluated": true
+  },
+  "build": {
+    "model_id": "reviewiq-8f0ef24251ae5522",
+    "mode": "full",
+    "path": "retrained_frozen_parameters",
+    "train_rows": 197572,
+    "data_cache_verified": false,
+    "wall_sec": 635.1587072000257,
+    "cpu_sec": 624.421875,
+    "test_evaluation_repeated": false,
+    "sampled_process_peak_rss_mib": 1205.18359375,
+    "artifact_sha256": "3f0ea3eecb7f69057d1e97a881ee9aa9166cc4598e47b9897e58e74d3efd8313",
+    "model_state_sha256": "acb4bc2199689a83debd60cf54a127dfcffb07bdc5c20f7fe14e471cdcdac18b"
+  },
+  "performance": {
+    "model_id": "reviewiq-8f0ef24251ae5522",
+    "mode": "full",
+    "scope": "local Predictor.predict, no HTTP; synthetic phrases; one process and one computation thread",
+    "package_load_sec": 0.40491450001718476,
+    "cold_first_prediction_sec": 1.7791564000071958,
+    "warmup_single_calls": 3,
+    "single": {
+      "calls": 30,
+      "p50_ms": 8.728899993002415,
+      "p95_ms": 9.855794985196553
+    },
+    "batch_100": {
+      "calls": 7,
+      "p50_ms": 100.84799997275695,
+      "p95_ms": 115.4065300070215
+    },
+    "baseline_rss_mib": 135.21875,
+    "idle_loaded_rss_mib": 234.234375,
+    "sampled_process_peak_rss_mib": 246.6328125,
+    "artifact_bytes": 1526928,
+    "machine": {
+      "os": "Windows-10-10.0.26200-SP0",
+      "python": "3.11.0",
+      "cpu": "AMD64 Family 25 Model 120 Stepping 0, AuthenticAMD",
+      "logical_cpus": 12,
+      "ram_total_gib": 13.719921112060547
+    },
+    "limitation": "Not an API benchmark. Batch percentile uses seven observations; RSS is sampled every 50ms and includes the interpreter and loaded libraries."
+  },
+  "workspace_relative_copy": "ml/artifacts/repro-kuxiwl9w"
+}

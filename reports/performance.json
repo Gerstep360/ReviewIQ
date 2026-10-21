@@ -1,0 +1,30 @@
+{
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "mode": "full",
+  "scope": "local Predictor.predict, no HTTP; synthetic phrases; one process and one computation thread",
+  "package_load_sec": 0.27820850000716746,
+  "cold_first_prediction_sec": 0.9745526000042446,
+  "warmup_single_calls": 3,
+  "single": {
+    "calls": 30,
+    "p50_ms": 9.21849999576807,
+    "p95_ms": 11.37524500954896
+  },
+  "batch_100": {
+    "calls": 7,
+    "p50_ms": 96.23740002280101,
+    "p95_ms": 101.13717996282503
+  },
+  "baseline_rss_mib": 134.99609375,
+  "idle_loaded_rss_mib": 233.94140625,
+  "sampled_process_peak_rss_mib": 245.6796875,
+  "artifact_bytes": 1526934,
+  "machine": {
+    "os": "Windows-10-10.0.26200-SP0",
+    "python": "3.11.0",
+    "cpu": "AMD64 Family 25 Model 120 Stepping 0, AuthenticAMD",
+    "logical_cpus": 12,
+    "ram_total_gib": 13.719921112060547
+  },
+  "limitation": "Not an API benchmark. Batch percentile uses seven observations; RSS is sampled every 50ms and includes the interpreter and loaded libraries."
+}

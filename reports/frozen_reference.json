@@ -1,0 +1,203 @@
+{
+  "schema_version": "1.0",
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "evaluated_artifact_sha256": "8f0ef24251ae55229dab692af7ff54ebebbeb99e552730e69f425f902333e818",
+  "model_state_sha256": "acb4bc2199689a83debd60cf54a127dfcffb07bdc5c20f7fe14e471cdcdac18b",
+  "config": {
+    "seed": 42,
+    "runtime": {
+      "n_jobs": 1
+    },
+    "dataset": {
+      "repository": "SetFit/amazon_reviews_multi_es",
+      "revision": "16015418b488c9186fce74b058877ea939ca934d",
+      "files": {
+        "train": {
+          "name": "train.jsonl",
+          "rows": 200000,
+          "bytes": 43777905,
+          "sha256": "f5ea8ef25c01e8eb51cc60d732cc9341e976c7910aab52c471fecab36465a8a1"
+        },
+        "validation": {
+          "name": "validation.jsonl",
+          "rows": 5000,
+          "bytes": 1088600,
+          "sha256": "62fe25433b7a63a8952b63246b3c4db20e2902cca4c6e2d20310dda736b71dce"
+        },
+        "test": {
+          "name": "test.jsonl",
+          "rows": 5000,
+          "bytes": 1097228,
+          "sha256": "aad4f1ce71f2235bf08ce1531ecc41cde7d6e55afa9b2aee83f90f3c2de0942a"
+        }
+      }
+    },
+    "nlp": {
+      "preprocessing": {
+        "preserve_accents": true,
+        "number_policy": "marker",
+        "emoji_policy": "marker",
+        "protect_negations": true,
+        "batch_size": 128
+      },
+      "morphology_candidates": [
+        "stemming",
+        "lemmatization"
+      ],
+      "ngram_candidates": [
+        [
+          1,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "tfidf": {
+        "max_features": 50000,
+        "min_df": 2,
+        "max_df": 0.98
+      },
+      "comparison": {
+        "train_rows": 20000,
+        "classifier": "MultinomialNB",
+        "alpha": 1,
+        "status": "experimental_validation_only"
+      }
+    },
+    "models": {
+      "screen_train_rows": 20000,
+      "cv_folds": 3,
+      "parameter_grid": {
+        "MultinomialNB": [
+          0.1,
+          1.0,
+          2.0
+        ],
+        "LogisticRegression": [
+          0.5,
+          1.0,
+          2.0
+        ]
+      },
+      "logistic_max_iter": 500,
+      "selection_rule": "maximize validation macro_f1, then minimize mae_stars, then model name; no test selection",
+      "final_fit_split": "train_only",
+      "test_policy": "one evaluation of the frozen full-train champion; quick never accesses test"
+    }
+  },
+  "runtime": {
+    "python_major_minor": "3.11",
+    "scikit-learn": "1.9.1",
+    "numpy": "2.4.6",
+    "scipy": "1.17.1",
+    "joblib": "1.6.0",
+    "nltk": "3.10.4",
+    "spacy": "3.8.16",
+    "es-core-news-sm": "3.8.0",
+    "emoji": "2.16.0"
+  },
+  "nlp_source_sha256": {
+    "normalize.py": "0ff9f4cba3ffa28ce2e3c62a7475c5f47ff91a54114502dc5b75101682fe08d4",
+    "tokenize.py": "ad8d5b259c9f3abb50d60e29b2d4fa3cb4be0a774a9edd8bf7df6cb69a656010",
+    "stopwords.py": "29b918c6b838a145a3e3017e9f5a77127558cd46c4a1e32ab251573200f0309c",
+    "stem_lemma.py": "30c02b0c25a8fc817707352721a0a58a40d1faf8c8199cb438f7421ff4135679",
+    "transformer.py": "05a2dbde5412b9f2eae3449ec1a24a14633f0f8638920a0effe5e94d441da796",
+    "pipeline.py": "22f22186a26d42e33110e5c01ebb53aecb6a71072f821801b23d9fe17a3f3bde"
+  },
+  "test_metrics_canonical_sha256": "5bfcb09f791cd839e6ed8e317b68d75b040a1a42d04a9b064983e72f79e1dac1",
+  "selection_canonical_sha256": "98d9e8e0aba1980f2561071688555706bc0396ef4b75685ea4a529b92048ccef",
+  "ledger_canonical_sha256": "620a0450bb7f730b5251379e19f99423dc53d604ae4a7b56b13abc5f6b005efe",
+  "train_file_sha256": "e5612e36bd3245366c1a493a3986a25c86c678abbd817da93bf143f0e363204e",
+  "validation_file_sha256": "92fb1af073afaa4ac9981567397cc017e5b605eb31343c29782e1abc39b59576",
+  "train_rows": 197572,
+  "probes": {
+    "texts": [
+      "No funciona y llegó roto 😡",
+      "Excelente, funciona muy bien y llegó rápido 😍",
+      "Aceptable, pero esperaba una calidad mejor por el precio",
+      "Sin garantía ni respuesta después de 2 días",
+      "El producto está bien aunque la entrega fue lenta",
+      "MALÍSIMO. Nunca volvería a comprarlo",
+      "Compré dos unidades y ambas funcionan correctamente",
+      "Información en https://ejemplo.invalid, capacidad de 128 GB",
+      "Muy útil 👩‍🚀, lo recomiendo",
+      "No es malo, tampoco es perfecto"
+    ],
+    "probabilities": [
+      [
+        0.8912168741226196,
+        0.08219820261001587,
+        0.02564527839422226,
+        0.0008012304315343499,
+        0.00013846046931575984
+      ],
+      [
+        0.00015921330486889929,
+        0.002638984937220812,
+        0.005281990859657526,
+        0.22714577615261078,
+        0.7647740840911865
+      ],
+      [
+        0.005196708720177412,
+        0.058806102722883224,
+        0.48286062479019165,
+        0.36001119017601013,
+        0.09312538057565689
+      ],
+      [
+        0.7197888493537903,
+        0.2101222425699234,
+        0.03528972715139389,
+        0.01225246675312519,
+        0.022546716034412384
+      ],
+      [
+        0.011760357767343521,
+        0.20924855768680573,
+        0.5511522889137268,
+        0.20474393665790558,
+        0.023094847798347473
+      ],
+      [
+        0.8598455190658569,
+        0.04278671368956566,
+        0.02490866370499134,
+        0.02111397497355938,
+        0.05134512111544609
+      ],
+      [
+        0.11412947624921799,
+        0.37192466855049133,
+        0.11738487333059311,
+        0.2783953845500946,
+        0.11816560477018356
+      ],
+      [
+        0.14807851612567902,
+        0.24402134120464325,
+        0.12682729959487915,
+        0.16197296977043152,
+        0.31909987330436707
+      ],
+      [
+        0.00026154282386414707,
+        0.0002363855455769226,
+        0.00242324429564178,
+        0.27537721395492554,
+        0.7217016220092773
+      ],
+      [
+        0.04174213856458664,
+        0.11592120677232742,
+        0.5138227343559265,
+        0.2804708480834961,
+        0.04804307594895363
+      ]
+    ],
+    "scope": "synthetic, not validation or test"
+  },
+  "identity": "Exact learned-state hash; pickle byte equality is not required. Historical test metrics remain tied to the evaluated state."
+}

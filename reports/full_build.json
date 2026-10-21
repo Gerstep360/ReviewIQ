@@ -1,0 +1,14 @@
+{
+  "model_id": "reviewiq-8f0ef24251ae5522",
+  "mode": "full",
+  "path": "retrained_frozen_parameters",
+  "train_rows": 197572,
+  "data_cache_verified": false,
+  "wall_sec": 635.1587072000257,
+  "cpu_sec": 624.421875,
+  "test_evaluation_repeated": false,
+  "sampled_process_peak_rss_mib": 1205.18359375,
+  "artifact_sha256": "1d25091470de2bc3c326212e7ed6fbcd36ad48d4eccacf99b12c3f181e3e3a26",
+  "model_state_sha256": "acb4bc2199689a83debd60cf54a127dfcffb07bdc5c20f7fe14e471cdcdac18b",
+  "metadata_exported_from_verified_clean_rebuild": true
+}

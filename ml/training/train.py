@@ -1,4 +1,4 @@
-"""Cribado, CV y selección con validación. Este módulo nunca abre test."""
+"""Selección histórica y entrada quick/full para reproducción sin reevaluar test."""
 
 import argparse
 import csv
@@ -142,9 +142,15 @@ def main() -> None:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=["quick", "full"], default="quick")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument("--output-dir", type=Path)
+    parser.add_argument("--rebuild", action="store_true", help="Reajustar parámetros congelados aunque exista un paquete.")
+    parser.add_argument("--morphology", choices=["stemming", "lemmatization"], help="Experimento quick.")
+    parser.add_argument("--ngram-max", choices=[1, 2], type=int, help="Experimento quick.")
     args = parser.parse_args()
-    result = train_models(mode=args.mode, seed=args.seed)
-    print(json.dumps({"model_id": result["model_id"], "champion": result["champion"]["model"], "mode": result["mode"], "test_accessed": False}, indent=2))
+    from ml.training.reproduce import reproduce
+
+    result = reproduce(mode=args.mode, seed=args.seed, output_dir=args.output_dir, rebuild=args.rebuild, morphology=args.morphology, ngram_max=args.ngram_max)
+    print(json.dumps({"model_id": result["model_id"], "mode": result["mode"], "feature_count": result["feature_count"], "test_evaluation_repeated": False}, indent=2))
 
 
 if __name__ == "__main__":

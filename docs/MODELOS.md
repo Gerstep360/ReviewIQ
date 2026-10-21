@@ -14,7 +14,9 @@ El problema es clasificación multiclase ordinal: labels internos 0–4, estrell
 
 No se hace una búsqueda combinatoria de todas las morfologías, n-gramas e hiperparámetros en cada fold: el cribado previo mantiene acotado el coste en CPU. Las métricas de validation son métricas de selección, no una estimación independiente del rendimiento final.
 
-## Reproducción
+## Ejecución histórica de selección (Fase D)
+
+Los comandos siguientes documentan la ejecución original. Desde la Fase E, la entrada `ml.training.train` reproduce el campeón congelado y no repite esta selección; el flujo histórico permanece protegido en `train_models`. Para los comandos vigentes consulte [ARTEFACTOS.md](ARTEFACTOS.md).
 
 ```powershell
 .\venv\Scripts\python.exe -m ml.training.train --mode full --seed 42
@@ -29,7 +31,7 @@ La reserva también bloquea reintentos tras un fallo: no se elimina automáticam
 .\venv\Scripts\python.exe -m ml.evaluation.final_test --render-only
 ```
 
-El modo quick ajusta finalistas con la muestra, guarda informes separados en reports/quick y un checkpoint quick distinto. Sus resultados son experimentales; nunca consulta test ni reemplaza el campeón full.
+El modo quick de la Fase D ajustaba finalistas con la muestra y guardaba informes separados en reports/quick. Desde la Fase E, quick genera un paquete experimental del clasificador congelado con métricas de validation y permite cambiar morfología/n-gramas. Nunca consulta test ni reemplaza el campeón full.
 
 ## Métricas y análisis
 
@@ -50,7 +52,7 @@ El entrenamiento mide pared, CPU y pico RSS muestreado cada 50 ms del proceso co
 - reports/errors.md: análisis observado, sin textos del corpus.
 - docs/FASE-D-MODELADO.md: comandos, resultados y alcance de esta ejecución.
 
-El checkpoint binario queda fuera de Git; se entrega el código que lo regenera. El empaquetado y manifiesto de despliegue corresponden a la fase E. No hay API ni frontend conectados en esta fase.
+El checkpoint binario queda fuera de Git; se entrega el código que lo regenera. El empaquetado y manifiesto de despliegue están implementados en la fase E; véase [ARTEFACTOS.md](ARTEFACTOS.md). No hay API ni frontend conectados todavía.
 
 Fuentes de implementación: [LogisticRegression](https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html), [GridSearchCV](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) y [Pipeline](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.Pipeline.html) de scikit-learn. Las versiones están fijadas en requirements.txt.
 ## Resultados de esta ejecución
