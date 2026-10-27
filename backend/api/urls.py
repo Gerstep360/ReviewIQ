@@ -4,7 +4,7 @@ from rest_framework.exceptions import NotFound
 from rest_framework.views import APIView
 
 from backend.apps.analytics.views import HealthView, MetricsView, TraceView
-from backend.apps.predictions.views import PredictView
+from backend.apps.predictions.views import BatchPredictView, PredictView
 
 app_name = 'api'
 
@@ -18,6 +18,7 @@ class UnknownRouteView(APIView):
 
 urlpatterns = [
     re_path(r'^health/?$', HealthView.as_view(), name='health'),
+    re_path(r'^predict/batch/?$', BatchPredictView.as_view(), name='predict-batch'),
     re_path(r'^predict/?$', PredictView.as_view(), name='predict'),
     re_path(r'^metrics/?$', MetricsView.as_view(), name='metrics'),
     re_path(r'^nlp/trace/?$', TraceView.as_view(), name='nlp-trace'),

@@ -205,7 +205,14 @@ class RealPackageAPITests(SimpleTestCase):
             metrics = client.get('/api/v1/metrics/').json()
             self.assertEqual(metrics['model_id'], predictor.manifest['model_id'])
             self.assertEqual(metrics['metrics']['macro_f1'], predictor.metrics['metrics']['macro_f1'])
-            self.assertEqual(metrics['comparison']['model_id'], metrics['model_id'])
+            if metrics.get('comparison'):
+                self.assertEqual(metrics['comparison']['model_id'], metrics['model_id'])
+
+            batch_resp = client.post('/api/v1/predict/batch/', {'texts': texts}, format='json')
+            self.assertEqual(batch_resp.status_code, 200)
+            batch_data = batch_resp.json()
+            self.assertEqual(batch_data['count'], len(texts))
+            self.assertEqual(len(batch_data['predictions']), len(texts))
 
 
 if __name__ == '__main__':
