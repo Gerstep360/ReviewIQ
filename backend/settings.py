@@ -70,6 +70,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'backend.apps.predictions',
     'backend.apps.analytics',
+    'backend.apps.reviewiq',
 ]
 
 MIDDLEWARE = [
