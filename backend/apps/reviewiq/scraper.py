@@ -2,7 +2,7 @@
 
 import logging
 from datetime import datetime, timezone
-from google_play_scraper import Sort, reviews
+from google_play_scraper import Sort, app as get_app_info, reviews
 
 from backend.api.service import model_service
 from backend.apps.reviewiq.dimensions import calcular_semaforo_entidad, puntuar_dimensiones
@@ -12,20 +12,34 @@ logger = logging.getLogger('reviewiq.scraper')
 
 
 def sincronizar_app_playstore(
-    package_id: str,
-    nombre: str,
-    categoria: str,
+    package_id: str = None,
+    nombre: str = None,
+    categoria: str = 'delivery',
     cantidad: int = 20,
-    icono_url: str = None
+    pais: str = 'bo',
+    icono_url: str = None,
+    **kwargs
 ) -> dict:
-    """Extrae reseñas de Google Play Store, las clasifica con ReviewIQ y las guarda en PostgreSQL.
-    
-    Args:
-        package_id: ID de la app en Play Store (ej: 'com.pedidosya')
-        nombre: Nombre visible de la app (ej: 'PedidosYa')
-        categoria: Rubro (ej: 'delivery', 'banca_finanzas')
-        cantidad: Número de reseñas a descargar (por defecto 20)
-    """
+    """Extrae reseñas de Google Play Store, las clasifica con ReviewIQ y las guarda en PostgreSQL."""
+    # Soporte para app_id o package_id indistintamente
+    package_id = package_id or kwargs.get('app_id')
+    cantidad = cantidad or kwargs.get('cantidad_resenas', 20)
+    if not package_id:
+        raise ValueError("Se requiere 'package_id' o 'app_id'.")
+    # Obtener metadatos oficiales de Google Play Store (icono oficial en alta resolución y nombre)
+    if not icono_url or not nombre:
+        try:
+            info = get_app_info(package_id, lang='es', country=pais)
+            if not icono_url:
+                icono_url = info.get('icon')
+            if not nombre:
+                nombre = info.get('title', package_id).split(' - ')[0]
+        except Exception as exc:
+            logger.warning(f"No se pudo obtener metadatos de Play Store para {package_id}: {exc}")
+
+    if not nombre:
+        nombre = package_id
+
     # 1. Obtener o crear la Entidad en la base de datos (evita duplicados)
     entidad, _ = Entidad.objects.get_or_create(
         tipo_fuente='play_store',
@@ -37,13 +51,16 @@ def sincronizar_app_playstore(
             'icono_url': icono_url
         }
     )
+    if icono_url and entidad.icono_url != icono_url:
+        entidad.icono_url = icono_url
+        entidad.save()
 
     # 2. Descargar reseñas públicas de Google Play Store para Bolivia en español
     try:
         raw_reviews, _ = reviews(
             package_id,
             lang='es',
-            country='bo',
+            country=pais,
             sort=Sort.NEWEST,
             count=cantidad
         )
@@ -108,16 +125,15 @@ def sincronizar_app_playstore(
     semaforo = calcular_semaforo_entidad(todos_diagnosticos)
     
     total = todos_diagnosticos.count()
-    promedio_estrellas = (
-        round(sum(d.estrellas_predichas for d in todos_diagnosticos) / total, 1)
-        if total > 0 else 0.0
-    )
+    if total > 0:
+        promedio_estrellas = sum(d.estrellas_predichas for d in todos_diagnosticos) / total
+    else:
+        promedio_estrellas = 0.0
 
     return {
-        'entidad_id': str(entidad.id),
-        'nombre': entidad.nombre,
-        'nuevos_procesados': nuevos_comentarios,
-        'total_comentarios': total,
-        'estrellas_promedio': promedio_estrellas,
+        'entidad': entidad,
+        'nuevos_comentarios': nuevos_comentarios,
+        'total_procesadas': total,
+        'calificacion_promedio': round(promedio_estrellas, 1),
         'semaforo': semaforo
     }
