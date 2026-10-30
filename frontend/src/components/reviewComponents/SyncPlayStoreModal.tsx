@@ -65,10 +65,74 @@ export function SyncPlayStoreModal({ isOpen, onClose, onSuccess }: SyncPlayStore
   const inferirCategoria = (genre: string | null): string => {
     if (!genre) return 'delivery'
     const g = genre.toLowerCase()
-    if (g.includes('food') || g.includes('comida') || g.includes('delivery')) return 'delivery'
-    if (g.includes('transport') || g.includes('maps') || g.includes('travel') || g.includes('viaje')) return 'transporte'
-    if (g.includes('financ') || g.includes('bank') || g.includes('banca') || g.includes('money')) return 'banca_finanzas'
-    if (g.includes('communi') || g.includes('comunica') || g.includes('social') || g.includes('telecom')) return 'telecom'
+
+    // Juegos
+    if (
+      g.includes('juego') ||
+      g.includes('game') ||
+      g.includes('arcade') ||
+      g.includes('action') ||
+      g.includes('estrategia') ||
+      g.includes('strategy') ||
+      g.includes('casual') ||
+      g.includes('puzzle') ||
+      g.includes('simulac') ||
+      g.includes('simulation') ||
+      g.includes('rpg') ||
+      g.includes('rol') ||
+      g.includes('aventura') ||
+      g.includes('adventure') ||
+      g.includes('carreras') ||
+      g.includes('racing')
+    ) {
+      return 'juegos'
+    }
+
+    // Compras
+    if (g.includes('compr') || g.includes('shop')) {
+      return 'compras'
+    }
+
+    // Delivery y Comida
+    if (g.includes('food') || g.includes('comida') || g.includes('delivery') || g.includes('restauran')) {
+      return 'delivery'
+    }
+
+    // Transporte y Movilidad
+    if (
+      g.includes('transport') ||
+      g.includes('maps') ||
+      g.includes('mapa') ||
+      g.includes('travel') ||
+      g.includes('viaje') ||
+      g.includes('navegac')
+    ) {
+      return 'transporte'
+    }
+
+    // Banca y Finanzas
+    if (
+      g.includes('financ') ||
+      g.includes('bank') ||
+      g.includes('banca') ||
+      g.includes('money') ||
+      g.includes('billetera') ||
+      g.includes('pago')
+    ) {
+      return 'banca_finanzas'
+    }
+
+    // Comunicación y Redes
+    if (
+      g.includes('communi') ||
+      g.includes('comunica') ||
+      g.includes('social') ||
+      g.includes('telecom') ||
+      g.includes('mensajer')
+    ) {
+      return 'telecom'
+    }
+
     return 'delivery'
   }
 

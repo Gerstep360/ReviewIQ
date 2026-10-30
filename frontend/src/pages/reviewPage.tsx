@@ -16,6 +16,16 @@ import { SyncPlayStoreModal } from '../components/reviewComponents/SyncPlayStore
 import { ReviewFormModal } from '../components/reviewComponents/ReviewFormModal'
 import { AuthModal } from '../components/reviewComponents/AuthModal'
 
+const CATEGORIA_LABELS: Record<string, string> = {
+  todas: 'Todas',
+  delivery: 'Delivery',
+  transporte: 'Transporte',
+  banca_finanzas: 'Banca y Finanzas',
+  telecom: 'Telecomunicaciones',
+  compras: 'Compras',
+  juegos: 'Juegos',
+}
+
 interface ReputationPageProps {
   user: UserSession | null
   onAuthSuccess: (user: UserSession) => void
@@ -206,6 +216,8 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
             { id: 'transporte', label: 'Transporte' },
             { id: 'banca_finanzas', label: 'Banca y Finanzas' },
             { id: 'telecom', label: 'Telecomunicaciones' },
+            { id: 'compras', label: 'Compras' },
+            { id: 'juegos', label: 'Juegos' },
           ].map((cat) => (
             <button
               key={cat.id}
@@ -306,7 +318,7 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
                               textTransform: 'capitalize',
                             }}
                           >
-                            {ent.categoria.replace('_', ' ')}
+                            {CATEGORIA_LABELS[ent.categoria] || ent.categoria.replace('_', ' ')}
                           </span>
                         </div>
 

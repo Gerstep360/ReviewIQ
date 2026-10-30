@@ -39,10 +39,29 @@ export function SemaforoBars({ semaforo }: SemaforoBarsProps) {
     }
   }
 
+  const itemsActivos = items.filter(({ data }) => data && data.menciones > 0)
+
+  if (itemsActivos.length === 0) {
+    return (
+      <div
+        style={{
+          padding: '24px',
+          textAlign: 'center',
+          color: 'var(--muted)',
+          fontSize: '13px',
+          background: 'var(--canvas)',
+          borderRadius: '8px',
+          border: '1px dashed var(--line)',
+        }}
+      >
+        Aún no hay suficientes opiniones que mencionen dimensiones específicas para esta app.
+      </div>
+    )
+  }
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
-      {items.map(({ key, data }) => {
-        if (!data) return null
+      {itemsActivos.map(({ key, data }) => {
         const badge = getBadgeStyle(data.color)
 
         return (
