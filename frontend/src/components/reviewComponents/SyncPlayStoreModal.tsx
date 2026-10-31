@@ -158,6 +158,10 @@ export function SyncPlayStoreModal({ isOpen, onClose, onSuccess }: SyncPlayStore
 
       setProgreso('Sincronizacion completada con exito!')
       setTimeout(() => {
+        setSeleccionadas([])
+        setBusqueda('')
+        setResultados([])
+        setProgreso(null)
         onSuccess()
         onClose()
       }, 1200)

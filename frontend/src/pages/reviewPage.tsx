@@ -421,7 +421,7 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
               >
                 <div style={{ marginBottom: '18px' }}>
                   <h3 style={{ margin: '0 0 4px', fontSize: '16px', fontWeight: 700, color: 'var(--ink)' }}>
-                    ¿Cómo rinde esta app? (Semáforo de Calidad)
+                    ¿Cómo rinde esta app? 
                   </h3>
                   <p style={{ margin: 0, fontSize: '13px', color: 'var(--muted)' }}>
                     Calificación calculada por la IA según lo que dicen los usuarios:
