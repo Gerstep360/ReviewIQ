@@ -45,6 +45,14 @@ class ReviewRequestSerializer(StrictObjectSerializer):
     text = ReviewTextField(max_length=settings.REVIEWIQ_MAX_TEXT_LENGTH, trim_whitespace=False)
 
 
+class BatchReviewRequestSerializer(StrictObjectSerializer):
+    texts = serializers.ListField(
+        child=ReviewTextField(max_length=settings.REVIEWIQ_MAX_TEXT_LENGTH, trim_whitespace=False),
+        min_length=1,
+        max_length=100,
+    )
+
+
 class ProbabilitiesSerializer(StrictObjectSerializer):
     def get_fields(self):
         return {str(stars): serializers.FloatField(min_value=0, max_value=1) for stars in range(1, 6)}
@@ -68,6 +76,12 @@ class PredictionSerializer(StrictObjectSerializer):
         if values['stars'] != most_likely or values['stars'] != values['label'] + 1 or not math.isfinite(values['inference_ms']):
             raise serializers.ValidationError('La salida no corresponde a las clases del modelo.')
         return values
+
+
+class BatchPredictionSerializer(StrictObjectSerializer):
+    predictions = PredictionSerializer(many=True)
+    count = serializers.IntegerField(min_value=1)
+    total_inference_ms = serializers.FloatField(min_value=0)
 
 
 class HealthSerializer(serializers.Serializer):
