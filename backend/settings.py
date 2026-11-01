@@ -50,7 +50,7 @@ if not SECRET_KEY:
 
 ALLOWED_HOSTS = [
     host.strip()
-    for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1').split(',')
+    for host in os.environ.get('DJANGO_ALLOWED_HOSTS', 'localhost,127.0.0.1,testserver').split(',')
     if host.strip()
 ]
 
@@ -105,19 +105,27 @@ TEMPLATES = [
 WSGI_APPLICATION = 'backend.wsgi.application'
 
 
-# Database: PostgreSQL
+# Database: PostgreSQL (con opción SQLite para desarrollo local)
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_DB', 'reviewiq_db'),
-        'USER': os.environ.get('POSTGRES_USER', 'postgres'),
-        'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
-        'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
-        'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+if os.environ.get('USE_SQLITE', 'false').lower() in ('true', '1') or os.environ.get('DJANGO_DB_ENGINE', '').lower() == 'sqlite':
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql',
+            'NAME': os.environ.get('POSTGRES_DB', 'reviewiq_db'),
+            'USER': os.environ.get('POSTGRES_USER', 'postgres'),
+            'PASSWORD': os.environ.get('POSTGRES_PASSWORD', ''),
+            'HOST': os.environ.get('POSTGRES_HOST', 'localhost'),
+            'PORT': os.environ.get('POSTGRES_PORT', '5432'),
+        }
+    }
 
 
 
@@ -166,6 +174,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 REVIEWIQ_MODEL_DIR = Path(os.environ.get('REVIEWIQ_MODEL_DIR', BASE_DIR / 'ml/artifacts/full'))
 if not REVIEWIQ_MODEL_DIR.is_absolute():
     REVIEWIQ_MODEL_DIR = BASE_DIR / REVIEWIQ_MODEL_DIR
+if not (REVIEWIQ_MODEL_DIR / 'pipeline.joblib').exists() and (BASE_DIR / 'ml/artifacts/quick' / 'pipeline.joblib').exists():
+    REVIEWIQ_MODEL_DIR = BASE_DIR / 'ml/artifacts/quick'
 REVIEWIQ_MAX_TEXT_LENGTH = 3000
 REVIEWIQ_TRACE_MAX_ITEMS = 200
 REVIEWIQ_TRACE_MAX_CHARACTERS = 12000

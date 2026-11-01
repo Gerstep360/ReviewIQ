@@ -41,7 +41,10 @@ export interface DiagnosticoResena {
 export interface Resena {
   id: string;
   texto: string;
-  estrellas_origen: number;
+  estrellas_origen?: number | null;
+  fuente?: 'play_store' | 'youtube' | 'google_maps' | 'manual' | string;
+  autor?: string | null;
+  url_referencia?: string | null;
   fecha_publicacion?: string | null;
   fecha_captura: string;
   diagnostico?: DiagnosticoResena;

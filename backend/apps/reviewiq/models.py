@@ -23,6 +23,7 @@ class Entidad(models.Model):
 
     FUENTES = [
         ('play_store', 'Google Play Store'),
+        ('youtube', 'YouTube'),
         ('google_maps', 'Google Maps'),
         ('manual', 'Ingreso Manual'),
     ]
@@ -58,7 +59,23 @@ class ComentarioCrudo(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     entidad = models.ForeignKey(Entidad, on_delete=models.CASCADE, related_name='comentarios')
     texto = models.TextField()
-    estrellas_origen = models.IntegerField(help_text='Estrellas de 1 a 5 reportadas en la plataforma origen')
+    estrellas_origen = models.IntegerField(
+        null=True, blank=True,
+        help_text='Estrellas de 1 a 5 reportadas en origen (o null si es texto libre como YouTube)'
+    )
+    fuente = models.CharField(
+        max_length=30,
+        choices=Entidad.FUENTES,
+        default='play_store',
+        db_index=True,
+        help_text='Plataforma origen de la reseña'
+    )
+    autor = models.CharField(max_length=150, blank=True, null=True)
+    identificador_externo = models.CharField(
+        max_length=255, blank=True, null=True, db_index=True,
+        help_text='ID único en la plataforma externa para evitar duplicados'
+    )
+    url_referencia = models.URLField(blank=True, null=True, help_text='Enlace al video o reseña original')
     fecha_publicacion = models.DateTimeField(blank=True, null=True)
     fecha_captura = models.DateTimeField(auto_now_add=True)
 
@@ -67,7 +84,8 @@ class ComentarioCrudo(models.Model):
         verbose_name_plural = 'Comentarios Crudos'
 
     def __str__(self):
-        return f'Reseña de {self.entidad.nombre} ({self.estrellas_origen}★)'
+        calif = f'{self.estrellas_origen}★' if self.estrellas_origen is not None else 'IA★'
+        return f'Reseña ({self.fuente}) de {self.entidad.nombre} ({calif})'
 
 
 class DiagnosticoIQ(models.Model):

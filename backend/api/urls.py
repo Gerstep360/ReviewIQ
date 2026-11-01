@@ -12,6 +12,7 @@ from backend.apps.reviewiq.views import (
     EntityReviewsView,
     VersusComparisonView,
     SyncPlayStoreView,
+    SyncYouTubeView,
     SearchPlayStoreView,
     LoginView,
     RegisterView,
@@ -42,6 +43,7 @@ urlpatterns = [
     path('reputation/entities/<uuid:entidad_id>/reviews/', EntityReviewsView.as_view(), name='reputation-reviews'),
     path('reputation/versus/', VersusComparisonView.as_view(), name='reputation-versus'),
     path('reputation/sync/playstore/', SyncPlayStoreView.as_view(), name='reputation-sync-playstore'),
+    path('reputation/sync/youtube/', SyncYouTubeView.as_view(), name='reputation-sync-youtube'),
     path('reputation/search/playstore/', SearchPlayStoreView.as_view(), name='reputation-search-playstore'),
 
     # Rutas de Autenticación (Admin y Usuarios)

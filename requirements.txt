@@ -78,6 +78,8 @@ es-core-news-sm @ https://github.com/explosion/spacy-models/releases/download/es
     # via -r requirements.in
 fonttools==4.67.0
     # via matplotlib
+google-play-scraper==1.2.7
+    # via -r requirements.in
 h11==0.16.0
     # via httpcore
 httpcore==1.0.9
