@@ -32,7 +32,15 @@ class EntidadSerializer(serializers.ModelSerializer):
         return obj.comentarios.count()
 
     def get_calificacion_promedio(self, obj):
-        avg = obj.comentarios.aggregate(Avg('estrellas_origen'))['estrellas_origen__avg']
+        # Promedio basado en las estrellas diagnosticadas por la IA de ReviewIQ
+        avg_ia = obj.comentarios.filter(diagnostico__isnull=False).aggregate(
+            Avg('diagnostico__estrellas_predichas')
+        )['diagnostico__estrellas_predichas__avg']
+        if avg_ia is not None:
+            return round(float(avg_ia), 1)
+        avg = obj.comentarios.filter(estrellas_origen__isnull=False).aggregate(
+            Avg('estrellas_origen')
+        )['estrellas_origen__avg']
         return round(float(avg), 1) if avg is not None else 0.0
 
 
@@ -63,6 +71,9 @@ class ComentarioCrudoSerializer(serializers.ModelSerializer):
             'id',
             'texto',
             'estrellas_origen',
+            'fuente',
+            'autor',
+            'url_referencia',
             'fecha_publicacion',
             'fecha_captura',
             'diagnostico',
@@ -126,4 +137,33 @@ class SyncPlayStoreRequestSerializer(serializers.Serializer):
         min_value=5,
         max_value=100,
         help_text="Cantidad de reseñas a descargar y procesar"
+    )
+
+
+class SyncYouTubeRequestSerializer(serializers.Serializer):
+    """Valida los datos para sincronizar comentarios desde un video de YouTube."""
+    entidad_id = serializers.CharField(
+        required=True,
+        help_text="UUID de la entidad en ReviewIQ o identificador de app (ej: package_id)"
+    )
+    video_url = serializers.CharField(
+        required=True,
+        help_text="URL completa o ID del video de YouTube a analizar"
+    )
+    cantidad = serializers.IntegerField(
+        default=30,
+        min_value=1,
+        max_value=150,
+        help_text="Cantidad máxima de comentarios a descargar y analizar"
+    )
+    nombre = serializers.CharField(
+        required=False,
+        allow_blank=True,
+        default="",
+        help_text="Nombre de la app o canal en caso de ser nueva entidad"
+    )
+    categoria = serializers.CharField(
+        required=False,
+        default="delivery",
+        help_text="Categoría comercial si se crea una nueva entidad"
     )

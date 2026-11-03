@@ -27,12 +27,13 @@ export async function fetchDiagnostic(entityId: string): Promise<{
 
 export async function fetchReviews(
   entityId: string,
-  filtros?: { estrellas?: number; sentimiento?: string; dimension?: string }
+  filtros?: { estrellas?: number; sentimiento?: string; dimension?: string; fuente?: string }
 ): Promise<Resena[]> {
   const params = new URLSearchParams()
   if (filtros?.estrellas) params.set('estrellas', String(filtros.estrellas))
   if (filtros?.sentimiento) params.set('sentimiento', filtros.sentimiento)
   if (filtros?.dimension) params.set('dimension', filtros.dimension)
+  if (filtros?.fuente) params.set('fuente', filtros.fuente)
 
   const url = `${BASE_URL}/entities/${entityId}/reviews/?${params.toString()}`
   const res = await fetch(url)
@@ -79,6 +80,25 @@ export async function syncPlayStore(payload: {
   if (!res.ok) {
     const err = await res.json()
     throw new Error(err.message || 'Error al sincronizar con Play Store')
+  }
+  return res.json()
+}
+
+export async function syncYouTube(payload: {
+  entidad_id: string
+  video_url: string
+  cantidad?: number
+  nombre?: string
+  categoria?: string
+}) {
+  const res = await fetch(`${BASE_URL}/sync/youtube/`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  })
+  if (!res.ok) {
+    const err = await res.json()
+    throw new Error(err.message || 'Error al analizar video de YouTube')
   }
   return res.json()
 }

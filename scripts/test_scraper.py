@@ -30,9 +30,10 @@ def main():
     )
 
     print("\n✅ ¡Sincronización completada con éxito!")
-    print(f"🏢 Entidad: {resultado['nombre']} (ID: {resultado['entidad_id']})")
-    print(f"📊 Total reseñas procesadas: {resultado['nuevos_procesados']}")
-    print(f"⭐ Calificación promedio calculada: {resultado['estrellas_promedio']} estrellas\n")
+    entidad = resultado['entidad']
+    print(f"🏢 Entidad: {entidad.nombre} (ID: {entidad.id})")
+    print(f"📊 Total reseñas procesadas: {resultado.get('total_procesadas', resultado.get('nuevos_comentarios', 0))}")
+    print(f"⭐ Calificación promedio calculada: {resultado['calificacion_promedio']} estrellas\n")
 
     print("🚦 SEMÁFORO DE EXPERIENCIA (Calculado en tiempo real):")
     for dim, info in resultado['semaforo'].items():

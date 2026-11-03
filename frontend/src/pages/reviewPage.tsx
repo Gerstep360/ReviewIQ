@@ -13,6 +13,7 @@ import type {
 } from '../types/reviewHome'
 import { SemaforoBars } from '../components/reviewComponents/SemaforoBars'
 import { SyncPlayStoreModal } from '../components/reviewComponents/SyncPlayStoreModal'
+import { SyncYouTubeModal } from '../components/reviewComponents/SyncYouTubeModal'
 import { ReviewFormModal } from '../components/reviewComponents/ReviewFormModal'
 import { AuthModal } from '../components/reviewComponents/AuthModal'
 
@@ -41,10 +42,12 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
 
   const [busqueda, setBusqueda] = useState('')
   const [categoriaFiltro, setCategoriaFiltro] = useState<string>('todas')
+  const [filtroFuente, setFiltroFuente] = useState<string>('todas')
   const [loading, setLoading] = useState(true)
 
   // Modales
   const [modalSyncOpen, setModalSyncOpen] = useState(false)
+  const [modalYouTubeOpen, setModalYouTubeOpen] = useState(false)
   const [modalReviewOpen, setModalReviewOpen] = useState(false)
   const [modalAuthOpen, setModalAuthOpen] = useState(false)
 
@@ -71,21 +74,28 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
       const diag = await fetchDiagnostic(ent.id)
       setSemaforo(diag.semaforo)
       setDistribucion(diag.distribucion_estrellas_ia)
-      cargarResenas(ent.id, filtroEstrellas)
+      cargarResenas(ent.id, filtroEstrellas, filtroFuente)
     } catch (err) {
       console.error(err)
     }
   }
 
   // Cargar reseñas filtradas
-  const cargarResenas = async (entId: string, estrellas?: number) => {
+  const cargarResenas = async (entId: string, estrellas?: number, fuente?: string) => {
     try {
-      const data = await fetchReviews(entId, { estrellas })
+      const f = fuente && fuente !== 'todas' ? fuente : undefined
+      const data = await fetchReviews(entId, { estrellas, fuente: f })
       setResenas(data)
     } catch (err) {
       console.error(err)
     }
   }
+
+  useEffect(() => {
+    if (entidadSeleccionada) {
+      cargarResenas(entidadSeleccionada.id, filtroEstrellas, filtroFuente)
+    }
+  }, [filtroEstrellas, filtroFuente])
 
   const handleEliminarEntidad = async (e: React.MouseEvent, entId: string) => {
     e.stopPropagation()
@@ -189,22 +199,46 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
 
           {/* Botón Administrador para Ingesta */}
           {user?.role === 'admin' && (
-            <button
-              type="button"
-              onClick={() => setModalSyncOpen(true)}
-              style={{
-                padding: '9px 18px',
-                borderRadius: '6px',
-                background: 'var(--accent)',
-                color: '#ffffff',
-                border: 'none',
-                fontWeight: 600,
-                fontSize: '13px',
-                cursor: 'pointer',
-              }}
-            >
-              + Importar Apps de Play Store
-            </button>
+            <div style={{ display: 'flex', gap: '8px' }}>
+              <button
+                type="button"
+                onClick={() => setModalSyncOpen(true)}
+                style={{
+                  padding: '9px 16px',
+                  borderRadius: '6px',
+                  background: 'var(--accent)',
+                  color: '#ffffff',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <span>📱</span> Play Store
+              </button>
+              <button
+                type="button"
+                onClick={() => setModalYouTubeOpen(true)}
+                style={{
+                  padding: '9px 16px',
+                  borderRadius: '6px',
+                  background: '#dc2626',
+                  color: '#ffffff',
+                  border: 'none',
+                  fontWeight: 600,
+                  fontSize: '13px',
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '6px',
+                }}
+              >
+                <span>▶</span> Analizar YouTube
+              </button>
+            </div>
           )}
         </div>
 
@@ -391,22 +425,45 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
                     </div>
                   </div>
 
-                  <button
-                    type="button"
-                    onClick={handleAbrirReview}
-                    style={{
-                      padding: '8px 16px',
-                      borderRadius: '6px',
-                      background: 'var(--accent)',
-                      color: '#ffffff',
-                      border: 'none',
-                      fontSize: '13px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                    }}
-                  >
-                    Dejar mi opinión
-                  </button>
+                  <div style={{ display: 'flex', gap: '8px', alignItems: 'center' }}>
+                    {user?.role === 'admin' && (
+                      <button
+                        type="button"
+                        onClick={() => setModalYouTubeOpen(true)}
+                        style={{
+                          padding: '8px 12px',
+                          borderRadius: '6px',
+                          background: '#dc2626',
+                          color: '#ffffff',
+                          border: 'none',
+                          fontSize: '12px',
+                          fontWeight: 600,
+                          cursor: 'pointer',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '6px',
+                        }}
+                      >
+                        <span>▶</span> Analizar YouTube
+                      </button>
+                    )}
+                    <button
+                      type="button"
+                      onClick={handleAbrirReview}
+                      style={{
+                        padding: '8px 16px',
+                        borderRadius: '6px',
+                        background: 'var(--accent)',
+                        color: '#ffffff',
+                        border: 'none',
+                        fontSize: '13px',
+                        fontWeight: 600,
+                        cursor: 'pointer',
+                      }}
+                    >
+                      Dejar mi opinión
+                    </button>
+                  </div>
                 </div>
               </div>
 
@@ -446,48 +503,77 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
                   padding: '22px 24px',
                 }}
               >
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px' }}>
+                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap', gap: '10px' }}>
                   <h3 style={{ margin: 0, fontSize: '16px', fontWeight: 700, color: 'var(--ink)' }}>
                     Comentarios de los usuarios ({resenas.length})
                   </h3>
 
-                  {/* Filtro por estrellas */}
-                  <div style={{ display: 'flex', gap: '6px' }}>
-                    <button
-                      type="button"
-                      onClick={() => setFiltroEstrellas(undefined)}
-                      style={{
-                        padding: '4px 10px',
-                        fontSize: '11px',
-                        fontWeight: 600,
-                        borderRadius: '4px',
-                        border: '1px solid var(--line)',
-                        background: filtroEstrellas === undefined ? 'var(--accent)' : 'var(--canvas)',
-                        color: filtroEstrellas === undefined ? '#ffffff' : 'var(--ink)',
-                        cursor: 'pointer',
-                      }}
-                    >
-                      Todas
-                    </button>
-                    {[5, 4, 3, 2, 1].map((val) => (
+                  <div style={{ display: 'flex', gap: '10px', alignItems: 'center', flexWrap: 'wrap' }}>
+                    {/* Filtro por fuente */}
+                    <div style={{ display: 'flex', gap: '4px', alignItems: 'center' }}>
+                      {[
+                        { id: 'todas', label: 'Todas' },
+                        { id: 'play_store', label: '📱 Play Store' },
+                        { id: 'youtube', label: '▶ YouTube' },
+                      ].map((f) => (
+                        <button
+                          key={f.id}
+                          type="button"
+                          onClick={() => setFiltroFuente(f.id)}
+                          style={{
+                            padding: '3px 8px',
+                            fontSize: '11px',
+                            fontWeight: 600,
+                            borderRadius: '4px',
+                            border: '1px solid var(--line)',
+                            background: filtroFuente === f.id ? (f.id === 'youtube' ? '#dc2626' : 'var(--accent)') : 'var(--canvas)',
+                            color: filtroFuente === f.id ? '#ffffff' : 'var(--ink)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {f.label}
+                        </button>
+                      ))}
+                    </div>
+
+                    {/* Filtro por estrellas */}
+                    <div style={{ display: 'flex', gap: '4px' }}>
                       <button
-                        key={val}
                         type="button"
-                        onClick={() => setFiltroEstrellas(val)}
+                        onClick={() => setFiltroEstrellas(undefined)}
                         style={{
-                          padding: '4px 8px',
+                          padding: '3px 8px',
                           fontSize: '11px',
                           fontWeight: 600,
                           borderRadius: '4px',
                           border: '1px solid var(--line)',
-                          background: filtroEstrellas === val ? 'var(--accent)' : 'var(--canvas)',
-                          color: filtroEstrellas === val ? '#ffffff' : 'var(--ink)',
+                          background: filtroEstrellas === undefined ? 'var(--accent)' : 'var(--canvas)',
+                          color: filtroEstrellas === undefined ? '#ffffff' : 'var(--ink)',
                           cursor: 'pointer',
                         }}
                       >
-                        {val}★
+                        Todas
                       </button>
-                    ))}
+                      {[5, 4, 3, 2, 1].map((val) => (
+                        <button
+                          key={val}
+                          type="button"
+                          onClick={() => setFiltroEstrellas(val)}
+                          style={{
+                            padding: '3px 6px',
+                            fontSize: '11px',
+                            fontWeight: 600,
+                            borderRadius: '4px',
+                            border: '1px solid var(--line)',
+                            background: filtroEstrellas === val ? 'var(--accent)' : 'var(--canvas)',
+                            color: filtroEstrellas === val ? '#ffffff' : 'var(--ink)',
+                            cursor: 'pointer',
+                          }}
+                        >
+                          {val}★
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
 
@@ -507,10 +593,32 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
                           background: 'var(--canvas)',
                         }}
                       >
-                        <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '6px' }}>
-                          <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--gold)', fontFamily: 'var(--mono)' }}>
-                            {r.diagnostico ? `${r.diagnostico.estrellas_predichas}★ (IA)` : `${r.estrellas_origen}★`}
-                          </span>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '8px', flexWrap: 'wrap', gap: '6px' }}>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                            <span style={{ fontSize: '13px', fontWeight: 700, color: 'var(--gold)', fontFamily: 'var(--mono)' }}>
+                              {r.diagnostico ? `${r.diagnostico.estrellas_predichas}★ (IA)` : `${r.estrellas_origen}★`}
+                            </span>
+
+                            {r.fuente === 'youtube' ? (
+                              <span style={{ background: '#fef2f2', color: '#dc2626', border: '1px solid #fecaca', padding: '2px 7px', borderRadius: '4px', fontSize: '10px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                                ▶ YouTube
+                              </span>
+                            ) : r.fuente === 'manual' ? (
+                              <span style={{ background: '#eff6ff', color: '#2563eb', border: '1px solid #bfdbfe', padding: '2px 7px', borderRadius: '4px', fontSize: '10px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                                👤 Web
+                              </span>
+                            ) : (
+                              <span style={{ background: '#ecfdf5', color: '#059669', border: '1px solid #a7f3d0', padding: '2px 7px', borderRadius: '4px', fontSize: '10px', fontWeight: 700, display: 'inline-flex', alignItems: 'center', gap: '3px' }}>
+                                📱 Play Store
+                              </span>
+                            )}
+
+                            {r.autor && (
+                              <span style={{ fontSize: '11px', color: 'var(--muted)', fontWeight: 500 }}>
+                                • {r.autor}
+                              </span>
+                            )}
+                          </div>
 
                           {r.diagnostico && (
                             <span
@@ -553,6 +661,19 @@ export function ReputationPage({ user, onAuthSuccess }: ReputationPageProps) {
         isOpen={modalSyncOpen}
         onClose={() => setModalSyncOpen(false)}
         onSuccess={cargarEntidades}
+      />
+
+      <SyncYouTubeModal
+        isOpen={modalYouTubeOpen}
+        onClose={() => setModalYouTubeOpen(false)}
+        onSuccess={() => {
+          cargarEntidades()
+          if (entidadSeleccionada) {
+            seleccionarEntidad(entidadSeleccionada)
+          }
+        }}
+        entidadActual={entidadSeleccionada}
+        entidades={entidades}
       />
 
       {entidadSeleccionada && (

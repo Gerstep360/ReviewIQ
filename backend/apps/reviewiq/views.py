@@ -12,6 +12,7 @@ from backend.api.service import model_service
 from .models import Entidad, ComentarioCrudo, DiagnosticoIQ
 from .dimensions import calcular_semaforo_entidad, puntuar_dimensiones
 from .scraper import sincronizar_app_playstore
+from .youtube_scraper import sincronizar_app_youtube
 from .serializers import (
     EntidadSerializer,
     ComentarioCrudoSerializer,
@@ -19,6 +20,7 @@ from .serializers import (
     LoginSerializer,
     RegisterSerializer,
     SyncPlayStoreRequestSerializer,
+    SyncYouTubeRequestSerializer,
 )
 
 DIMENSION_LABELS = {
@@ -115,6 +117,10 @@ class EntityReviewsView(APIView):
         sentimiento = request.query_params.get('sentimiento')
         if sentimiento:
             queryset = queryset.filter(diagnostico__sentimiento_global=sentimiento.lower())
+
+        fuente = request.query_params.get('fuente')
+        if fuente:
+            queryset = queryset.filter(fuente=fuente.lower())
 
         dimension = request.query_params.get('dimension')
         if dimension and dimension in DIMENSION_LABELS:
@@ -286,6 +292,44 @@ class SyncPlayStoreView(APIView):
             return Response({
                 'status': 'error',
                 'message': f"Error al sincronizar con Google Play Store: {str(e)}"
+            }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class SyncYouTubeView(APIView):
+    """
+    POST /api/v1/reputation/sync/youtube/
+    Descarga comentarios de un video de YouTube, los clasifica con ReviewIQ y actualiza el semáforo.
+    """
+    def post(self, request):
+        serializer = SyncYouTubeRequestSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response({
+                'status': 'error',
+                'errors': serializer.errors
+            }, status=status.HTTP_400_BAD_REQUEST)
+
+        datos = serializer.validated_data
+        try:
+            resultado = sincronizar_app_youtube(
+                package_id_o_entidad_id=datos['entidad_id'],
+                video_url=datos['video_url'],
+                cantidad=datos.get('cantidad', 30),
+                nombre_app=datos.get('nombre') or None,
+                categoria=datos.get('categoria', 'delivery'),
+            )
+            return Response({
+                'status': 'success',
+                'message': f"Se analizaron exitosamente {resultado['nuevos_comentarios']} comentarios de YouTube para '{resultado['entidad'].nombre}'.",
+                'entidad': EntidadSerializer(resultado['entidad']).data,
+                'nuevos_comentarios': resultado['nuevos_comentarios'],
+                'total_procesadas': resultado['total_procesadas'],
+                'calificacion_promedio': resultado['calificacion_promedio'],
+                'semaforo': resultado['semaforo'],
+            }, status=status.HTTP_200_OK)
+        except Exception as e:
+            return Response({
+                'status': 'error',
+                'message': f"Error al analizar video de YouTube: {str(e)}"
             }, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
